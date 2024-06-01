@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwta3d83pt468"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_t8ked"]
+[ext_resource type="Texture2D" uid="uid://cap4tq3gyfn32" path="res://assets/spells/orb/spell_orb_0003.png" id="2_il1la"]
+[ext_resource type="Texture2D" uid="uid://dd2y3d8x71l83" path="res://assets/spells/orb/spell_orb_0002.png" id="3_qjvto"]
+[ext_resource type="Texture2D" uid="uid://j5e1km51cxg0" path="res://assets/spells/orb/spell_orb_0000.png" id="4_aokyn"]
+[ext_resource type="Texture2D" uid="uid://dkgqwl2ambia6" path="res://assets/spells/orb/spell_orb_0001.png" id="5_1jxxa"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="6_k35cx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36dy8"]
+radius = 200.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fcuen"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_il1la")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qjvto")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_aokyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1jxxa")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 8.0
+}]
+
+[node name="orb" instance=ExtResource("1_t8ked")]
+attackEntities = true
+costType = "red"
+cost = 1
+damageType = []
+damageAmount = 20
+acceleration = 50.0
+speed = 3500.0
+maxDuration = 60.0
+autoDisapear = false
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_36dy8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(32, 22)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_fcuen")
+animation = &"spawn"
+script = ExtResource("6_k35cx")
+spawnAnimationTime = 0.24
+explosionAnimationTime = 0.25
+
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_orb_hit"]

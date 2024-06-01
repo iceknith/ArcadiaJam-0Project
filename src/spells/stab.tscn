@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0fuit13cyvvw"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_vruxd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6cmxg"]
+size = Vector2(366, 78)
+
+[node name="stab" instance=ExtResource("1_vruxd")]
+maxDuration = 0.166
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(183, 0)
+shape = SubResource("RectangleShape2D_6cmxg")

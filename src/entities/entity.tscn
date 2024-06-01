@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://fogg8jxfmkbt"]
+
+[ext_resource type="Script" path="res://src/entities/entity.gd" id="1_nu8s1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rogsh"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"damage",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4ye0"]
+
+[node name="entity" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_nu8s1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rogsh")
+animation = &"death"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_q4ye0")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="pathRefreshTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="pathRefreshTimer" to="." method="_on_path_refresh_timer_timeout"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://7jmvt7d100l"]
+
+[ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_1xsno"]
+[ext_resource type="Texture2D" uid="uid://m122n5ikryrd" path="res://assets/mobs/zombie/zombie_default.png" id="2_8yfof"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8w2j6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8yfof")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8yfof")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8yfof")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8yfof")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2bt6"]
+radius = 34.0
+height = 606.0
+
+[node name="zombie" instance=ExtResource("1_1xsno")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_8w2j6")
+animation = &"damage"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(40, 70)
+shape = SubResource("CapsuleShape2D_w2bt6")

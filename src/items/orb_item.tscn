@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl5perrshumd3"]
+
+[ext_resource type="PackedScene" uid="uid://dpa5nrn4qfvx" path="res://src/items/item.tscn" id="1_1u6wg"]
+[ext_resource type="PackedScene" uid="uid://bwta3d83pt468" path="res://src/spells/orb.tscn" id="2_o12ay"]
+[ext_resource type="Texture2D" uid="uid://cft3gox8nv4fm" path="res://assets/spells/orb/icon.png" id="3_3wpmv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65u68"]
+radius = 125.0
+
+[node name="orb_item" instance=ExtResource("1_1u6wg")]
+healType = []
+isSpell = true
+spellPointer = ExtResource("2_o12ay")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_65u68")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(43, 6)
+scale = Vector2(1.36687, 1.17293)
+texture = ExtResource("3_3wpmv")

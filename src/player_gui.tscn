@@ -1,0 +1,136 @@
+[gd_scene load_steps=13 format=3 uid="uid://bbgi5hfe1qdm0"]
+
+[ext_resource type="Script" path="res://src/player_gui.gd" id="1_kg7fi"]
+[ext_resource type="Texture2D" uid="uid://dykr1opknrv2s" path="res://assets/GUI/hp_bar/overlay.png" id="1_kury1"]
+[ext_resource type="Texture2D" uid="uid://c7hrcyvadjqxi" path="res://assets/GUI/hp_bar/red4.png" id="2_7wirc"]
+[ext_resource type="Texture2D" uid="uid://bmivci2kei18h" path="res://assets/GUI/hp_bar/yellow4.png" id="3_p36vg"]
+[ext_resource type="Texture2D" uid="uid://ctv3kd1rxdv53" path="res://assets/GUI/hp_bar/blue4.png" id="4_3yq3l"]
+[ext_resource type="Texture2D" uid="uid://dqksofexe7eu4" path="res://assets/GUI/hp_bar/gray4.png" id="5_mgul0"]
+[ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="7_o0dof"]
+[ext_resource type="Texture2D" uid="uid://c2r2c0p8no47n" path="res://assets/GUI/shelf/cressidaShelf.png" id="8_8x6x7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1gxb6"]
+font = ExtResource("7_o0dof")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0.552941, 0.552941, 0.552941, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6h7me"]
+font = ExtResource("7_o0dof")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0.721569, 0.00392157, 0.00392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jli6"]
+font = ExtResource("7_o0dof")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0.8, 0.701961, 0.0313726, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5odn5"]
+font = ExtResource("7_o0dof")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0.0627451, 0.32549, 0.552941, 1)
+
+[node name="playerGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_kg7fi")
+
+[node name="health_bar_red" type="Sprite2D" parent="."]
+position = Vector2(1600, 950)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_7wirc")
+metadata/_edit_lock_ = true
+
+[node name="health_bar_yellow" type="Sprite2D" parent="."]
+position = Vector2(1600, 950)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_p36vg")
+metadata/_edit_lock_ = true
+
+[node name="health_bar_blue" type="Sprite2D" parent="."]
+position = Vector2(1600, 950)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_3yq3l")
+metadata/_edit_lock_ = true
+
+[node name="health_bar_gray" type="Sprite2D" parent="."]
+position = Vector2(1600, 950)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_mgul0")
+metadata/_edit_lock_ = true
+
+[node name="health_bar_overlay" type="Sprite2D" parent="."]
+position = Vector2(1600, 950)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_kury1")
+metadata/_edit_lock_ = true
+
+[node name="health_counter_gray" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1680.0
+offset_top = 917.0
+offset_right = 1840.0
+offset_bottom = 959.0
+text = "100"
+label_settings = SubResource("LabelSettings_1gxb6")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="health_counter_red" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1403.0
+offset_top = 847.0
+offset_right = 1494.0
+offset_bottom = 873.0
+text = "100"
+label_settings = SubResource("LabelSettings_6h7me")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="health_counter_yellow" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1401.0
+offset_top = 927.0
+offset_right = 1492.0
+offset_bottom = 953.0
+text = "100"
+label_settings = SubResource("LabelSettings_4jli6")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="health_counter_blue" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1400.0
+offset_top = 1008.0
+offset_right = 1491.0
+offset_bottom = 1034.0
+text = "100
+"
+label_settings = SubResource("LabelSettings_5odn5")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="spell_shelf" type="Sprite2D" parent="."]
+position = Vector2(216, 962)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_8x6x7")
+metadata/_edit_lock_ = true
+
+[node name="spell_1_pos" type="Marker2D" parent="."]
+position = Vector2(212, 890)
+
+[node name="spell_2_pos" type="Marker2D" parent="."]
+position = Vector2(361, 1007)
+
+[node name="spell_3_pos" type="Marker2D" parent="."]
+position = Vector2(215, 1010)
+
+[node name="spell_4_pos" type="Marker2D" parent="."]
+position = Vector2(57, 1011)

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8bvd8uvtkktl"]
+
+[ext_resource type="Script" path="res://src/rooms/room.gd" id="1_3cxma"]
+[ext_resource type="TileSet" uid="uid://ctvunq4ln4pe1" path="res://assets/tileset.tres" id="2_asvuk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hnplb"]
+size = Vector2(1600, 2400)
+
+[node name="corridor1" type="Area2D"]
+script = ExtResource("1_3cxma")
+num_entries = 2
+isCorridor = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_asvuk")
+format = 2
+layer_0/name = "Ground"
+layer_0/tile_data = PackedInt32Array(-1, 65537, 1, 65535, 65537, 1, 0, 65537, 1, -65536, 65537, 1, -65537, 65537, 1, -131072, 65537, 1, 131071, 65537, 1, 65536, 65537, 1, 196607, 65537, 1, 131072, 65537, 1, -131073, 65537, 1, -196608, 65537, 1, -131074, 131073, 2, -65538, 131073, 2, -2, 131073, 2, 65534, 131073, 2, 131070, 131073, 2, 196606, 131073, 2, -196607, 262145, 1, -131071, 262145, 1, -65535, 262145, 1, 1, 262145, 1, 65537, 262145, 1, 131073, 262145, 1, 262143, 65537, 1, 196608, 131073, 1, -196609, 131073, 1, -262144, 196609, 1, -262143, 196609, 2, -196610, 131073, 2, 262142, 131073, 2, 196609, 196609, 2)
+layer_1/name = "Walls"
+layer_1/z_index = 2
+layer_1/tile_data = PackedInt32Array(-131071, 131073, 0, -65535, 131073, 0, 1, 131073, 0, 65537, 131073, 0, 131073, 131073, 0, -65538, 131073, 0, -2, 131073, 0, 65534, 131073, 0, 131070, 131073, 0, -196607, 131073, 0, -131074, 131073, 0, 196606, 131073, 0, 196609, 1, 2, 262142, 65537, 2, -196610, 1, 0, -262143, 65537, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hnplb")
+
+[node name="entry1" type="Marker2D" parent="."]
+position = Vector2(0, 1200)
+
+[node name="entry2" type="Marker2D" parent="."]
+position = Vector2(0, -1200)

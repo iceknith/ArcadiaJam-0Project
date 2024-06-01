@@ -1,0 +1,134 @@
+[gd_scene load_steps=19 format=3 uid="uid://pn7bc5ccesrr"]
+
+[ext_resource type="Script" path="res://src/player.gd" id="1_vmk58"]
+[ext_resource type="Texture2D" uid="uid://bckuidra0chpn" path="res://assets/cressida/dash/cressida_dash_0003.png" id="2_58vcm"]
+[ext_resource type="Texture2D" uid="uid://dp60q0tonpvvg" path="res://assets/cressida/dash/cressida_dash_0006.png" id="3_1m2wi"]
+[ext_resource type="Texture2D" uid="uid://bkon3vrjnnn5y" path="res://assets/cressida/dash/cressida_dash_0009.png" id="4_udepd"]
+[ext_resource type="Texture2D" uid="uid://dk1sulgcqnry8" path="res://assets/cressida/idle/cressida_idle_0000.png" id="5_nh144"]
+[ext_resource type="Texture2D" uid="uid://bx4fchwvll48k" path="res://assets/cressida/spell/cressida_spell_0003.png" id="6_4exwm"]
+[ext_resource type="Texture2D" uid="uid://wbpaydv2lgqj" path="res://assets/cressida/idle/cressida_idle_0003.png" id="6_kxqhv"]
+[ext_resource type="Texture2D" uid="uid://cl4y832xshryn" path="res://assets/cressida/spell/cressida_spell_0006.png" id="7_t6q5t"]
+[ext_resource type="Texture2D" uid="uid://bkjj34s6r3k46" path="res://assets/cressida/stab/cressida_stab_0003.png" id="9_y1sp0"]
+[ext_resource type="Texture2D" uid="uid://dji41yiy84acn" path="res://assets/cressida/stab/cressida_stab_0006.png" id="10_cmhs5"]
+[ext_resource type="Texture2D" uid="uid://d3nw6675uvuug" path="res://assets/cressida/walk/cressida_walk_0000.png" id="11_4dyhg"]
+[ext_resource type="Texture2D" uid="uid://bl023dk78hm3" path="res://assets/cressida/walk/cressida_walk_0003.png" id="12_8o5y6"]
+[ext_resource type="Texture2D" uid="uid://hah8rjaht5yc" path="res://assets/cressida/walk/cressida_walk_0006.png" id="13_ywmpc"]
+[ext_resource type="Texture2D" uid="uid://yb8uwg2byac2" path="res://assets/cressida/walk/cressida_walk_0009.png" id="14_ugb7t"]
+[ext_resource type="Texture2D" uid="uid://bklb5r8fhniyv" path="res://assets/cressida/walk/cressida_walk_0012.png" id="15_njqo4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2mc8m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_58vcm")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1m2wi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_udepd")
+}],
+"loop": true,
+"name": &"dash_stop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_nh144")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kxqhv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_4exwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_t6q5t")
+}],
+"loop": true,
+"name": &"spell",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_y1sp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cmhs5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y1sp0")
+}],
+"loop": true,
+"name": &"stab",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_4dyhg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8o5y6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ywmpc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ugb7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_njqo4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yaaq1"]
+radius = 161.0
+height = 354.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v8y20"]
+radius = 33.0
+height = 486.0
+
+[node name="player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_vmk58")
+speed = 1500.0
+metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2mc8m")
+animation = &"spell"
+frame_progress = 0.79968
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-25, 211)
+shape = SubResource("CapsuleShape2D_yaaq1")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.2, 0.2)
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, 85)
+shape = SubResource("CapsuleShape2D_v8y20")
+metadata/_edit_lock_ = true

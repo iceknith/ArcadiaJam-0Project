@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://qdqs7qkxu7j1"]
+
+[ext_resource type="Script" path="res://src/gui.gd" id="1_coytm"]
+[ext_resource type="PackedScene" uid="uid://bbgi5hfe1qdm0" path="res://src/player_gui.tscn" id="1_ilxe0"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_coytm")
+
+[node name="playerGUI" parent="." instance=ExtResource("1_ilxe0")]
+
+[node name="Button" type="Button" parent="."]
+offset_right = 181.0
+offset_bottom = 82.0
+text = "Click to generate new dungeon"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
