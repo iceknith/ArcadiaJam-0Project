@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://ceujuajux8q35"]
+[gd_scene load_steps=3 format=3 uid="uid://ceujuajux8q35"]
 
 [ext_resource type="Script" path="res://src/dungeon.gd" id="1_b1y67"]
+[ext_resource type="Texture2D" uid="uid://b7d1xjw2fd14b" path="res://assets/backgrounds/background_world_1.png" id="2_t2umc"]
 
 [node name="dungeon" type="Node2D"]
 script = ExtResource("1_b1y67")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -100
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(1000, 1000)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_t2umc")

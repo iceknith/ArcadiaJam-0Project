@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbx0oxb564uqr"]
+
+[ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="1_1kihp"]
+[ext_resource type="Script" path="res://src/popup_text.gd" id="1_gxa00"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k53ls"]
+font = ExtResource("1_1kihp")
+font_size = 300
+font_color = Color(0, 0, 0, 1)
+shadow_size = 30
+shadow_color = Color(0.552941, 0.552941, 0.552941, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cnl42"]
+font = ExtResource("1_1kihp")
+font_size = 300
+font_color = Color(0, 0, 0, 1)
+shadow_size = 30
+shadow_color = Color(0.721569, 0.00392157, 0.00392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vnqjf"]
+font = ExtResource("1_1kihp")
+font_size = 300
+font_color = Color(0, 0, 0, 1)
+shadow_size = 30
+shadow_color = Color(0.8, 0.701961, 0.0313726, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t0fdj"]
+font = ExtResource("1_1kihp")
+font_size = 300
+font_color = Color(0, 0, 0, 1)
+shadow_size = 30
+shadow_color = Color(0.0627451, 0.32549, 0.552941, 1)
+
+[node name="popupText" type="Node2D"]
+z_index = 100
+script = ExtResource("1_gxa00")
+
+[node name="health_counter_gray" type="Label" parent="."]
+offset_right = 21.0
+offset_bottom = 42.0
+label_settings = SubResource("LabelSettings_k53ls")
+horizontal_alignment = 1
+
+[node name="health_counter_red" type="Label" parent="."]
+offset_right = 35.0
+offset_bottom = 26.0
+label_settings = SubResource("LabelSettings_cnl42")
+horizontal_alignment = 1
+
+[node name="health_counter_yellow" type="Label" parent="."]
+offset_right = 35.0
+offset_bottom = 26.0
+label_settings = SubResource("LabelSettings_vnqjf")
+horizontal_alignment = 1
+
+[node name="health_counter_blue" type="Label" parent="."]
+offset_right = 35.0
+offset_bottom = 26.0
+label_settings = SubResource("LabelSettings_t0fdj")
+horizontal_alignment = 1
+
+[node name="lifeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="lifeTimer" to="." method="_on_life_timer_timeout"]

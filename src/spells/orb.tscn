@@ -43,7 +43,8 @@ animations = [{
 [node name="orb" instance=ExtResource("1_t8ked")]
 attackEntities = true
 costType = "red"
-cost = 1
+maxColorAdd = 40
+cost = 10
 damageType = []
 damageAmount = 20
 acceleration = 50.0

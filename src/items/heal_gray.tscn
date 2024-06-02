@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbclffmmuf7ak"]
+
+[ext_resource type="PackedScene" uid="uid://dpa5nrn4qfvx" path="res://src/items/item.tscn" id="1_ohar3"]
+[ext_resource type="Texture2D" uid="uid://1j46wx4ma4sa" path="res://assets/items/healGray/icon.png" id="2_dc8eu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elp71"]
+radius = 150.0
+
+[node name="healGray" instance=ExtResource("1_ohar3")]
+isHeal = true
+healType = ["gray"]
+healAmount = 20
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_elp71")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(5, -40)
+scale = Vector2(1.00242, 0.992497)
+texture = ExtResource("2_dc8eu")

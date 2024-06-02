@@ -5,10 +5,27 @@ signal player_entered_first_time(player:Player)
 
 @export var num_entries:int = 4
 @export var isCorridor:bool = false
+@export var hasMobs:bool = false
+@export var check_if_open_door_time = 1.0
 
+@export var loot:Array = [preload("res://src/items/heal_gray.tscn"),
+						preload("res://src/items/heal_red.tscn"),
+						preload("res://src/items/heal_yellow.tscn"),
+						preload("res://src/items/heal_blue.tscn")]
+						
+@export var minHeal:float = 0.1
+@export var maxHeal:float = 0.6
+
+var player:Player
 var playerEntered:bool = false
+var doorClosed:bool = false
 var collisionRect:Rect2;
 var entries_dir:Array = []
+var door_to_close:Array = []
+var walls:Array = []
+
+var openDoorTimer = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,15 +44,91 @@ func _ready():
 			else:
 				entries_dir[i].append(Vector2(0, entries_dir[i][0].y/collisionRect.size.y))
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if (doorClosed):
+		openDoorTimer += delta
+		if (openDoorTimer >= check_if_open_door_time):
+			openDoorTimer = 0
+			if (!has_entities()):
+				doorClosed = false
+				open_doors()
 
 func _on_body_entered(body):
-	print(self.name," -> ",body.name)
 	if ("player" in body.name && !playerEntered):
-		playerEntered = true
-		var player:Player = body
+		player = body
 		player_entered_first_time.emit(player)
+		if (hasMobs):
+			playerEntered = true
+			doorClosed = true
+			await get_tree().create_timer(0.5).timeout
+			close_doors()
+		
+func close_doors():
+	var i:int = 0
+	for direction in door_to_close:
+		i+=1
+		var wall:Node2D
+		if direction[1].x == -1:
+			wall = walls[0].instantiate()
+		elif direction[1].x == 1:
+			wall = walls[1].instantiate()
+		elif direction[1].y == 1:
+			wall = walls[2].instantiate()
+		elif direction[1].y == -1:
+			wall = walls[3].instantiate()
+		
+		wall.name = str("wall_",i)
+		wall.z_index = 5
+		wall.position = direction[0]/2
+		add_child(wall)
+		
+func open_doors():
+	for child in get_children():
+		if "wall" in child.name: child.queue_free()
+	
+	if (hasMobs):
+		var lootStat = player_get_needed_colors().pick_random()
+		var lootItem:Item = loot[lootStat[0]].instantiate()
+		lootItem.healAmount = lootStat[1]
+		lootItem.position = get_node("LootPosition").position
+		add_child(lootItem)
 
+func has_entities()->bool:
+	for child in get_children():
+		for grand_children in child.get_children():
+			if ("hit_hitbox" in grand_children.name):
+				return true
+	return false
+
+func dungeon_finished(player):
+	get_parent().get_parent().nextLevel.call_deferred()
+
+func remove_entities():
+	if (!hasMobs): return
+	hasMobs = false
+	
+	for child in get_children():
+		var deleteChild = false
+		for grand_children in child.get_children():
+			if ("hit_hitbox" in grand_children.name):
+				deleteChild = true
+				break
+		if (deleteChild): 
+			child.queue_free()
+
+func player_get_needed_colors()->Array:
+	var result:Array = []
+	
+	if player == null: return result
+	
+	if (player.gray < player.maxGray):
+		result.append([0, int(player.maxGray * randf_range(minHeal, maxHeal))])
+	if (player.red < player.maxRed):
+		result.append([1, int(player.maxRed * randf_range(minHeal, maxHeal))])
+	if (player.yellow < player.maxYellow):
+		result.append([2, int(player.maxYellow * randf_range(minHeal, maxHeal))])
+	if (player.blue < player.maxBlue):
+		result.append([3, int(player.maxBlue * randf_range(minHeal, maxHeal))])
+	
+	return result

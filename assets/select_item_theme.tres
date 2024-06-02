@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cwfjtfcadn8x4"]
+
+[ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="1_kqrdi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tt5ry"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grk81"]
+bg_color = Color(1, 1, 1, 0.52549)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4sxac"]
+bg_color = Color(0, 0, 0, 0.639216)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_if6a1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63s3v"]
+bg_color = Color(1, 1, 1, 0.52549)
+
+[resource]
+default_font = ExtResource("1_kqrdi")
+default_font_size = 20
+Button/styles/disabled = SubResource("StyleBoxEmpty_tt5ry")
+Button/styles/focus = SubResource("StyleBoxFlat_grk81")
+Button/styles/hover = SubResource("StyleBoxFlat_4sxac")
+Button/styles/normal = SubResource("StyleBoxEmpty_if6a1")
+Button/styles/pressed = SubResource("StyleBoxFlat_63s3v")

@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4mqgcsx1u52d"]
+
+[ext_resource type="Script" path="res://src/rooms/room.gd" id="1_3i3wt"]
+[ext_resource type="TileSet" uid="uid://ctvunq4ln4pe1" path="res://assets/tileset.tres" id="2_x8t1l"]
+[ext_resource type="PackedScene" uid="uid://dyyeoj20j6cyq" path="res://src/spawner.tscn" id="3_n8sbn"]
+[ext_resource type="PackedScene" uid="uid://7jmvt7d100l" path="res://src/entities/zombie.tscn" id="4_vgaub"]
+[ext_resource type="PackedScene" uid="uid://bovjfu1ap5g6x" path="res://src/entities/mib.tscn" id="5_4pirg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kf4jx"]
+size = Vector2(5600, 5600)
+
+[node name="roomD" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_3i3wt")
+hasMobs = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_x8t1l")
+format = 2
+layer_0/name = "Ground"
+layer_0/tile_data = PackedInt32Array(262142, 393235, 0, 196609, 393235, 0, 262143, 393235, 0, 196608, 393235, 0, -262143, 393235, 0, -262144, 393235, 0, 131068, 393235, 131072, 65532, 393235, 0, -4, 393235, 0, -65540, 393235, 0, -131076, 327699, 0, -196605, 327699, 0, -131069, 393235, 0, -65533, 393235, 0, 3, 393235, 0, 65539, 393235, 131072, 196610, 262163, 1, 262141, 327699, 1, 196604, 327699, 131072, 131075, 327699, 131072, 327677, 65555, 1, 327678, 262163, 0, 327679, 262163, 0, 262144, 262163, 0, 262145, 262163, 0, 262146, 19, 1, 131076, 262163, 131072, 65540, 262163, 0, 4, 262163, 0, -65532, 262163, 0, -131068, 262163, 0, -196604, 262163, 0, -327678, 19, 1, -327679, 262163, 0, -327680, 262163, 0, -262145, 262163, 0, -262146, 262163, 0, -131077, 262163, 0, -65541, 262163, 0, -5, 262163, 0, 65531, 262163, 0, 131067, 262163, 0, 196603, 262163, 131072, 5, 393235, 0, 65541, 393235, 0, 327681, 393235, 0, 327680, 393235, 0, 393215, 393235, 0, 393214, 393235, 0, 393213, 327699, 1, 65530, 393235, 0, -6, 393235, 0, -65542, 393235, 0, -131078, 327699, 0, -262142, 262163, 1, -262140, 262163, 0, -196611, 327699, 1, -196610, 393235, 0, -196609, 393235, 0, -196613, 262163, 0, -262147, 65555, 1, -196614, 327699, 0, -262139, 327699, 0, -196603, 327699, 0, -131067, 393235, 0, -65531, 393235, 0, 131077, 327699, 131072, 196613, 327699, 131072, 196612, 262163, 131072, 262138, 327699, 131072, 196602, 327699, 131072, 131066, 393235, 0, 262139, 262163, 131072, -327683, 327699, 1, -327682, 393235, 0, -327681, 393235, 0, -393216, 393235, 0, -393215, 393235, 0, -393214, 262163, 1, -196615, 327699, 1, 262137, 327699, 1, 196614, 262163, 1, -262138, 262163, 1, 327682, 262163, 1, -131073, 327699, 0, -65537, 262163, 0, -131072, 262163, 0, -196608, 327699, 0, -2, 262163, 0, -3, 327699, 0, 65533, 327699, 0, 65534, 262163, 0, 131070, 327699, 0, -65538, 327699, 0, -131071, 327699, 0, 65537, 327699, 0, 131071, 262163, 0, 65536, 262163, 0, 1, 262163, 0, -65535, 262163, 0, -65534, 327699, 0, 2, 327699, 0, 196607, 327699, 0, 131072, 327699, 0, 131069, 393235, 131072, 196605, 393235, 131072, 196606, 393235, 0, 131073, 393235, 0, 131074, 393235, 131072, 65538, 393235, 131072, -196607, 393235, 0, -196606, 393235, 0, -131070, 393235, 0, -131074, 393235, 0, -131075, 393235, 0, -65539, 393235, 0, -1, 262163, 0, 65535, 262163, 0, 0, 262163, 0, -65536, 262163, 0)
+layer_1/name = "Walls"
+layer_1/z_index = 2
+layer_1/tile_data = PackedInt32Array(196604, 19, 65536, 131075, 19, 131072, -131076, 65555, 65536, -196605, 65555, 131072, -196612, 19, 131072, -262141, 19, 65536, 262140, 65555, 131072, -196615, 19, 65536, -196614, 131091, 0, -196613, 131091, 0, 262137, 65555, 65536, 262138, 131091, 0, 262139, 131091, 0, 196612, 131091, 0, 196613, 131091, 0, 196611, 65555, 65536, 196614, 65555, 131072, -262140, 131091, 0, -262139, 131091, 0, -262138, 19, 131072, 196605, 19, 131072, 262141, 196627, 0, 327677, 196627, 0, 196610, 196627, 0, 262146, 196627, 0, 131074, 19, 65536, -131075, 65555, 131072, -196606, 65555, 65536, -327678, 196627, 0, -262142, 196627, 0, -262147, 196627, 0, -196611, 196627, 0, -327683, 19, 131072, -393220, 19, 65536, -393214, 19, 65536, -458749, 19, 131072, -393213, 65555, 131072, -327684, 65555, 65536, 458748, 65555, 65536, 327682, 65555, 65536, 393213, 65555, 131072, 393219, 65555, 131072, 393212, 19, 65536, 327683, 19, 131072)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_kf4jx")
+
+[node name="entry1" type="Marker2D" parent="."]
+position = Vector2(0, 2800)
+
+[node name="entry2" type="Marker2D" parent="."]
+position = Vector2(2800, 0)
+
+[node name="entry3" type="Marker2D" parent="."]
+position = Vector2(0, -2800)
+
+[node name="entry4" type="Marker2D" parent="."]
+position = Vector2(-2800, 0)
+
+[node name="spawner" parent="." instance=ExtResource("3_n8sbn")]
+entitiesList = Array[PackedScene]([ExtResource("4_vgaub"), ExtResource("5_4pirg")])
+minEntities = 2
+maxEntities = 4
+
+[node name="Marker2D" type="Marker2D" parent="spawner"]
+position = Vector2(-668, 637)
+
+[node name="Marker2D2" type="Marker2D" parent="spawner"]
+position = Vector2(-592, -601)
+
+[node name="Marker2D3" type="Marker2D" parent="spawner"]
+position = Vector2(576, -614)
+
+[node name="Marker2D4" type="Marker2D" parent="spawner"]
+position = Vector2(582, 580)
+
+[node name="Marker2D5" type="Marker2D" parent="spawner"]
+position = Vector2(-2, -36)
+
+[node name="LootPosition" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="player_entered_first_time" from="." to="spawner" method="_on_player_entered_first_time"]

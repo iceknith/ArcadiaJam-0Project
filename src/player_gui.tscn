@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbgi5hfe1qdm0"]
+[gd_scene load_steps=16 format=3 uid="uid://bbgi5hfe1qdm0"]
 
 [ext_resource type="Script" path="res://src/player_gui.gd" id="1_kg7fi"]
 [ext_resource type="Texture2D" uid="uid://dykr1opknrv2s" path="res://assets/GUI/hp_bar/overlay.png" id="1_kury1"]
@@ -16,26 +16,47 @@ font_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.552941, 0.552941, 0.552941, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_6h7me"]
+[sub_resource type="LabelSettings" id="LabelSettings_1hfxy"]
 font = ExtResource("7_o0dof")
 font_size = 30
 font_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.721569, 0.00392157, 0.00392157, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_4jli6"]
+[sub_resource type="LabelSettings" id="LabelSettings_4u16w"]
 font = ExtResource("7_o0dof")
 font_size = 30
 font_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.8, 0.701961, 0.0313726, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_5odn5"]
+[sub_resource type="LabelSettings" id="LabelSettings_o663e"]
 font = ExtResource("7_o0dof")
 font_size = 30
 font_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.0627451, 0.32549, 0.552941, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5odn5"]
+font = ExtResource("7_o0dof")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0.0627451, 0.32549, 0.552941, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jli6"]
+font = ExtResource("7_o0dof")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0.8, 0.701961, 0.0313726, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6h7me"]
+font = ExtResource("7_o0dof")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0.721569, 0.00392157, 0.00392157, 1)
 
 [node name="playerGUI" type="Control"]
 layout_mode = 3
@@ -90,7 +111,7 @@ offset_top = 847.0
 offset_right = 1494.0
 offset_bottom = 873.0
 text = "100"
-label_settings = SubResource("LabelSettings_6h7me")
+label_settings = SubResource("LabelSettings_1hfxy")
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
 
@@ -101,7 +122,7 @@ offset_top = 927.0
 offset_right = 1492.0
 offset_bottom = 953.0
 text = "100"
-label_settings = SubResource("LabelSettings_4jli6")
+label_settings = SubResource("LabelSettings_4u16w")
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
 
@@ -113,7 +134,7 @@ offset_right = 1491.0
 offset_bottom = 1034.0
 text = "100
 "
-label_settings = SubResource("LabelSettings_5odn5")
+label_settings = SubResource("LabelSettings_o663e")
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
 
@@ -126,11 +147,49 @@ metadata/_edit_lock_ = true
 [node name="spell_1_pos" type="Marker2D" parent="."]
 position = Vector2(212, 890)
 
+[node name="cost" type="Label" parent="spell_1_pos"]
+z_index = 1
+offset_left = -66.0
+offset_top = 12.0
+offset_right = 74.0
+offset_bottom = 54.0
+label_settings = SubResource("LabelSettings_1gxb6")
+horizontal_alignment = 1
+
 [node name="spell_2_pos" type="Marker2D" parent="."]
-position = Vector2(361, 1007)
+position = Vector2(57, 1011)
+
+[node name="cost" type="Label" parent="spell_2_pos"]
+z_index = 1
+offset_left = -45.0
+offset_top = 14.0
+offset_right = 46.0
+offset_bottom = 56.0
+text = "
+"
+label_settings = SubResource("LabelSettings_5odn5")
+horizontal_alignment = 1
 
 [node name="spell_3_pos" type="Marker2D" parent="."]
 position = Vector2(215, 1010)
 
+[node name="cost" type="Label" parent="spell_3_pos"]
+z_index = 1
+offset_left = -61.0
+offset_top = 16.0
+offset_right = 62.0
+offset_bottom = 58.0
+label_settings = SubResource("LabelSettings_4jli6")
+horizontal_alignment = 1
+
 [node name="spell_4_pos" type="Marker2D" parent="."]
-position = Vector2(57, 1011)
+position = Vector2(361, 1007)
+
+[node name="cost" type="Label" parent="spell_4_pos"]
+z_index = 1
+offset_left = -53.0
+offset_top = 19.0
+offset_right = 56.0
+offset_bottom = 61.0
+label_settings = SubResource("LabelSettings_6h7me")
+horizontal_alignment = 1

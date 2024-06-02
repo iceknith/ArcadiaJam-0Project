@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cahhc0oyqsiev"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_qc6lc"]
+[ext_resource type="Texture2D" uid="uid://beaqy43hxnxxo" path="res://assets/spells/bullet/bullet.png" id="2_be1uo"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="3_gegu1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fm67d"]
+size = Vector2(65, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ltd52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_be1uo")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_be1uo")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_be1uo")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[node name="bullet" instance=ExtResource("1_qc6lc")]
+scale = Vector2(1.5, 1.5)
+attackPlayer = true
+damageType = ["red", "gray"]
+damageAmount = 10
+acceleration = 75.0
+speed = 2500.0
+maxDuration = 15.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_fm67d")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(10, -4)
+sprite_frames = SubResource("SpriteFrames_ltd52")
+animation = &"spawn"
+script = ExtResource("3_gegu1")
+spawnAnimationTime = 0.0
+explosionAnimationTime = 0.0

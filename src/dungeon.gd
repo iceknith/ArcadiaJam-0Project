@@ -2,16 +2,15 @@ extends Node2D
 
 var rooms:Array = [];
 var corridors:Array = [];
+var walls:Array = []
+var finishRooms:Array = []
 var grid:Array = [];
 
 @export var default_room_cnt:int = 5
 @export var max_try_to_spawn_room:int = 5
 @export var max_room_to_corridor = 1
 
-var wallUp
-var wallDown
-var wallLeft
-var wallRight
+var world = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,23 +21,31 @@ func _ready():
 	while file.dir_exists(world_dir):
 		rooms.append([])
 		corridors.append([])
+		finishRooms.append([])
+		walls.append([null, null, null, null])
 		
 		var world_file = DirAccess.open(str("res://src/rooms/world",i))
 		
 		for room in world_file.get_files():
 			if "corridor" in room:
 				corridors[i-1].append(load(str("res://src/rooms/world",i,"/",room)))
-			elif "wallLeft" in room: wallLeft = load(str("res://src/rooms/world",i,"/",room))
-			elif "wallRight" in room: wallRight = load(str("res://src/rooms/world",i,"/",room))
-			elif "wallDown" in room: wallDown = load(str("res://src/rooms/world",i,"/",room))
-			elif "wallUp" in room: wallUp = load(str("res://src/rooms/world",i,"/",room))
+			elif "wallLeft" in room: 
+				walls[i-1][0] = load(str("res://src/rooms/world",i,"/",room))
+			elif "wallRight" in room: 
+				walls[i-1][1] = load(str("res://src/rooms/world",i,"/",room))
+			elif "wallDown" in room: 
+				walls[i-1][2] = load(str("res://src/rooms/world",i,"/",room))
+			elif "wallUp" in room: 
+				walls[i-1][3] = load(str("res://src/rooms/world",i,"/",room))
+			elif "finishRoom" in room: 
+				finishRooms[i-1].append(load(str("res://src/rooms/world",i,"/",room)))
 			else:
 				rooms[i-1].append(load(str("res://src/rooms/world",i,"/",room)))
 		
 		i+=1;
 		world_dir = str("world",i)
 		
-	generateDungeon(1, default_room_cnt)
+	generateNewDungeon.call_deferred()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -46,10 +53,13 @@ func _process(delta):
 	
 func generateDungeon(worldNum:int, roomNum:int):
 	worldNum -= 1
-	
 	if worldNum > rooms.size():
 		push_error("Invalid World num")
+		
+	#load background
+	$ParallaxBackground/ParallaxLayer/Sprite2D.texture = load(str("res://assets/backgrounds/background_world_",worldNum+1,".png"))
 	
+	#generate dungeon
 	var rooms_used:Array = rooms[worldNum]
 	var corridor_used:Array = corridors[worldNum]
 	
@@ -72,7 +82,9 @@ func generateDungeon(worldNum:int, roomNum:int):
 		var found_room:bool = false
 		
 		var possible_rooms:Array
-		if (room_to_corridor == 0):
+		if (i == roomNum):
+			possible_rooms = finishRooms[worldNum].duplicate()
+		elif (room_to_corridor == 0):
 			possible_rooms = corridor_used.duplicate()
 		else:
 			possible_rooms = rooms_used.duplicate()
@@ -80,7 +92,7 @@ func generateDungeon(worldNum:int, roomNum:int):
 		
 		#Search for a valid room to insert in this space
 		while !found_room && possible_rooms.size() > 0:
-		
+			
 			room = possible_rooms.pop_front().instantiate()
 			room.position = current_pix
 			add_child(room)
@@ -92,7 +104,9 @@ func generateDungeon(worldNum:int, roomNum:int):
 			for dirs in possible_dirs:
 				if dirs[1] == -previous_dir[1]:
 					found_room = true
-					if (i != 1): room.entries_dir.erase(dirs)
+					if (i != 1): 
+						room.door_to_close.append(dirs)
+						room.entries_dir.erase(dirs)
 					break
 			#searching a possible direction
 			if (found_room):
@@ -150,13 +164,18 @@ func generateDungeon(worldNum:int, roomNum:int):
 			
 		#Adding the room
 		if (prevRoom != null): 
+			prevRoom.door_to_close.append(previous_dir)
 			prevRoom.entries_dir.erase(previous_dir)
+		room.walls = walls[worldNum]
 		grid.append(room)
 		previous_pos.append(current_pos);
 		current_pix += current_dir[0]
 		current_pos += current_dir[1]
 		previous_dir = current_dir
 		prevRoom = room
+		if (i == 1):
+			get_parent().get_node("player").position = position + room.position + room.get_node("LootPosition").position
+			room.remove_entities.call_deferred()
 		
 		if(!room.isCorridor): room_to_corridor -= 1
 		else: room_to_corridor = max_room_to_corridor
@@ -165,14 +184,14 @@ func generateDungeon(worldNum:int, roomNum:int):
 	for room:Room in grid:
 		for direction in room.entries_dir:
 			var wall:Node2D
-			if direction[1].x == 1:
-				wall = wallRight.instantiate()
-			elif direction[1].x == -1:
-				wall = wallLeft.instantiate()
-			elif direction[1].y == -1:
-				wall = wallUp.instantiate()
+			if direction[1].x == -1:
+				wall = walls[worldNum][0].instantiate()
+			elif direction[1].x == 1:
+				wall = walls[worldNum][1].instantiate()
 			elif direction[1].y == 1:
-				wall = wallDown.instantiate()
+				wall = walls[worldNum][2].instantiate()
+			elif direction[1].y == -1:
+				wall = walls[worldNum][3].instantiate()
 				
 			wall.position = room.position + direction[0]/2
 			add_child(wall)
@@ -184,9 +203,11 @@ func intersectsWithRoom(position:Vector2, rooms_pos:Array)->bool:
 
 func generateNewDungeon():
 	deleteDungeon()
-	generateDungeon(1, default_room_cnt)
+	generateDungeon(world, default_room_cnt)
+	world = world%rooms.size() + 1
 	
 func deleteDungeon():
 	grid = []
 	for child in get_children():
-		remove_child(child)
+		if !("ParallaxBackground" in child.name):
+			remove_child(child)

@@ -1,0 +1,178 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr1cc4gg313og"]
+
+[ext_resource type="Script" path="res://src/shop.gd" id="1_4tm1s"]
+[ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="1_40c4v"]
+[ext_resource type="Theme" uid="uid://cwfjtfcadn8x4" path="res://assets/select_item_theme.tres" id="2_e1gf3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oe5dv"]
+font = ExtResource("1_40c4v")
+font_size = 50
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4tm1s")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1078.0
+color = Color(0, 0, 0, 0.25098)
+
+[node name="item_1" type="Marker2D" parent="."]
+position = Vector2(960, 400)
+
+[node name="select_button" type="Button" parent="item_1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_e1gf3")
+
+[node name="icon" type="Sprite2D" parent="item_1"]
+
+[node name="description" type="Label" parent="item_1"]
+offset_left = -200.0
+offset_top = 150.0
+offset_right = 200.0
+offset_bottom = 192.0
+theme = ExtResource("2_e1gf3")
+theme_override_font_sizes/font_size = 100
+text = "Placeholder"
+label_settings = SubResource("LabelSettings_oe5dv")
+horizontal_alignment = 1
+
+[node name="item_2" type="Marker2D" parent="."]
+position = Vector2(480, 400)
+
+[node name="select_button" type="Button" parent="item_2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_e1gf3")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="Sprite2D" parent="item_2"]
+
+[node name="description" type="Label" parent="item_2"]
+offset_left = -200.0
+offset_top = 150.0
+offset_right = 200.0
+offset_bottom = 192.0
+theme = ExtResource("2_e1gf3")
+theme_override_font_sizes/font_size = 100
+text = "Placeholder"
+label_settings = SubResource("LabelSettings_oe5dv")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="item_3" type="Marker2D" parent="."]
+position = Vector2(1440, 400)
+
+[node name="select_button" type="Button" parent="item_3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_e1gf3")
+
+[node name="icon" type="Sprite2D" parent="item_3"]
+
+[node name="description" type="Label" parent="item_3"]
+offset_left = -200.0
+offset_top = 150.0
+offset_right = 200.0
+offset_bottom = 192.0
+theme = ExtResource("2_e1gf3")
+theme_override_font_sizes/font_size = 100
+text = "Placeholder"
+label_settings = SubResource("LabelSettings_oe5dv")
+horizontal_alignment = 1
+
+[node name="back_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 748.0
+offset_top = 874.0
+offset_right = 1136.0
+offset_bottom = 1006.0
+theme_override_fonts/font = ExtResource("1_40c4v")
+theme_override_font_sizes/font_size = 150
+text = "Retour"
+
+[node name="spell_1_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 837.0
+offset_right = 279.0
+offset_bottom = 938.0
+theme = ExtResource("2_e1gf3")
+
+[node name="spell_2_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 948.0
+offset_right = 129.0
+offset_bottom = 1052.0
+theme = ExtResource("2_e1gf3")
+
+[node name="spell_3_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 949.0
+offset_right = 280.0
+offset_bottom = 1052.0
+theme = ExtResource("2_e1gf3")
+
+[node name="spell_4_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 299.0
+offset_top = 953.0
+offset_right = 420.0
+offset_bottom = 1050.0
+theme = ExtResource("2_e1gf3")
+
+[node name="text_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 82.0
+offset_right = 1923.0
+offset_bottom = 165.0
+theme = ExtResource("2_e1gf3")
+theme_override_font_sizes/font_size = 100
+text = "Placeholder text"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="item_1/select_button" to="." method="_on_select_item_1_button_pressed"]
+[connection signal="pressed" from="item_2/select_button" to="." method="_on_select_item_2_button_pressed"]
+[connection signal="pressed" from="item_3/select_button" to="." method="_on_select_item_3_button_pressed"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="spell_1_button" to="." method="_on_spell_1_button_pressed"]
+[connection signal="pressed" from="spell_2_button" to="." method="_on_spell_2_button_pressed"]
+[connection signal="pressed" from="spell_3_button" to="." method="_on_spell_3_button_pressed"]
+[connection signal="pressed" from="spell_4_button" to="." method="_on_spell_4_button_pressed"]

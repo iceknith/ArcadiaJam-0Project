@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://ub25dk45bpqv"]
+
+[ext_resource type="PackedScene" uid="uid://dpa5nrn4qfvx" path="res://src/items/item.tscn" id="1_rwu87"]
+[ext_resource type="Texture2D" uid="uid://ck8ckjotksk8t" path="res://icon.svg" id="2_344x7"]
+[ext_resource type="PackedScene" uid="uid://bwta3d83pt468" path="res://src/spells/orb.tscn" id="2_dltpf"]
+[ext_resource type="PackedScene" uid="uid://cbclffmmuf7ak" path="res://src/items/heal_gray.tscn" id="3_4b66u"]
+[ext_resource type="PackedScene" uid="uid://ckqqj0lhqkknf" path="res://src/items/heal_red.tscn" id="4_iy6tj"]
+
+[node name="Shop" instance=ExtResource("1_rwu87")]
+isShop = true
+items = Array[PackedScene]([ExtResource("2_dltpf"), ExtResource("3_4b66u"), ExtResource("4_iy6tj")])
+itemType = Array[String](["spell", "item", "item"])
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(-6.5, 1.50002)
+scale = Vector2(8.58594, 8.46094)
+texture = ExtResource("2_344x7")

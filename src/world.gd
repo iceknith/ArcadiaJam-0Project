@@ -4,29 +4,50 @@ signal playerSignal(signalType:String, signalValues:Array)
 
 # Called when thZe node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-
-
-func _on_gui_generate_new_dungeon():
+func generate_new_dungeon():
+	$dungeon.world = 1
 	$dungeon.generateNewDungeon()
-	$player.position = Vector2.ZERO
 	$player.gray = $player.maxGray
 	$player.healthChange.emit("gray", false, $player.gray)
 
+func nextLevel():
+	$dungeon.generateNewDungeon()
 
 func _on_player_death():
-	playerSignal.emit("death", null)
-
+	get_parent().get_parent().endGame()
 
 func _on_player_health_change(healthType, maxHealthChange, newValue):
 	playerSignal.emit("health_change", [healthType, maxHealthChange, newValue])
 
+func _on_player_spell_change(spellNum, newSpell, newSpellType, newSpellCost):
+	playerSignal.emit("spell_change", [spellNum, newSpell, newSpellType, newSpellCost])
+	
+func _on_player_choosing_spell(spellPointer):
+	playerSignal.emit("choosing_spell", [spellPointer])
+	(func(): process_mode = Node.PROCESS_MODE_DISABLED).call_deferred()
 
-func _on_player_spell_change(spellNum, newSpell, newSpellCost):
-	playerSignal.emit("spell_change", [spellNum, newSpell, newSpellCost])
+func _on_player_open_shop(items:Array[PackedScene], itemType:Array[String]):
+	playerSignal.emit("open_shop", [items, itemType])
+	(func(): process_mode = Node.PROCESS_MODE_DISABLED).call_deferred()
+
+func _on_gui_toggle_pause_game():
+	if (process_mode == Node.PROCESS_MODE_DISABLED):
+		process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func _on_gui_gui_signal(signalType, signalValues):
+	if (signalType == "generate_dungeon"):
+		generate_new_dungeon()
+	elif (signalType == "spell_change"):
+		$player.replaceSpell(signalValues[0], signalValues[1])
+	elif (signalType == "gain_item"):
+		$player.heal(signalValues[2], signalValues[0])
+	

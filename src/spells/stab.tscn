@@ -3,11 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_vruxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6cmxg"]
-size = Vector2(366, 78)
+size = Vector2(702, 92)
 
 [node name="stab" instance=ExtResource("1_vruxd")]
+attackEntities = true
+damageAmount = 10
 maxDuration = 0.166
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(183, 0)
+position = Vector2(351, 0)
 shape = SubResource("RectangleShape2D_6cmxg")

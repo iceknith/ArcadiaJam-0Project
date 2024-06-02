@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://colc6yn53tjht"]
+[gd_scene load_steps=7 format=3 uid="uid://colc6yn53tjht"]
 
 [ext_resource type="Script" path="res://src/rooms/room.gd" id="1_vkdir"]
 [ext_resource type="TileSet" uid="uid://ctvunq4ln4pe1" path="res://assets/tileset.tres" id="2_ngjye"]
+[ext_resource type="PackedScene" uid="uid://dyyeoj20j6cyq" path="res://src/spawner.tscn" id="3_v18p4"]
+[ext_resource type="PackedScene" uid="uid://7jmvt7d100l" path="res://src/entities/zombie.tscn" id="4_g1106"]
+[ext_resource type="PackedScene" uid="uid://bovjfu1ap5g6x" path="res://src/entities/mib.tscn" id="5_d0q4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kf4jx"]
 size = Vector2(5600, 5600)
 
 [node name="roomA" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_vkdir")
+hasMobs = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_ngjye")
@@ -21,6 +27,8 @@ layer_1/tile_data = PackedInt32Array(-393223, 65537, 0, -458746, 1, 0, 458745, 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kf4jx")
 
+[node name="LootPosition" type="Marker2D" parent="."]
+
 [node name="entry1" type="Marker2D" parent="."]
 position = Vector2(0, 2800)
 
@@ -32,3 +40,23 @@ position = Vector2(0, -2800)
 
 [node name="entry4" type="Marker2D" parent="."]
 position = Vector2(-2800, 0)
+
+[node name="spawner" parent="." instance=ExtResource("3_v18p4")]
+entitiesList = Array[PackedScene]([ExtResource("4_g1106"), ExtResource("5_d0q4u")])
+minEntities = 2
+maxEntities = 4
+
+[node name="Marker2D" type="Marker2D" parent="spawner"]
+position = Vector2(-1371, 1336)
+
+[node name="Marker2D2" type="Marker2D" parent="spawner"]
+position = Vector2(1295, 741)
+
+[node name="Marker2D3" type="Marker2D" parent="spawner"]
+position = Vector2(1426, -1643)
+
+[node name="Marker2D4" type="Marker2D" parent="spawner"]
+position = Vector2(-1749, -1346)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="player_entered_first_time" from="." to="spawner" method="_on_player_entered_first_time"]

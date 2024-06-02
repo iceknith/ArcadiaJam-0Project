@@ -1,14 +1,20 @@
-[gd_scene load_steps=19 format=3 uid="uid://pn7bc5ccesrr"]
+[gd_scene load_steps=25 format=3 uid="uid://pn7bc5ccesrr"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_vmk58"]
 [ext_resource type="Texture2D" uid="uid://bckuidra0chpn" path="res://assets/cressida/dash/cressida_dash_0003.png" id="2_58vcm"]
 [ext_resource type="Texture2D" uid="uid://dp60q0tonpvvg" path="res://assets/cressida/dash/cressida_dash_0006.png" id="3_1m2wi"]
 [ext_resource type="Texture2D" uid="uid://bkon3vrjnnn5y" path="res://assets/cressida/dash/cressida_dash_0009.png" id="4_udepd"]
+[ext_resource type="Texture2D" uid="uid://5tkgj0gfsdbc" path="res://assets/cressida/dead/cressida_dead_0003.png" id="5_8qpo3"]
+[ext_resource type="Texture2D" uid="uid://bcfsh6vwwbshd" path="res://assets/cressida/hit/cressida_hit_0003.png" id="5_l0d5n"]
 [ext_resource type="Texture2D" uid="uid://dk1sulgcqnry8" path="res://assets/cressida/idle/cressida_idle_0000.png" id="5_nh144"]
 [ext_resource type="Texture2D" uid="uid://bx4fchwvll48k" path="res://assets/cressida/spell/cressida_spell_0003.png" id="6_4exwm"]
+[ext_resource type="Texture2D" uid="uid://224bmsg4n7wc" path="res://assets/cressida/dead/cressida_dead_0009.png" id="6_fm47p"]
 [ext_resource type="Texture2D" uid="uid://wbpaydv2lgqj" path="res://assets/cressida/idle/cressida_idle_0003.png" id="6_kxqhv"]
+[ext_resource type="Texture2D" uid="uid://clrrsx4ca7e1o" path="res://assets/cressida/hit/cressida_hit_0000.png" id="6_lwea3"]
 [ext_resource type="Texture2D" uid="uid://cl4y832xshryn" path="res://assets/cressida/spell/cressida_spell_0006.png" id="7_t6q5t"]
+[ext_resource type="Texture2D" uid="uid://bo2x3swiaa7me" path="res://assets/cressida/invincibility/cressida_invicibility_0.png" id="9_7h5rf"]
 [ext_resource type="Texture2D" uid="uid://bkjj34s6r3k46" path="res://assets/cressida/stab/cressida_stab_0003.png" id="9_y1sp0"]
+[ext_resource type="Texture2D" uid="uid://ootejxfjsecj" path="res://assets/cressida/invincibility/cressida_invincibility_2.png" id="10_0viya"]
 [ext_resource type="Texture2D" uid="uid://dji41yiy84acn" path="res://assets/cressida/stab/cressida_stab_0006.png" id="10_cmhs5"]
 [ext_resource type="Texture2D" uid="uid://d3nw6675uvuug" path="res://assets/cressida/walk/cressida_walk_0000.png" id="11_4dyhg"]
 [ext_resource type="Texture2D" uid="uid://bl023dk78hm3" path="res://assets/cressida/walk/cressida_walk_0003.png" id="12_8o5y6"]
@@ -39,6 +45,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("5_8qpo3")
+}, {
+"duration": 5.0,
+"texture": ExtResource("6_fm47p")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_l0d5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lwea3")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("5_nh144")
 }, {
 "duration": 1.0,
@@ -47,6 +75,17 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_7h5rf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0viya")
+}],
+"loop": true,
+"name": &"invincible",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -104,15 +143,14 @@ height = 486.0
 
 [node name="player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_vmk58")
-speed = 1500.0
 metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2mc8m")
-animation = &"spell"
-frame_progress = 0.79968
+animation = &"dead"
+frame_progress = 0.297479
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -126,9 +164,14 @@ position_smoothing_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 3
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(1, 85)
 shape = SubResource("CapsuleShape2D_v8y20")
 metadata/_edit_lock_ = true
+
+[node name="RegenerationTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="RegenerationTimer" to="." method="_on_regeneration_timer_timeout"]

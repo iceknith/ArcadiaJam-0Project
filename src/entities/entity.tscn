@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://fogg8jxfmkbt"]
+[gd_scene load_steps=6 format=3 uid="uid://fogg8jxfmkbt"]
 
 [ext_resource type="Script" path="res://src/entities/entity.gd" id="1_nu8s1"]
+[ext_resource type="Script" path="res://src/entities/hitboxes.gd" id="2_i284r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rogsh"]
 animations = [{
@@ -26,25 +27,56 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4ye0"]
+radius = 53.0
+height = 106.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xlw4"]
+size = Vector2(89, 644)
 
 [node name="entity" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 3
+z_index = 9
+collision_layer = 4
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_nu8s1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 9
 sprite_frames = SubResource("SpriteFrames_rogsh")
 animation = &"death"
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_q4ye0")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="pathRefreshTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
+[node name="invincibilityTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="deathAnimationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="hit_hitbox" type="Area2D" parent="."]
+script = ExtResource("2_i284r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_hitbox"]
+shape = SubResource("RectangleShape2D_2xlw4")
+
+[node name="fire_point" type="Marker2D" parent="hit_hitbox"]
+
+[node name="RayCast2D" type="RayCast2D" parent="hit_hitbox/fire_point"]
+collision_mask = 2
+
+[node name="shootCooldown" type="Timer" parent="hit_hitbox/fire_point"]
+one_shot = true
+
+[connection signal="rotate" from="." to="hit_hitbox" method="_on_rotate"]
 [connection signal="timeout" from="pathRefreshTimer" to="." method="_on_path_refresh_timer_timeout"]
+[connection signal="timeout" from="invincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="deathAnimationTimer" to="." method="_on_death_animation_timer_timeout"]
+[connection signal="area_entered" from="hit_hitbox" to="." method="_on_hitbox_area_collision"]

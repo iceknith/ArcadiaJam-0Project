@@ -9,18 +9,16 @@ script = ExtResource("1_h7s14")
 
 [node name="dungeon" parent="." instance=ExtResource("1_ox068")]
 position = Vector2(953, 543)
-scale = Vector2(1.4, 1.4)
-default_room_cnt = 31
-max_try_to_spawn_room = 20
+scale = Vector2(1.25, 1.25)
+default_room_cnt = 21
+max_try_to_spawn_room = 10
 
 [node name="player" parent="." instance=ExtResource("2_xiut1")]
 z_index = 10
-speed = 1750.0
-acceleration = 70.0
-dashCost = 10
-dashSpeed = 10000.0
-dashAcceleration = 100.0
-dashDuration = 0.25
+defaultSpeed = 2000.0
+defaultDashSpeed = 6000.0
+defaultDashAcceleration = 100.0
+defaultDashDuration = 0.6
 
 [connection signal="death" from="player" to="." method="_on_player_death"]
 [connection signal="healthChange" from="player" to="." method="_on_player_health_change"]
