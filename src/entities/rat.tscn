@@ -51,12 +51,12 @@ height = 92.0
 size = Vector2(325.389, 109.622)
 
 [node name="rat" instance=ExtResource("1_s2dd4")]
-minSpeed = 1750.0
-maxSpeed = 2250.0
+minSpeed = 2050.0
+maxSpeed = 2500.0
 acceleration = 75.0
-knockbackSpeed = 1000.0
+knockbackSpeed = 0.0
 minHealth = 10.0
-maxHealth = 20.0
+maxHealth = 25.0
 meleDamageType = ["yellow", "gray"]
 minMeleDamageAmount = 6
 maxMeleDamageAmount = 10
@@ -71,5 +71,4 @@ shape = SubResource("CapsuleShape2D_6i68e")
 [node name="CollisionShape2D" parent="hit_hitbox" index="0"]
 position = Vector2(-0.399726, -11.5512)
 rotation = 0.541052
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_4thmf")

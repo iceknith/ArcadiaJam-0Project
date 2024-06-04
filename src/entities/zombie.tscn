@@ -57,8 +57,8 @@ size = Vector2(140.139, 56.9019)
 
 [node name="zombie" instance=ExtResource("1_1xsno")]
 acceleration = 20.0
-minHealth = 30.0
-maxHealth = 60.0
+minHealth = 45.0
+maxHealth = 80.0
 meleDamageType = ["red"]
 minMeleDamageAmount = 10
 maxMeleDamageAmount = 20

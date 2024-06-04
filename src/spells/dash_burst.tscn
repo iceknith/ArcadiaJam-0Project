@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_g4arl"]
 [ext_resource type="Script" path="res://src/spells/dash_burst.gd" id="2_nlbi7"]
 
-[node name="Dash Burst" instance=ExtResource("1_g4arl")]
+[node name="Sprinteuse" instance=ExtResource("1_g4arl")]
 script = ExtResource("2_nlbi7")
 duration_per_level = Array[float]([8.0, 8.0, 12.0, 12.0])
-dash_duration_percent_per_level = Array[float]([0.4, 0.7, 0.9, 1.1])
+dash_duration_percent_per_level = Array[float]([1.4, 1.7, 2.0, 2.3])
 utilitySpell = true
 costType = "blue"
 maxLevels = 4

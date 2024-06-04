@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_dpjyu"]
 [ext_resource type="Script" path="res://src/spells/attack_burst.gd" id="2_e4e0x"]
 
-[node name="Attack Burst" instance=ExtResource("1_dpjyu")]
+[node name="Carnage" instance=ExtResource("1_dpjyu")]
 script = ExtResource("2_e4e0x")
 duration_per_level = Array[float]([3.0, 4.0, 5.0, 6.0])
 player_damage_mult_per_level = Array[float]([0.3, 0.35, 0.4, 0.5])

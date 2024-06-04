@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://bcm0ngn6fp17a" path="res://assets/spells/Explosion_red/explosion0003.png" id="6_0ecw3"]
 [ext_resource type="Texture2D" uid="uid://sca7m3432dcn" path="res://assets/spells/Explosion_red/explosion0004.png" id="7_wuif1"]
 [ext_resource type="Texture2D" uid="uid://bn8nvdbuele6u" path="res://assets/spells/Explosion_red/explosion0005.png" id="8_eift8"]
-[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Wind Burst/crescent_0002.png" id="9_rk6qy"]
+[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Bourrasque/crescent_0002.png" id="9_rk6qy"]
 [ext_resource type="Texture2D" uid="uid://bpp2024v0vsvu" path="res://assets/spells/crescent_0000.png" id="10_e5d4q"]
-[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Wind Burst/crescent_0001.png" id="11_34sfk"]
+[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Bourrasque/crescent_0001.png" id="11_34sfk"]
 [ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="12_5thmb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ju8rl"]
@@ -61,15 +61,15 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Blood Blade" instance=ExtResource("1_n1eeh")]
+[node name="Lame sanguinaire" instance=ExtResource("1_n1eeh")]
 script = ExtResource("2_28e2k")
 size_per_levels = Array[float]([2.0, 2.0, 3.0, 3.0])
 attackEntities = true
 costType = "red"
 maxLevels = 4
 maxColorAdd_per_level = Array[int]([20, 25, 25, 30])
-costs_per_level = Array[int]([15, 15, 12, 10])
-damageAmount_per_level = Array[int]([10, 12, 15, 15])
+costs_per_level = Array[int]([10, 10, 8, 5])
+damageAmount_per_level = Array[int]([25, 27, 30, 35])
 acceleration_per_leve = Array[float]([50.0, 50.0, 50.0, 50.0])
 speed_per_level = Array[float]([2500.0, 2500.0, 3000.0, 3000.0])
 maxDuration_per_level = Array[float]([2.0, 2.0, 3.0, 3.0])

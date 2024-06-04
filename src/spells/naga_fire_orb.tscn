@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bcm0ngn6fp17a" path="res://assets/spells/Explosion_red/explosion0003.png" id="5_ppooj"]
 [ext_resource type="Texture2D" uid="uid://sca7m3432dcn" path="res://assets/spells/Explosion_red/explosion0004.png" id="6_kmd2g"]
 [ext_resource type="Texture2D" uid="uid://bn8nvdbuele6u" path="res://assets/spells/Explosion_red/explosion0005.png" id="7_54uwa"]
-[ext_resource type="Texture2D" uid="uid://j5e1km51cxg0" path="res://assets/spells/Fire Ball/spell_orb_0000.png" id="9_7e4pk"]
-[ext_resource type="Texture2D" uid="uid://dkgqwl2ambia6" path="res://assets/spells/Fire Ball/spell_orb_0001.png" id="10_guk2e"]
+[ext_resource type="Texture2D" uid="uid://j5e1km51cxg0" path="res://assets/spells/Orbe explosif/spell_orb_0000.png" id="9_7e4pk"]
+[ext_resource type="Texture2D" uid="uid://dkgqwl2ambia6" path="res://assets/spells/Orbe explosif/spell_orb_0001.png" id="10_guk2e"]
 [ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="11_almp5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36dy8"]

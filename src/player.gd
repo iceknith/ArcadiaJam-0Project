@@ -420,10 +420,10 @@ func addPassive(passiveName:String, passiveLevel:int):
 		elif passiveLevel == 3: stabLifeLeechAmount = 25
 		
 	elif (passiveName == "Stab Damage"):
-		if passiveLevel == 0: additionalStabDamage = 1
-		elif passiveLevel == 1: additionalStabDamage = 2
-		elif passiveLevel == 2: additionalStabDamage = 4
-		elif passiveLevel == 3: additionalStabDamage = 5
+		if passiveLevel == 0: additionalStabDamage = 3
+		elif passiveLevel == 1: additionalStabDamage = 5
+		elif passiveLevel == 2: additionalStabDamage = 8
+		elif passiveLevel == 3: additionalStabDamage = 10
 		
 	passiveChange.emit(passiveName, passiveLevel)
 	if (passiveName in passives):
@@ -442,7 +442,7 @@ func spawn_text_popup(textColor:String, textContent:String, textDuration:float, 
 
 func _on_regeneration_timer_timeout():
 	var prevGray = gray
-	gray = min(gray+1, maxGray)
+	gray = min(gray+3, maxGray)
 	if prevGray != gray:
 		spawn_text_popup("gray", "+ 1", 0.25, 500)
 		healthChange.emit("gray", false, gray)

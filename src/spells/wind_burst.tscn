@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://bcm0ngn6fp17a" path="res://assets/spells/Explosion_red/explosion0003.png" id="5_8ii7k"]
 [ext_resource type="Texture2D" uid="uid://sca7m3432dcn" path="res://assets/spells/Explosion_red/explosion0004.png" id="6_k83m7"]
 [ext_resource type="Texture2D" uid="uid://bn8nvdbuele6u" path="res://assets/spells/Explosion_red/explosion0005.png" id="7_1j6ok"]
-[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Wind Burst/crescent_0002.png" id="8_xkvx2"]
+[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Bourrasque/crescent_0002.png" id="8_xkvx2"]
 [ext_resource type="Texture2D" uid="uid://bpp2024v0vsvu" path="res://assets/spells/crescent_0000.png" id="9_w6ddo"]
-[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Wind Burst/crescent_0001.png" id="10_jyxsc"]
+[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Bourrasque/crescent_0001.png" id="10_jyxsc"]
 [ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="12_jh072"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ju8rl"]
@@ -61,7 +61,7 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Wind Burst" instance=ExtResource("1_kcpdx")]
+[node name="Bourrasque" instance=ExtResource("1_kcpdx")]
 script = ExtResource("2_nynf2")
 knock_back_force_multiplier = 10
 attackEntities = true

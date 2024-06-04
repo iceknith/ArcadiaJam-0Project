@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://do2ofp0is0txa"]
 
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_ym6su"]
-[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Wind Burst/crescent_0002.png" id="2_e31l8"]
+[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Bourrasque/crescent_0002.png" id="2_e31l8"]
 [ext_resource type="Script" path="res://src/spells/sword_of_justice.gd" id="2_wsg6n"]
 [ext_resource type="Texture2D" uid="uid://bpp2024v0vsvu" path="res://assets/spells/crescent_0000.png" id="3_vva7l"]
-[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Wind Burst/crescent_0001.png" id="4_jiaj2"]
+[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Bourrasque/crescent_0001.png" id="4_jiaj2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5aisa"]
 animations = [{
@@ -31,7 +31,7 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Sword Of Justice" instance=ExtResource("1_ym6su")]
+[node name="Lame scintillante" instance=ExtResource("1_ym6su")]
 script = ExtResource("2_wsg6n")
 attackEntities = true
 costType = "blue"

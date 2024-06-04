@@ -9,7 +9,7 @@ size = Vector2(702, 92)
 attackEntities = true
 maxLevels = 1
 costs_per_level = Array[int]([10])
-damageAmount_per_level = Array[int]([20])
+damageAmount_per_level = Array[int]([15])
 maxDuration_per_level = Array[float]([0.2])
 
 [node name="CollisionShape2D" parent="." index="0"]

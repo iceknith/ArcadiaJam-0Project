@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_hyqqy"]
 [ext_resource type="Script" path="res://src/spells/speed_burst.gd" id="2_f74t6"]
 
-[node name="Speed Burst" instance=ExtResource("1_hyqqy")]
+[node name="Accélération fulgurante" instance=ExtResource("1_hyqqy")]
 script = ExtResource("2_f74t6")
 duration_per_level = Array[float]([8.0, 8.0, 12.0, 12.0])
 speed_percent_per_level = Array[float]([0.2, 0.4, 0.8, 1.6])

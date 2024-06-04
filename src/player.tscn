@@ -183,6 +183,9 @@ height = 486.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_vmk58")
+defaultDashCost = 5
+defaultDashSpeed = 1000.0
+defaultDashAcceleration = 300.0
 metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_55jmb"]
 [ext_resource type="Script" path="res://src/spells/cutting_freak.gd" id="2_0s5kb"]
 
-[node name="Cutting Freak" instance=ExtResource("1_55jmb")]
+[node name="Aiguisoir" instance=ExtResource("1_55jmb")]
 script = ExtResource("2_0s5kb")
 duration_per_level = Array[float]([5.0, 8.0, 8.0, 10.0])
 damageAdd_per_level = Array[float]([5.0, 7.0, 10.0, 13.0])
