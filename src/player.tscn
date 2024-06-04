@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://pn7bc5ccesrr"]
+[gd_scene load_steps=32 format=3 uid="uid://pn7bc5ccesrr"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_vmk58"]
 [ext_resource type="Texture2D" uid="uid://bckuidra0chpn" path="res://assets/cressida/dash/cressida_dash_0003.png" id="2_58vcm"]
@@ -17,10 +17,17 @@
 [ext_resource type="Texture2D" uid="uid://ootejxfjsecj" path="res://assets/cressida/invincibility/cressida_invincibility_2.png" id="10_0viya"]
 [ext_resource type="Texture2D" uid="uid://dji41yiy84acn" path="res://assets/cressida/stab/cressida_stab_0006.png" id="10_cmhs5"]
 [ext_resource type="Texture2D" uid="uid://d3nw6675uvuug" path="res://assets/cressida/walk/cressida_walk_0000.png" id="11_4dyhg"]
+[ext_resource type="Texture2D" uid="uid://c0baqwwdtkul8" path="res://assets/cressida/idle_buffed/cressidia_idle_buffed_0000.png" id="11_qhi64"]
 [ext_resource type="Texture2D" uid="uid://bl023dk78hm3" path="res://assets/cressida/walk/cressida_walk_0003.png" id="12_8o5y6"]
+[ext_resource type="Texture2D" uid="uid://d1rk2ykyymwfy" path="res://assets/cressida/idle_buffed/cressidia_idle_buffed_0003.png" id="12_w8p6s"]
 [ext_resource type="Texture2D" uid="uid://hah8rjaht5yc" path="res://assets/cressida/walk/cressida_walk_0006.png" id="13_ywmpc"]
 [ext_resource type="Texture2D" uid="uid://yb8uwg2byac2" path="res://assets/cressida/walk/cressida_walk_0009.png" id="14_ugb7t"]
 [ext_resource type="Texture2D" uid="uid://bklb5r8fhniyv" path="res://assets/cressida/walk/cressida_walk_0012.png" id="15_njqo4"]
+[ext_resource type="Texture2D" uid="uid://5qsa06qxo324" path="res://assets/cressida/walk_buffed/cressidia_walk_buffed_0000.png" id="22_sjvdq"]
+[ext_resource type="Texture2D" uid="uid://bcracy5owdff6" path="res://assets/cressida/walk_buffed/cressidia_walk_buffed_0003.png" id="23_78dob"]
+[ext_resource type="Texture2D" uid="uid://dpa4w5mvhwwlp" path="res://assets/cressida/walk_buffed/cressidia_walk_buffed_0006.png" id="24_7dpmw"]
+[ext_resource type="Texture2D" uid="uid://btso0fs1g5khx" path="res://assets/cressida/walk_buffed/cressidia_walk_buffed_0009.png" id="25_70fdy"]
+[ext_resource type="Texture2D" uid="uid://cv1hccxhr4g76" path="res://assets/cressida/walk_buffed/cressidia_walk_buffed_0012.png" id="26_7m8q2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2mc8m"]
 animations = [{
@@ -78,6 +85,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("11_qhi64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_w8p6s")
+}],
+"loop": true,
+"name": &"idle_buffed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("9_7h5rf")
 }, {
 "duration": 1.0,
@@ -131,6 +149,26 @@ animations = [{
 "loop": true,
 "name": &"walk",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_sjvdq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_78dob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_7dpmw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_70fdy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_7m8q2")
+}],
+"loop": true,
+"name": &"walk_buffed",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yaaq1"]
@@ -149,8 +187,7 @@ metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2mc8m")
-animation = &"dead"
-frame_progress = 0.297479
+animation = &"idle_buffed"
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

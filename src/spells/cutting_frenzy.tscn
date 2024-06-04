@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://iqmxg7sgh5j0"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_ftasn"]
+[ext_resource type="Script" path="res://src/spells/cutting_frenzy.gd" id="2_hvdeo"]
+
+[node name="Cutting Frenzy" instance=ExtResource("1_ftasn")]
+script = ExtResource("2_hvdeo")
+duration_per_level = Array[float]([5.0, 8.0, 8.0, 10.0])
+utilitySpell = true
+costType = "red"
+maxLevels = 4
+maxColorAdd_per_level = Array[int]([20, 20, 20, 20])
+costs_per_level = Array[int]([15, 12, 10, 10])
+damageAmount_per_level = Array[int]([0, 0, 0, 0])
+acceleration_per_leve = Array[float]([0.0, 0.0, 0.0, 0.0])
+speed_per_level = Array[float]([0.0, 0.0, 0.0, 0.0])
+maxDuration_per_level = Array[float]([20.0, 20.0, 20.0, 20.0])
+damageType = []
+autoDisapear = false
+
+[node name="Timer" type="Timer" parent="." index="1"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

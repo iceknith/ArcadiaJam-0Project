@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://br2r6sup7p58j"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_q0wtm"]
+[ext_resource type="Script" path="res://src/spells/butterflies.gd" id="2_bu677"]
+[ext_resource type="Texture2D" uid="uid://dd53c1iy3vql1" path="res://assets/spells/Butterflies/orb_0003.png" id="3_cvts2"]
+[ext_resource type="Texture2D" uid="uid://vrt5tfdwx0ni" path="res://assets/spells/Butterflies/orb_0002.png" id="4_2j4fg"]
+[ext_resource type="Texture2D" uid="uid://1u50eyem1ruw" path="res://assets/spells/Butterflies/orb_0000.png" id="5_ixweu"]
+[ext_resource type="Texture2D" uid="uid://blvm8w2ldx4xs" path="res://assets/spells/Butterflies/orb_0001.png" id="6_wu475"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="7_1gebe"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1l4o2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cvts2")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2j4fg")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ixweu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wu475")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1sc32"]
+radius = 196.163
+
+[node name="Butterflies" instance=ExtResource("1_q0wtm")]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bu677")
+butterflies_num = 12
+attackEntities = true
+costType = "yellow"
+maxLevels = 4
+maxColorAdd_per_level = Array[int]([20, 20, 25, 30])
+costs_per_level = Array[int]([15, 10, 10, 7])
+damageAmount_per_level = Array[int]([5, 5, 7, 10])
+acceleration_per_leve = Array[float]([50.0, 50.0, 60.0, 70.0])
+speed_per_level = Array[float]([2500.0, 2500.0, 2750.0, 3000.0])
+maxDuration_per_level = Array[float]([5.0, 5.0, 5.0, 5.0])
+damageType = []
+autoDisapear = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(2, -0.999998)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_1l4o2")
+animation = &"fly"
+script = ExtResource("7_1gebe")
+spawnAnimationTime = 0.5
+explosionAnimationTime = 0.25
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-17.3333, -22.6667)
+shape = SubResource("CircleShape2D_1sc32")
+
+[connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]

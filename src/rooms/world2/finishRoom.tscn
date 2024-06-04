@@ -37,5 +37,8 @@ position = Vector2(-2800, 0)
 
 [node name="LootPosition" type="Marker2D" parent="."]
 
+[node name="FinishTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="player_entered_first_time" from="." to="." method="dungeon_finished"]
+[connection signal="timeout" from="FinishTimer" to="." method="_on_finish_timer_timeout"]

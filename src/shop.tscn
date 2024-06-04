@@ -41,6 +41,7 @@ grow_vertical = 2
 theme = ExtResource("2_e1gf3")
 
 [node name="icon" type="Sprite2D" parent="item_1"]
+scale = Vector2(0.3, 0.3)
 
 [node name="description" type="Label" parent="item_1"]
 offset_left = -200.0
@@ -72,6 +73,7 @@ theme = ExtResource("2_e1gf3")
 metadata/_edit_use_anchors_ = true
 
 [node name="icon" type="Sprite2D" parent="item_2"]
+scale = Vector2(0.3, 0.3)
 
 [node name="description" type="Label" parent="item_2"]
 offset_left = -200.0
@@ -103,6 +105,7 @@ grow_vertical = 2
 theme = ExtResource("2_e1gf3")
 
 [node name="icon" type="Sprite2D" parent="item_3"]
+scale = Vector2(0.3, 0.3)
 
 [node name="description" type="Label" parent="item_3"]
 offset_left = -200.0

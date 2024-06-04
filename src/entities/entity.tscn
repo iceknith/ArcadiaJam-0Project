@@ -55,11 +55,13 @@ wait_time = 0.5
 autostart = true
 
 [node name="invincibilityTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.1
 one_shot = true
 
 [node name="deathAnimationTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="freezeTimer" type="Timer" parent="."]
 
 [node name="hit_hitbox" type="Area2D" parent="."]
 script = ExtResource("2_i284r")
@@ -79,4 +81,5 @@ one_shot = true
 [connection signal="timeout" from="pathRefreshTimer" to="." method="_on_path_refresh_timer_timeout"]
 [connection signal="timeout" from="invincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="deathAnimationTimer" to="." method="_on_death_animation_timer_timeout"]
+[connection signal="timeout" from="freezeTimer" to="." method="_on_freeze_timer_timeout"]
 [connection signal="area_entered" from="hit_hitbox" to="." method="_on_hitbox_area_collision"]

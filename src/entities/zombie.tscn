@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://7jmvt7d100l"]
+[gd_scene load_steps=9 format=3 uid="uid://7jmvt7d100l"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_1xsno"]
 [ext_resource type="Texture2D" uid="uid://m122n5ikryrd" path="res://assets/mobs/zombie/zombie_default.png" id="2_8yfof"]
+[ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_18rhn"]
 [ext_resource type="Script" path="res://src/entities/hitboxes.gd" id="3_jt025"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8w2j6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": ExtResource("2_18rhn")
 }],
 "loop": true,
 "name": &"dead",
@@ -75,7 +76,7 @@ shape = SubResource("CapsuleShape2D_bis06")
 script = ExtResource("3_jt025")
 
 [node name="deathAnimationTimer" parent="." index="6"]
-wait_time = 0.001
+wait_time = 2.0
 one_shot = false
 
 [node name="CollisionShape2D" parent="hit_hitbox" index="0"]

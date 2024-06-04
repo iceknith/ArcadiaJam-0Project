@@ -28,19 +28,19 @@ func _ready():
 		
 		for room in world_file.get_files():
 			if "corridor" in room:
-				corridors[i-1].append(load(str("res://src/rooms/world",i,"/",room)))
+				corridors[i-1].append(load(str("res://src/rooms/world",i,"/",room)) as PackedScene)
 			elif "wallLeft" in room: 
-				walls[i-1][0] = load(str("res://src/rooms/world",i,"/",room))
+				walls[i-1][0] = load(str("res://src/rooms/world",i,"/",room)) as PackedScene
 			elif "wallRight" in room: 
-				walls[i-1][1] = load(str("res://src/rooms/world",i,"/",room))
+				walls[i-1][1] = load(str("res://src/rooms/world",i,"/",room)) as PackedScene
 			elif "wallDown" in room: 
-				walls[i-1][2] = load(str("res://src/rooms/world",i,"/",room))
+				walls[i-1][2] = load(str("res://src/rooms/world",i,"/",room)) as PackedScene
 			elif "wallUp" in room: 
-				walls[i-1][3] = load(str("res://src/rooms/world",i,"/",room))
+				walls[i-1][3] = load(str("res://src/rooms/world",i,"/",room)) as PackedScene
 			elif "finishRoom" in room: 
-				finishRooms[i-1].append(load(str("res://src/rooms/world",i,"/",room)))
+				finishRooms[i-1].append(load(str("res://src/rooms/world",i,"/",room)) as PackedScene)
 			else:
-				rooms[i-1].append(load(str("res://src/rooms/world",i,"/",room)))
+				rooms[i-1].append(load(str("res://src/rooms/world",i,"/",room)) as PackedScene)
 		
 		i+=1;
 		world_dir = str("world",i)

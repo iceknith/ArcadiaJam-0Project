@@ -19,4 +19,5 @@ text = "Click to generate new dungeon"
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="dialogue_end" from="Shop" to="." method="_on_shop_dialogue_end"]
 [connection signal="player_gain_item" from="Shop" to="." method="_on_shop_player_gain_item"]
+[connection signal="player_gain_passive" from="Shop" to="." method="_on_shop_player_gain_passive"]
 [connection signal="player_gain_spell" from="Shop" to="." method="_on_shop_player_gain_spell"]

@@ -36,11 +36,10 @@ func _ready():
 		$hit_hitbox/fire_point.queue_free()
 
 func _process(delta):
+	if (state == "dead"): return
 	
 	#collect actions
 	action_handler()
-	
-	#collisions
 	
 	#consequences
 	if (health <= 0 and state != "dead"):
@@ -51,7 +50,7 @@ func _process(delta):
 		death.emit()
 
 func _physics_process(delta):
-	if ((state != "hit" && !wantToMove) || state == "dead"): return
+	if ((state != "hit" && !wantToMove) || state == "dead" || state == "freeze"): return
 	
 	if (state != "hit"):
 		direction = to_local(nav_agent.get_next_path_position()).normalized()
@@ -61,10 +60,12 @@ func _physics_process(delta):
 	move_and_slide()
 
 func make_path():
+	if (state == "dead"): return
 	if (target != null):
 		nav_agent.target_position = target.position
 
 func action_handler():
+	if (state == "dead"): return
 	if (ranged && (state == "idle" || state == "walk")):
 		if (target != null):
 			wantToMove = true
@@ -140,12 +141,18 @@ func _on_hitbox_area_collision(area):
 		player.damage(meleDamageAmount, direction, meleDamageType)
 
 func _on_invincibility_timer_timeout():
-	state = "idle"
-	if (ranged):
-		$hit_hitbox/fire_point/shootCooldown.start()
+	if (state == "hit" || state == "invincible"):
+		state = "idle"
+		if (ranged):
+			$hit_hitbox/fire_point/shootCooldown.start()
 
 func _on_death_animation_timer_timeout():
 	queue_free()
 
 func _on_shoot_cooldown_timeout():
 	canShoot = true
+
+func _on_freeze_timer_timeout():
+	state = "idle"
+	if (ranged):
+		$hit_hitbox/fire_point/shootCooldown.start()

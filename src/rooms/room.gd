@@ -58,8 +58,8 @@ func _on_body_entered(body):
 	if ("player" in body.name && !playerEntered):
 		player = body
 		player_entered_first_time.emit(player)
+		playerEntered = true
 		if (hasMobs):
-			playerEntered = true
 			doorClosed = true
 			await get_tree().create_timer(0.5).timeout
 			close_doors()
@@ -97,12 +97,12 @@ func open_doors():
 func has_entities()->bool:
 	for child in get_children():
 		for grand_children in child.get_children():
-			if ("hit_hitbox" in grand_children.name):
+			if ("hit_hitbox" in grand_children.name && child.state != "dead"):
 				return true
 	return false
 
 func dungeon_finished(player):
-	get_parent().get_parent().nextLevel.call_deferred()
+	get_node("FinishTimer").start()
 
 func remove_entities():
 	if (!hasMobs): return
@@ -132,3 +132,9 @@ func player_get_needed_colors()->Array:
 		result.append([3, int(player.maxBlue * randf_range(minHeal, maxHeal))])
 	
 	return result
+
+func _on_finish_timer_timeout():
+	for body in get_overlapping_bodies():
+		if ("player" in body.name):
+			get_parent().get_parent().nextLevel.call_deferred()
+	playerEntered = false

@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=3 uid="uid://df6qhu2028we"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_uf2o0"]
+[ext_resource type="Script" path="res://src/spells/quadruple_slash.gd" id="2_jfs8b"]
+[ext_resource type="Texture2D" uid="uid://b0sl3mi2hcukw" path="res://assets/spells/Explosion_red/explosion0000.png" id="3_gj2n7"]
+[ext_resource type="Texture2D" uid="uid://byc5ef3tb7ctk" path="res://assets/spells/Explosion_red/explosion0001.png" id="4_vax80"]
+[ext_resource type="Texture2D" uid="uid://d1icvjlrhopwx" path="res://assets/spells/Explosion_red/explosion0002.png" id="5_60mqj"]
+[ext_resource type="Texture2D" uid="uid://bcm0ngn6fp17a" path="res://assets/spells/Explosion_red/explosion0003.png" id="6_70fqu"]
+[ext_resource type="Texture2D" uid="uid://sca7m3432dcn" path="res://assets/spells/Explosion_red/explosion0004.png" id="7_tvd0b"]
+[ext_resource type="Texture2D" uid="uid://bn8nvdbuele6u" path="res://assets/spells/Explosion_red/explosion0005.png" id="8_6eh8s"]
+[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Wind Burst/crescent_0002.png" id="9_iqfu8"]
+[ext_resource type="Texture2D" uid="uid://bpp2024v0vsvu" path="res://assets/spells/crescent_0000.png" id="10_pxnlp"]
+[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Wind Burst/crescent_0001.png" id="11_u7ptk"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="12_lodp7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ju8rl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gj2n7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vax80")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_60mqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_70fqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tvd0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6eh8s")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_iqfu8")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_pxnlp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_u7ptk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_iqfu8")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 6.0
+}]
+
+[node name="Quadruple Slash" instance=ExtResource("1_uf2o0")]
+script = ExtResource("2_jfs8b")
+attackEntities = true
+costType = "red"
+maxLevels = 4
+maxColorAdd_per_level = Array[int]([25, 30, 35, 40])
+costs_per_level = Array[int]([20, 20, 20, 20])
+damageAmount_per_level = Array[int]([12, 15, 15, 17])
+acceleration_per_leve = Array[float]([75.0, 75.0, 75.0, 75.0])
+speed_per_level = Array[float]([2500.0, 2500.0, 2500.0, 2500.0])
+maxDuration_per_level = Array[float]([5.0, 5.0, 5.0, 5.0])
+damageType = []
+autoDisapear = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(2, -0.999998)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_ju8rl")
+animation = &"explode"
+script = ExtResource("12_lodp7")
+spawnAnimationTime = 0.5
+explosionAnimationTime = 0.9
+
+[node name="Timer" type="Timer" parent="." index="2"]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

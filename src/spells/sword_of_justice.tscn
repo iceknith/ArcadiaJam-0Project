@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://do2ofp0is0txa"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_ym6su"]
+[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Wind Burst/crescent_0002.png" id="2_e31l8"]
+[ext_resource type="Script" path="res://src/spells/sword_of_justice.gd" id="2_wsg6n"]
+[ext_resource type="Texture2D" uid="uid://bpp2024v0vsvu" path="res://assets/spells/crescent_0000.png" id="3_vva7l"]
+[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Wind Burst/crescent_0001.png" id="4_jiaj2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5aisa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e31l8")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vva7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jiaj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_e31l8")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 6.0
+}]
+
+[node name="Sword Of Justice" instance=ExtResource("1_ym6su")]
+script = ExtResource("2_wsg6n")
+attackEntities = true
+costType = "blue"
+maxLevels = 4
+maxColorAdd_per_level = Array[int]([30, 30, 30, 30])
+costs_per_level = Array[int]([0, 17, 15, 12])
+damageAmount_per_level = Array[int]([1, 2, 3, 4])
+acceleration_per_leve = Array[float]([25.0, 25.0, 25.0, 25.0])
+speed_per_level = Array[float]([2000.0, 2000.0, 2000.0, 2000.0])
+maxDuration_per_level = Array[float]([2.0, 3.0, 4.0, 5.0])
+damageType = []
+autoDisapear = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(2, -0.999998)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_5aisa")
+animation = &"fly"
+
+[connection signal="hit" from="." to="." method="_on_hit"]

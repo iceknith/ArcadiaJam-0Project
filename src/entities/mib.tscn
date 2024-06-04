@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bovjfu1ap5g6x"]
+[gd_scene load_steps=8 format=3 uid="uid://bovjfu1ap5g6x"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_fc1pa"]
 [ext_resource type="PackedScene" uid="uid://cahhc0oyqsiev" path="res://src/spells/bullet.tscn" id="2_iv5vg"]
 [ext_resource type="Texture2D" uid="uid://cbxnfo6utlhwu" path="res://assets/mobs/MIB/mib.png" id="2_qk7i2"]
+[ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="3_uc0cj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ih8ah"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": ExtResource("3_uc0cj")
 }],
 "loop": true,
 "name": &"dead",
@@ -57,16 +58,16 @@ rotatedOffsetX = 150.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_ih8ah")
-animation = &"hit"
+animation = &"dead"
 offset = Vector2(-75, 0)
 
 [node name="NavigationAgent2D" parent="." index="1"]
 target_desired_distance = 2000.0
 
 [node name="deathAnimationTimer" parent="." index="5"]
-wait_time = 0.001
+wait_time = 2.0
 
-[node name="hit_hitbox" parent="." index="6"]
+[node name="hit_hitbox" parent="." index="7"]
 visible = false
 
 [node name="CollisionShape2D" parent="hit_hitbox" index="0"]

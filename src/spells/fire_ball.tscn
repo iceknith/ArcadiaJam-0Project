@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://bwta3d83pt468"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_wxqna"]
+[ext_resource type="Texture2D" uid="uid://b0sl3mi2hcukw" path="res://assets/spells/Explosion_red/explosion0000.png" id="2_k3mof"]
+[ext_resource type="Texture2D" uid="uid://byc5ef3tb7ctk" path="res://assets/spells/Explosion_red/explosion0001.png" id="3_dsd3v"]
+[ext_resource type="Texture2D" uid="uid://dd2y3d8x71l83" path="res://assets/spells/Fire Ball/spell_orb_0002.png" id="3_lewhb"]
+[ext_resource type="Texture2D" uid="uid://d1icvjlrhopwx" path="res://assets/spells/Explosion_red/explosion0002.png" id="4_0dudl"]
+[ext_resource type="Texture2D" uid="uid://j5e1km51cxg0" path="res://assets/spells/Fire Ball/spell_orb_0000.png" id="4_fglxm"]
+[ext_resource type="Texture2D" uid="uid://dkgqwl2ambia6" path="res://assets/spells/Fire Ball/spell_orb_0001.png" id="5_tpmwl"]
+[ext_resource type="Texture2D" uid="uid://bcm0ngn6fp17a" path="res://assets/spells/Explosion_red/explosion0003.png" id="5_yjij1"]
+[ext_resource type="Texture2D" uid="uid://sca7m3432dcn" path="res://assets/spells/Explosion_red/explosion0004.png" id="6_b257n"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="6_pvnue"]
+[ext_resource type="Texture2D" uid="uid://bn8nvdbuele6u" path="res://assets/spells/Explosion_red/explosion0005.png" id="7_sms0e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36dy8"]
+radius = 200.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fcuen"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k3mof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dsd3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0dudl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yjij1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_b257n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_sms0e")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lewhb")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_fglxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tpmwl")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 8.0
+}]
+
+[node name="Fire Ball" instance=ExtResource("1_wxqna")]
+attackEntities = true
+costType = "red"
+maxLevels = 1
+maxColorAdd_per_level = Array[int]([20, 25, 30, 35])
+costs_per_level = Array[int]([5, 5, 5, 5])
+damageAmount_per_level = Array[int]([7, 9, 9, 12])
+acceleration_per_leve = Array[float]([75.0, 75.0, 75.0, 75.0])
+speed_per_level = Array[float]([2500.0, 2500.0, 2500.0, 2500.0])
+maxDuration_per_level = Array[float]([5.0, 5.0, 5.0, 5.0])
+damageType = []
+autoDisapear = false
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_36dy8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(32, 22)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_fcuen")
+animation = &"spawn"
+frame_progress = 0.0202512
+script = ExtResource("6_pvnue")
+spawnAnimationTime = 0.25
+explosionAnimationTime = 0.5
+explodeToContact = false
+
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]

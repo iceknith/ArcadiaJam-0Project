@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 
 @export var spawnAnimationTime:float = .2
 @export var explosionAnimationTime:float = .2
+@export var explodeToContact:bool = true
 
 var time:float = .0
 var hasExploded:bool = false
@@ -10,7 +11,6 @@ var hasExploded:bool = false
 func _ready():
 	animation = "spawn"
 	play()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -24,7 +24,11 @@ func _process(delta):
 	elif get_parent().direction.x > 0.5:
 		flip_h = false
 		
-func _on_orb_hit():
-	hasExploded = true
-	animation = "explode"
-	time = 0
+func _on_hit(bodyType:String, body:Node2D):
+	if (explodeToContact || bodyType == "TileMap"):
+		hasExploded = true
+		animation = "explode"
+		time = 0
+		get_parent().isAlive = !explodeToContact
+	else:
+		get_parent().isAlive = true

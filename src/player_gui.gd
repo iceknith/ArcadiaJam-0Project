@@ -30,6 +30,8 @@ var redColor:Color = Color("#b80101")
 var yellowColor:Color = Color("#ccb308")
 var blueColor:Color = Color("#10538d")
 
+var passives:Array[String] = []
+var passive_levels:Array[int] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -107,3 +109,17 @@ func spell_change(spellNum:int, newSpell:String, newSpellType:String, newSpellCo
 		label.label_settings.shadow_color = blueColor
 	elif (newSpellType == "yellow"):
 		label.label_settings.shadow_color = yellowColor
+
+func passive_change(passive:String, passiveLevel:int):
+	if (passive in passives):
+		passive_levels[passives.find(passive)] = passiveLevel
+	else:
+		passives.append(passive)
+		passive_levels.append(passiveLevel)
+	display_passives()
+
+func display_passives():
+	var text:String = ""
+	for i in passives.size():
+		text = str(text, passives[i], " Niveau: ", passive_levels[i]+1 ,"\n")
+	$passive_label.text = text

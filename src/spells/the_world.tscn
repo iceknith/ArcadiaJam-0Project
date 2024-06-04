@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://benvhnm8pux3k"]
+
+[ext_resource type="Script" path="res://src/spells/the_world.gd" id="2_p2ivn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eildm"]
+radius = 2000.0
+
+[node name="The World" type="Area2D"]
+script = ExtResource("2_p2ivn")
+freezeTime_per_level = Array[float]([2.0, 2.5, 3.0, 4.0])
+attackEntities = true
+costType = "yellow"
+maxColorAdd_per_level = Array[int]([15, 20, 25, 30])
+costs_per_level = Array[int]([10, 7, 5, 5])
+damageAmount_per_level = Array[int]([0, 0, 0, 0])
+acceleration_per_leve = Array[float]([0.0, 0.0, 0.0, 0.0])
+speed_per_level = Array[float]([0.0, 0.0, 0.0, 0.0])
+maxDuration_per_level = Array[float]([0.5, 0.5, 0.5, 0.5])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eildm")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="hit" from="." to="." method="_on_hit"]

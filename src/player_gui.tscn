@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bbgi5hfe1qdm0"]
+[gd_scene load_steps=17 format=3 uid="uid://bbgi5hfe1qdm0"]
 
 [ext_resource type="Script" path="res://src/player_gui.gd" id="1_kg7fi"]
 [ext_resource type="Texture2D" uid="uid://dykr1opknrv2s" path="res://assets/GUI/hp_bar/overlay.png" id="1_kury1"]
@@ -57,6 +57,10 @@ font_size = 50
 font_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.721569, 0.00392157, 0.00392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nxrbq"]
+font = ExtResource("7_o0dof")
+font_size = 35
 
 [node name="playerGUI" type="Control"]
 layout_mode = 3
@@ -193,3 +197,12 @@ offset_right = 56.0
 offset_bottom = 61.0
 label_settings = SubResource("LabelSettings_6h7me")
 horizontal_alignment = 1
+
+[node name="passive_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1291.0
+offset_top = 25.0
+offset_right = 1894.0
+offset_bottom = 492.0
+label_settings = SubResource("LabelSettings_nxrbq")
+horizontal_alignment = 2

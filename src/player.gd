@@ -3,14 +3,15 @@ class_name  Player
 
 signal healthChange(healthType:String, maxHealthChange:bool, newValue:int)
 signal spellChange(spellNum:int, newSpell:String, newSpellType:String, newSpellCost:int)
+signal passiveChange(passive:String, passive_level:int)
 signal death
 
-@export var defaultSpeed = 300.0
+@export var defaultSpeed = 2000.0
 @export var defaultAcceleration = 50.0
 @export var defaultKnockbackForce = 50.0
 @export var defaultInvincibilityTimer = 2.0
 @export var defaultDashCost = 12
-@export var defaultDashSpeed = 600.0
+@export var defaultDashSpeed = 4000.0
 @export var defaultDashAcceleration = 200.0
 @export var defaultDashDuration = 1.0
 @export var defaultStabCost = 5
@@ -24,6 +25,7 @@ var dashSpeed
 var dashAcceleration
 var dashDuration
 var stabCost
+var damageMultiplier = 1
 
 var additionalStabDamage:int = 0
 var stabLifeLeechAmount:int = 0
@@ -38,9 +40,12 @@ var maxGray:int
 var gray:int = 100
 
 var spells:Array[PackedScene] = [null, null, null, null]
-var passives:Array[Array] = []
+var spell_levels:Array[int] = [0, 0, 0, 0]
+var passives:Array[String] = []
+var passive_levels:Array[int] = []
 
 var state:String = "idle"
+var is_buffed:bool = false
 var time_since_state_change:float = 0
 var spell_selected:int
 var spell_spawned:bool
@@ -127,26 +132,27 @@ func action_handler():
 			if (Input.is_action_just_pressed(spellList[i]) && spells[i] != null):
 				var spell:Spell = spells[i].instantiate()
 				var canSpawn = false
+				var cost = spell.costs_per_level[spell_levels[i]]
 				
-				if spell.costType == "gray" && gray >= spell.cost:
+				if spell.costType == "gray" && gray >= cost:
 					canSpawn = true
-					gray -= spell.cost
-					spawn_text_popup("gray", str("- ", spell.cost), 2, 500)
+					gray -= cost
+					spawn_text_popup("gray", str("- ", cost), 2, 500)
 					healthChange.emit("gray", false, gray)
-				elif spell.costType == "red" && red >= spell.cost:
+				elif spell.costType == "red" && red >= cost:
 					canSpawn = true
-					red -= spell.cost
-					spawn_text_popup("red", str("- ", spell.cost), 2, 500)					
+					red -= cost
+					spawn_text_popup("red", str("- ", cost), 2, 500)					
 					healthChange.emit("red", false, red)
-				elif spell.costType == "yellow" && yellow >= spell.cost:
+				elif spell.costType == "yellow" && yellow >= cost:
 					canSpawn = true
-					yellow -= spell.cost
-					spawn_text_popup("yellow", str("- ", spell.cost), 2, 500)
+					yellow -= cost
+					spawn_text_popup("yellow", str("- ", cost), 2, 500)
 					healthChange.emit("yellow", false, yellow)
-				elif spell.costType == "blue" && blue >= spell.cost:
+				elif spell.costType == "blue" && blue >= cost:
 					canSpawn = true
-					blue -= spell.cost
-					spawn_text_popup("blue", str("- ", spell.cost), 2, 500)
+					blue -= cost
+					spawn_text_popup("blue", str("- ", cost), 2, 500)
 					healthChange.emit("blue", false, blue)
 					
 				if canSpawn:
@@ -171,10 +177,12 @@ func movement(input:Vector2, delta):
 	
 	if (state == "idle" || state == "walk"):
 		if input.distance_squared_to(Vector2.ZERO) <= 0.5:
-			$AnimatedSprite2D.animation = "idle"
+			if is_buffed: $AnimatedSprite2D.animation = "idle_buffed"
+			else: $AnimatedSprite2D.animation = "idle"
 			state = "idle"
 		else:
-			$AnimatedSprite2D.animation = "walk"
+			if is_buffed: $AnimatedSprite2D.animation = "walk_buffed"
+			else: $AnimatedSprite2D.animation = "walk"
 			state = "walk"
 
 	if input.x < -0.5:
@@ -194,11 +202,11 @@ func stab_handler(delta):
 		else: dir.x = 1
 		stab_instance.position = position
 		stab_instance.direction = dir
-		stab_instance.damageAmount += additionalStabDamage
 		stab_instance.kill.connect(_on_stab_kill)
 		if ($AnimatedSprite2D.flip_h):
 			stab_instance.position.x -= stab_instance.get_node("CollisionShape2D").get_shape().get_rect().size.x
 		get_parent().add_child(stab_instance)
+		stab_instance.damageAmount += additionalStabDamage
 		spell_spawned = true
 
 func dash_handler(delta):
@@ -228,8 +236,11 @@ func spell_handler(input:Vector2, delta):
 			if $AnimatedSprite2D.flip_h: input.x = -1
 			else: input.x = 1
 		spell_instance.direction = input
-		spell_instance.position = position #change for better spawning points
+		spell_instance.position = position
+		spell_instance.player = self
+		spell_instance.level = spell_levels[spell_selected]
 		get_parent().add_child(spell_instance)
+		spell_instance.damageAmount *= damageMultiplier
 		spell_spawned = true
 
 func hit_handler(delta):
@@ -311,105 +322,115 @@ func heal(heal_amount:int, heal_type:Array):
 		spawn_text_popup("blue", str("+ ", heal_amount), 2, y_popup_margin)
 		healthChange.emit("blue", false, blue)
 
-func replaceSpell(spell_num:int, new_spell:PackedScene):
+func replaceSpell(spell_num:int, new_spell:PackedScene, new_spell_level:int):
 	#update max-life
 	if (spells[spell_num - 1] != null):
 		var oldSpell:Spell = spells[spell_num - 1].instantiate()
+		var oldSpellLevel:int = spell_levels[spell_num - 1]
 		if (oldSpell.costType == "gray"):
-			maxGray -= oldSpell.maxColorAdd
+			maxGray -= oldSpell.maxColorAdd_per_level[oldSpellLevel]
 			healthChange.emit("gray", true, maxGray)
 			gray = min(maxGray, gray)
 			healthChange.emit("gray", false, gray)
 		if (oldSpell.costType == "red"):
-			maxRed -= oldSpell.maxColorAdd
+			maxRed -= oldSpell.maxColorAdd_per_level[oldSpellLevel]
 			healthChange.emit("red", true, maxRed)
 			red = min(maxRed, red)
 			healthChange.emit("red", false, red)
 		if (oldSpell.costType == "yellow"):
-			maxYellow -= oldSpell.maxColorAdd
+			maxYellow -= oldSpell.maxColorAdd_per_level[oldSpellLevel]
 			healthChange.emit("yellow", true, maxYellow)
 			yellow = min(maxYellow, yellow)
 			healthChange.emit("yellow", false, yellow)
 		if (oldSpell.costType == "blue"):
-			maxBlue -= oldSpell.maxColorAdd
+			maxBlue -= oldSpell.maxColorAdd_per_level[oldSpellLevel]
 			healthChange.emit("blue", true, maxBlue)
 			blue = min(maxBlue, blue)
 			healthChange.emit("blue", false, blue)
 	spells[spell_num - 1] = new_spell
+	spell_levels[spell_num - 1] = new_spell_level
 	var spell:Spell = new_spell.instantiate()
-	spellChange.emit(spell_num, spell.name, spell.costType, spell.cost)
+	spellChange.emit(spell_num, spell.name, spell.costType, spell.costs_per_level[new_spell_level])
 	if (spell.costType == "gray"):
-		maxGray += spell.maxColorAdd
+		maxGray += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("gray", true, maxGray)
-		gray += spell.maxColorAdd
+		gray += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("gray", false, gray)
 	if (spell.costType == "red"):
-		maxRed += spell.maxColorAdd
+		maxRed += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("red", true, maxRed)
-		red += spell.maxColorAdd
+		red += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("red", false, red)
 	if (spell.costType == "yellow"):
-		maxYellow += spell.maxColorAdd
+		maxYellow += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("yellow", true, maxYellow)
-		yellow += spell.maxColorAdd
+		yellow += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("yellow", false, yellow)
 	if (spell.costType == "blue"):
-		maxBlue += spell.maxColorAdd
+		maxBlue += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("blue", true, maxBlue)
-		blue += spell.maxColorAdd
+		blue += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("blue", false, blue)
 
 func addPassive(passiveName:String, passiveLevel:int):
-	if (passiveName == "passive_regenation"):
+	
+	if (passiveName == "Passive Regenation"):
 		$RegenerationTimer.stop()
-		if passiveLevel == 1: $RegenerationTimer.wait_time = 5
-		elif passiveLevel == 2: $RegenerationTimer.wait_time = 3
-		elif passiveLevel == 3: $RegenerationTimer.wait_time = 2.5
-		elif passiveLevel == 4: $RegenerationTimer.wait_time = 1.5
+		if passiveLevel == 0: $RegenerationTimer.wait_time = 5
+		elif passiveLevel == 1: $RegenerationTimer.wait_time = 3
+		elif passiveLevel == 2: $RegenerationTimer.wait_time = 2.5
+		elif passiveLevel == 3: $RegenerationTimer.wait_time = 1.5
 		$RegenerationTimer.start()
 		
-	elif (passiveName == "max_gray"):
-		if passiveLevel == 1: maxGray = defaultMaxGray + 30
-		elif passiveLevel == 2: maxGray = defaultMaxGray + 70
-		elif passiveLevel == 3: maxGray = defaultMaxGray + 100
-		elif passiveLevel == 4: maxGray = defaultMaxGray + 130
+	elif (passiveName == "Max Gray"):
+		if passiveLevel == 0: maxGray = defaultMaxGray + 30
+		elif passiveLevel == 1: maxGray = defaultMaxGray + 70
+		elif passiveLevel == 2: maxGray = defaultMaxGray + 100
+		elif passiveLevel == 3: maxGray = defaultMaxGray + 130
 		healthChange.emit("gray", true, maxGray)
 		
-	elif (passiveName == "stab_cost"):
-		if passiveLevel == 1: stabCost = defaultStabCost - 1
-		elif passiveLevel == 2: stabCost = defaultStabCost - 2
-		elif passiveLevel == 3: stabCost = defaultStabCost - 4
-		elif passiveLevel == 4: stabCost = defaultStabCost - 5
+	elif (passiveName == "Stab Cost"):
+		if passiveLevel == 0: stabCost = defaultStabCost - 1
+		elif passiveLevel == 1: stabCost = defaultStabCost - 2
+		elif passiveLevel == 2: stabCost = defaultStabCost - 4
+		elif passiveLevel == 3: stabCost = defaultStabCost - 5
 		
-	elif (passiveName == "dash_cost"):
-		if passiveLevel == 1: dashCost = defaultDashCost - 1
-		elif passiveLevel == 2: dashCost = defaultDashCost - 2
-		elif passiveLevel == 3: dashCost = defaultDashCost - 4
-		elif passiveLevel == 4: dashCost = defaultDashCost - 5
+	elif (passiveName == "Dash Cost"):
+		if passiveLevel == 0: dashCost = defaultDashCost - 1
+		elif passiveLevel == 1: dashCost = defaultDashCost - 2
+		elif passiveLevel == 2: dashCost = defaultDashCost - 4
+		elif passiveLevel == 3: dashCost = defaultDashCost - 5
 		
-	elif (passiveName == "dash_duration"):
-		if passiveLevel == 1: dashDuration = defaultDashDuration * 0.1
-		elif passiveLevel == 2: dashDuration = defaultDashDuration * 0.25
-		elif passiveLevel == 3: dashDuration = defaultDashDuration * 0.45
-		elif passiveLevel == 4: dashDuration = defaultDashDuration * 0.6
+	elif (passiveName == "Dash Duration"):
+		if passiveLevel == 0: dashDuration = defaultDashDuration * 0.1
+		elif passiveLevel == 1: dashDuration = defaultDashDuration * 0.25
+		elif passiveLevel == 2: dashDuration = defaultDashDuration * 0.45
+		elif passiveLevel == 3: dashDuration = defaultDashDuration * 0.6
 		
-	elif (passiveName == "speed"):
-		if passiveLevel == 1: speed = defaultSpeed * 0.05
-		elif passiveLevel == 2: speed = defaultSpeed * 0.1
-		elif passiveLevel == 3: speed = defaultSpeed * 0.2
-		elif passiveLevel == 4: speed = defaultSpeed * 0.3
+	elif (passiveName == "Speed"):
+		if passiveLevel == 0: speed = defaultSpeed * 0.05
+		elif passiveLevel == 1: speed = defaultSpeed * 0.1
+		elif passiveLevel == 2: speed = defaultSpeed * 0.2
+		elif passiveLevel == 3: speed = defaultSpeed * 0.3
 		
-	elif (passiveName == "life_leech"):
-		if passiveLevel == 1: stabLifeLeechAmount = 8
-		elif passiveLevel == 2: stabLifeLeechAmount = 15 
-		elif passiveLevel == 3: stabLifeLeechAmount = 20
-		elif passiveLevel == 4: stabLifeLeechAmount = 25
+	elif (passiveName == "Life Leech"):
+		if passiveLevel == 0: stabLifeLeechAmount = 8
+		elif passiveLevel == 1: stabLifeLeechAmount = 15 
+		elif passiveLevel == 2: stabLifeLeechAmount = 20
+		elif passiveLevel == 3: stabLifeLeechAmount = 25
 		
-	elif (passiveName == "stab_damage"):
-		if passiveLevel == 1: additionalStabDamage = 1
-		elif passiveLevel == 2: additionalStabDamage = 2
-		elif passiveLevel == 3: additionalStabDamage = 4
-		elif passiveLevel == 4: additionalStabDamage = 5
+	elif (passiveName == "Stab Damage"):
+		if passiveLevel == 0: additionalStabDamage = 1
+		elif passiveLevel == 1: additionalStabDamage = 2
+		elif passiveLevel == 2: additionalStabDamage = 4
+		elif passiveLevel == 3: additionalStabDamage = 5
+		
+	passiveChange.emit(passiveName, passiveLevel)
+	if (passiveName in passives):
+		passive_levels[passives.find(passiveName)] = passiveLevel
+	else:
+		passives.append(passiveName)
+		passive_levels.append(passiveLevel)
 
 func spawn_text_popup(textColor:String, textContent:String, textDuration:float, y_margin:float):
 	var popup_text_instance:PopupText = popup_text.instantiate()

@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://crvok7v3nridg"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_yf8d5"]
+[ext_resource type="Script" path="res://src/spells/grenade_à_fragmentation.gd" id="2_v4top"]
+[ext_resource type="Texture2D" uid="uid://pjaydxyiy4kb" path="res://assets/spells/Grenade à Fragmentation/orb_0003.png" id="3_6kk4v"]
+[ext_resource type="Texture2D" uid="uid://d2njkhnxomyc6" path="res://assets/spells/Grenade à Fragmentation/orb_0002.png" id="4_2s5ua"]
+[ext_resource type="Texture2D" uid="uid://cadtfiio3o4qw" path="res://assets/spells/Grenade à Fragmentation/orb_0000.png" id="5_pk0rn"]
+[ext_resource type="Texture2D" uid="uid://bf3jw1i83pgmn" path="res://assets/spells/Grenade à Fragmentation/orb_0001.png" id="6_niqk5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36dy8"]
+radius = 200.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gwd2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6kk4v")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2s5ua")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_pk0rn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_niqk5")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 6.0
+}]
+
+[node name="Grenade à Fragmentation" instance=ExtResource("1_yf8d5")]
+script = ExtResource("2_v4top")
+explosion_radius = 750.0
+attackEntities = true
+costType = "yellow"
+maxLevels = 4
+maxColorAdd_per_level = Array[int]([25, 25, 30, 30])
+costs_per_level = Array[int]([15, 15, 15, 15])
+damageAmount_per_level = Array[int]([10, 12, 14, 16])
+acceleration_per_leve = Array[float]([50.0, 50.0, 50.0, 50.0])
+speed_per_level = Array[float]([2500.0, 2500.0, 2500.0, 2500.0])
+maxDuration_per_level = Array[float]([5.0, 5.0, 5.0, 5.0])
+damageType = []
+autoDisapear = false
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_36dy8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(32, 22)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_gwd2r")
+animation = &"spawn"
+
+[node name="Timer" type="Timer" parent="." index="2"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
