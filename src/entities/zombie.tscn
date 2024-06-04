@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://7jmvt7d100l"]
+[gd_scene load_steps=10 format=3 uid="uid://7jmvt7d100l"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_1xsno"]
 [ext_resource type="Texture2D" uid="uid://m122n5ikryrd" path="res://assets/mobs/zombie/zombie_default.png" id="2_8yfof"]
 [ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_18rhn"]
-[ext_resource type="Script" path="res://src/entities/hitboxes.gd" id="3_jt025"]
+[ext_resource type="Texture2D" uid="uid://d316f8fxuyejv" path="res://assets/mobs/zombie/zombie_walk_0000.png" id="4_sk82q"]
+[ext_resource type="Texture2D" uid="uid://dywtx2yawlimr" path="res://assets/mobs/zombie/zombie_walk_0001.png" id="5_jo0hw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8w2j6"]
 animations = [{
@@ -33,11 +34,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_8yfof")
+"texture": ExtResource("4_sk82q")
+}, {
+"duration": 1.5,
+"texture": ExtResource("5_jo0hw")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bis06"]
@@ -52,15 +56,18 @@ height = 614.0
 size = Vector2(140.139, 56.9019)
 
 [node name="zombie" instance=ExtResource("1_1xsno")]
-speed = 750.0
-maxHealth = 30.0
+acceleration = 20.0
+minHealth = 30.0
+maxHealth = 60.0
 meleDamageType = ["red"]
-meleDamageAmount = 10
+minMeleDamageAmount = 10
+maxMeleDamageAmount = 20
 rotatedOffsetX = 115.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_8w2j6")
-animation = &"dead"
+animation = &"walk"
+frame_progress = 0.336918
 offset = Vector2(-55, 0)
 
 [node name="NavigationAgent2D" parent="." index="1"]
@@ -72,10 +79,7 @@ debug_path_custom_line_width = 22.6
 z_index = 9
 shape = SubResource("CapsuleShape2D_bis06")
 
-[node name="hit_hitbox2" type="Area2D" parent="." index="4"]
-script = ExtResource("3_jt025")
-
-[node name="deathAnimationTimer" parent="." index="6"]
+[node name="deathAnimationTimer" parent="." index="5"]
 wait_time = 2.0
 one_shot = false
 
@@ -91,6 +95,3 @@ shape = SubResource("RectangleShape2D_isiyk")
 [node name="RayCast2D" parent="hit_hitbox/fire_point" index="0"]
 target_position = Vector2(0, 0)
 collide_with_areas = true
-
-[connection signal="rotate" from="." to="hit_hitbox2" method="_on_rotate"]
-[connection signal="area_entered" from="hit_hitbox2" to="." method="_on_hitbox_area_collision"]

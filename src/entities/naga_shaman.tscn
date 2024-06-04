@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://cigepe0a0fxxx"]
+
+[ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_c7xr1"]
+[ext_resource type="PackedScene" uid="uid://bfrwqjqbsbg8d" path="res://src/spells/naga_fire_orb.tscn" id="2_65kyr"]
+[ext_resource type="Script" path="res://src/entities/naga_shaman.gd" id="2_jadju"]
+[ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_kdun4"]
+[ext_resource type="Texture2D" uid="uid://dahstylt4du0a" path="res://assets/mobs/naga/naga_idle.png" id="3_c5hxq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0op31"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kdun4")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c5hxq")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c5hxq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c5hxq")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_di10o"]
+radius = 36.0
+height = 72.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g30p8"]
+size = Vector2(67, 504)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xea3g"]
+size = Vector2(337, 120)
+
+[node name="naga_shaman" instance=ExtResource("1_c7xr1")]
+scale = Vector2(1.25, 1.25)
+script = ExtResource("2_jadju")
+minHealth = 45.0
+maxHealth = 75.0
+meleDamageType = ["red"]
+minMeleDamageAmount = 5
+maxMeleDamageAmount = 10
+ranged = true
+shootRange = 2000.0
+minShootDamageAmount = 10
+maxShootDamageAmount = 25
+attacks = Array[PackedScene]([ExtResource("2_65kyr")])
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_0op31")
+animation = &"walk"
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CapsuleShape2D_di10o")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+position = Vector2(-23.5, 79)
+shape = SubResource("RectangleShape2D_g30p8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="1"]
+position = Vector2(39.5, 271)
+shape = SubResource("RectangleShape2D_xea3g")
+
+[node name="RayCast2D" parent="hit_hitbox/fire_point" index="0"]
+target_position = Vector2(3000, 0)
+
+[node name="shootCooldown" parent="hit_hitbox/fire_point" index="1"]
+wait_time = 3.0
+
+[connection signal="timeout" from="hit_hitbox/fire_point/shootCooldown" to="." method="_on_shoot_cooldown_timeout"]

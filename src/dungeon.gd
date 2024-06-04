@@ -6,6 +6,9 @@ var walls:Array = []
 var finishRooms:Array = []
 var grid:Array = [];
 
+var roomCount:int
+var shopCount:int
+
 @export var default_room_cnt:int = 5
 @export var max_try_to_spawn_room:int = 5
 @export var max_room_to_corridor = 1
@@ -27,6 +30,8 @@ func _ready():
 		var world_file = DirAccess.open(str("res://src/rooms/world",i))
 		
 		for room in world_file.get_files():
+			if ".remap" in room:
+				room = room.replace(".remap","")
 			if "corridor" in room:
 				corridors[i-1].append(load(str("res://src/rooms/world",i,"/",room)) as PackedScene)
 			elif "wallLeft" in room: 
@@ -95,6 +100,9 @@ func generateDungeon(worldNum:int, roomNum:int):
 			
 			room = possible_rooms.pop_front().instantiate()
 			room.position = current_pix
+			if (room.hasMobs):
+				room.get_node("spawner").level = worldNum
+				room.get_node("spawner").difficulty = get_difficulty(roomCount, shopCount)
 			add_child(room)
 			
 			possible_dirs = room.entries_dir.duplicate()
@@ -166,6 +174,9 @@ func generateDungeon(worldNum:int, roomNum:int):
 		if (prevRoom != null): 
 			prevRoom.door_to_close.append(previous_dir)
 			prevRoom.entries_dir.erase(previous_dir)
+		#changing the room counts
+		if (room.hasMobs and !room.isCorridor): roomCount+=1
+		elif (!room.isCorridor): shopCount+=1
 		room.walls = walls[worldNum]
 		grid.append(room)
 		previous_pos.append(current_pos);
@@ -211,3 +222,6 @@ func deleteDungeon():
 	for child in get_children():
 		if !("ParallaxBackground" in child.name):
 			remove_child(child)
+
+func get_difficulty(roomCount:int, shopCount:int)->float:
+	return clamp((roomCount + 5*shopCount)/100, 0, 1)

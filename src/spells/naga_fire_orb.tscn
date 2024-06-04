@@ -1,0 +1,87 @@
+[gd_scene load_steps=14 format=3 uid="uid://bfrwqjqbsbg8d"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_stk24"]
+[ext_resource type="Texture2D" uid="uid://b0sl3mi2hcukw" path="res://assets/spells/Explosion_red/explosion0000.png" id="2_11ghh"]
+[ext_resource type="Script" path="res://src/spells/naga_fire_orb.gd" id="2_xqduw"]
+[ext_resource type="Texture2D" uid="uid://byc5ef3tb7ctk" path="res://assets/spells/Explosion_red/explosion0001.png" id="3_62f7f"]
+[ext_resource type="Texture2D" uid="uid://d1icvjlrhopwx" path="res://assets/spells/Explosion_red/explosion0002.png" id="4_tw2mc"]
+[ext_resource type="Texture2D" uid="uid://bcm0ngn6fp17a" path="res://assets/spells/Explosion_red/explosion0003.png" id="5_ppooj"]
+[ext_resource type="Texture2D" uid="uid://sca7m3432dcn" path="res://assets/spells/Explosion_red/explosion0004.png" id="6_kmd2g"]
+[ext_resource type="Texture2D" uid="uid://bn8nvdbuele6u" path="res://assets/spells/Explosion_red/explosion0005.png" id="7_54uwa"]
+[ext_resource type="Texture2D" uid="uid://j5e1km51cxg0" path="res://assets/spells/Fire Ball/spell_orb_0000.png" id="9_7e4pk"]
+[ext_resource type="Texture2D" uid="uid://dkgqwl2ambia6" path="res://assets/spells/Fire Ball/spell_orb_0001.png" id="10_guk2e"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="11_almp5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36dy8"]
+radius = 200.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fcuen"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_11ghh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_62f7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tw2mc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ppooj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kmd2g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_54uwa")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_guk2e")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_7e4pk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_guk2e")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 8.0
+}]
+
+[node name="Naga Fire Orb" instance=ExtResource("1_stk24")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_xqduw")
+attackPlayer = true
+costType = ""
+acceleration_per_leve = Array[float]([25.0])
+speed_per_level = Array[float]([1500.0])
+maxDuration_per_level = Array[float]([5.0])
+damageType = ["red"]
+autoDisapear = false
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_36dy8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(32, 22)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_fcuen")
+animation = &"fly"
+script = ExtResource("11_almp5")
+spawnAnimationTime = 0.25
+explosionAnimationTime = 0.5
+explodeToContact = false
+
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]

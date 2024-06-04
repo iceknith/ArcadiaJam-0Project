@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://bp545nlw4cfoq"]
+
+[ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_d8tgb"]
+[ext_resource type="PackedScene" uid="uid://6dycdw4x0es6" path="res://src/spells/imp_fire_ball.tscn" id="2_ihwsx"]
+[ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_nu2fu"]
+[ext_resource type="Texture2D" uid="uid://cfkomfiuce06x" path="res://assets/mobs/imp/imp_fly_0000.png" id="3_y0mxo"]
+[ext_resource type="Texture2D" uid="uid://bdbfrawsio8q2" path="res://assets/mobs/imp/imp_fly_0001.png" id="4_y5rkh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1l5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nu2fu")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_y0mxo")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_y0mxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y5rkh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_y0mxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y5rkh")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cmatb"]
+radius = 36.0
+height = 72.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ph7yf"]
+size = Vector2(73.2533, 384)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cq2ei"]
+size = Vector2(305, 112)
+
+[node name="imp" instance=ExtResource("1_d8tgb")]
+minSpeed = 1500.0
+maxSpeed = 1750.0
+knockbackSpeed = 1250.0
+minHealth = 50.0
+meleDamageType = ["blue", "yellow", "red"]
+minMeleDamageAmount = 5
+maxMeleDamageAmount = 10
+ranged = true
+minShootDamageAmount = 15
+maxShootDamageAmount = 25
+attacks = Array[PackedScene]([ExtResource("2_ihwsx")])
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, -54)
+sprite_frames = SubResource("SpriteFrames_s1l5d")
+animation = &"walk"
+frame = 1
+frame_progress = 0.735441
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CapsuleShape2D_cmatb")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+position = Vector2(-40.3734, -50)
+shape = SubResource("RectangleShape2D_ph7yf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="1"]
+position = Vector2(-31.5, -127)
+shape = SubResource("RectangleShape2D_cq2ei")
+
+[node name="RayCast2D" parent="hit_hitbox/fire_point" index="0"]
+target_position = Vector2(4000, 0)
+
+[node name="shootCooldown" parent="hit_hitbox/fire_point" index="1"]
+wait_time = 0.75
+
+[connection signal="timeout" from="hit_hitbox/fire_point/shootCooldown" to="." method="_on_shoot_cooldown_timeout"]

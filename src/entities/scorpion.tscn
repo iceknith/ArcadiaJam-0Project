@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://cr5nje0gu1e7t"]
+
+[ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_jkkso"]
+[ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_n73wn"]
+[ext_resource type="Texture2D" uid="uid://5lqxky6pr83i" path="res://assets/mobs/scorpion/scorpion_walk_0000.png" id="3_i3imi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_50qw1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n73wn")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i3imi")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i3imi")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i3imi")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vmh15"]
+radius = 36.0
+height = 72.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmocl"]
+size = Vector2(366, 85)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gojwc"]
+radius = 134.034
+
+[node name="entity" instance=ExtResource("1_jkkso")]
+minSpeed = 1250.0
+maxSpeed = 1500.0
+minHealth = 5.0
+maxHealth = 10.0
+meleDamageType = ["gray"]
+minMeleDamageAmount = 25
+maxMeleDamageAmount = 40
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(1, -250)
+sprite_frames = SubResource("SpriteFrames_50qw1")
+animation = &"idle"
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CapsuleShape2D_vmh15")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+position = Vector2(-17, 25.5)
+shape = SubResource("RectangleShape2D_wmocl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="1"]
+position = Vector2(101, -139)
+shape = SubResource("CircleShape2D_gojwc")

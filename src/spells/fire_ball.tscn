@@ -63,7 +63,7 @@ animations = [{
 [node name="Fire Ball" instance=ExtResource("1_wxqna")]
 attackEntities = true
 costType = "red"
-maxLevels = 1
+maxLevels = 4
 maxColorAdd_per_level = Array[int]([20, 25, 30, 35])
 costs_per_level = Array[int]([5, 5, 5, 5])
 damageAmount_per_level = Array[int]([7, 9, 9, 12])

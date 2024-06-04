@@ -43,6 +43,7 @@ func _ready():
 				entries_dir[i].append(Vector2(entries_dir[i][0].x/collisionRect.size.x, 0))
 			else:
 				entries_dir[i].append(Vector2(0, entries_dir[i][0].y/collisionRect.size.y))
+				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -61,7 +62,7 @@ func _on_body_entered(body):
 		playerEntered = true
 		if (hasMobs):
 			doorClosed = true
-			await get_tree().create_timer(0.5).timeout
+			#await get_tree().create_timer(0.5).timeout
 			close_doors()
 		
 func close_doors():
@@ -82,7 +83,7 @@ func close_doors():
 		wall.z_index = 5
 		wall.position = direction[0]/2
 		add_child(wall)
-		
+	
 func open_doors():
 	for child in get_children():
 		if "wall" in child.name: child.queue_free()

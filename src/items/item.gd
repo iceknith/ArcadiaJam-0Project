@@ -94,6 +94,7 @@ func shop_handler(player:Player):
 				items.append(null)
 				itemLevels.append(player.passive_levels[i] + 1)
 				itemType.append(str("passive_", player.passives[i]))
+				break
 	else:
 		items.append(null)
 		itemLevels.append(0)
@@ -108,6 +109,7 @@ func shop_handler(player:Player):
 				items.append(player.spells[i])
 				itemLevels.append(player.spell_levels[i] + 1)
 				itemType.append(str("spellUpgrade_",i+1))
+				break
 	else:
 		items.append(spells.pick_random())
 		itemLevels.append(0)

@@ -12,6 +12,8 @@ func _process(delta):
 
 func generate_new_dungeon():
 	$dungeon.world = 1
+	$dungeon.roomCount = 0
+	$dungeon.shopCount = 0
 	$dungeon.generateNewDungeon()
 	$player.gray = $player.maxGray
 	$player.healthChange.emit("gray", false, $player.gray)

@@ -1,17 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfgiyy1vo8irc"]
+[gd_scene load_steps=6 format=3 uid="uid://dfgiyy1vo8irc"]
 
 [ext_resource type="Script" path="res://src/rooms/room.gd" id="1_828vq"]
 [ext_resource type="TileSet" uid="uid://ctvunq4ln4pe1" path="res://assets/tileset.tres" id="2_fut12"]
 [ext_resource type="PackedScene" uid="uid://dyyeoj20j6cyq" path="res://src/spawner.tscn" id="3_vb6qf"]
-[ext_resource type="PackedScene" uid="uid://bovjfu1ap5g6x" path="res://src/entities/mib.tscn" id="5_f2wdo"]
-[ext_resource type="PackedScene" uid="uid://7jmvt7d100l" path="res://src/entities/zombie.tscn" id="5_tn085"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kf4jx"]
 size = Vector2(5600, 5600)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k20tv"]
+size = Vector2(4502, 4521)
+
 [node name="roomB" type="Area2D"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_828vq")
 hasMobs = true
 
@@ -40,9 +41,6 @@ position = Vector2(0, -2800)
 position = Vector2(-2800, 0)
 
 [node name="spawner" parent="." instance=ExtResource("3_vb6qf")]
-entitiesList = Array[PackedScene]([ExtResource("5_tn085"), ExtResource("5_f2wdo")])
-minEntities = 2
-maxEntities = 4
 
 [node name="Marker2D" type="Marker2D" parent="spawner"]
 position = Vector2(1384, 1194)
@@ -65,5 +63,14 @@ position = Vector2(5, 1793)
 [node name="LootPosition" type="Marker2D" parent="."]
 position = Vector2(-13, 1118)
 
+[node name="PlayerDetectionArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea"]
+position = Vector2(8, -5.5)
+shape = SubResource("RectangleShape2D_k20tv")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="player_entered_first_time" from="." to="spawner" method="_on_player_entered_first_time"]
+[connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_body_entered"]

@@ -29,6 +29,5 @@ func _on_hit(bodyType:String, body:Node2D):
 		hasExploded = true
 		animation = "explode"
 		time = 0
-		get_parent().isAlive = !explodeToContact
 	else:
 		get_parent().isAlive = true

@@ -4,33 +4,46 @@ class_name Entity
 signal death
 signal rotate
 
-@export var speed = 1000.0
+@export var minSpeed = 750.0
+@export var maxSpeed = 1000.0
 @export var acceleration = 50.0
 @export var knockbackSpeed = 750.0
+@export var minHealth = 100.0
 @export var maxHealth = 100.0
 @export var meleDamageType:Array = ["gray","blue","yellow","red"]
-@export var meleDamageAmount:int = 0
+@export var minMeleDamageAmount:int = 0
+@export var maxMeleDamageAmount:int = 0
 @export var ranged:bool = false
 @export var shootRange:float = 1000
+@export var minShootDamageAmount:int = 0
+@export var maxShootDamageAmount:int = 0
 @export var attacks:Array[PackedScene]
 @export var rotatedOffsetX:float = 0
 
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var ray_cast := $hit_hitbox/fire_point/RayCast2D as RayCast2D
 
+var speed:float
 var health:int
+var meleDamageAmount:int
+var shootDamageAmount:int
 var target:CharacterBody2D
 var state:String = "idle"
 var direction:Vector2 = Vector2.ZERO
 var canShoot:bool = true
 var wantToMove:bool = true
 
+var level:float = 0
+
 var popup_text = preload("res://src/popup_text.tscn")
 
 func _ready():
 	$AnimatedSprite2D.animation = "idle"
 	$AnimatedSprite2D.play()
-	health = maxHealth
+	health = int(minHealth + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxHealth - minHealth))
+	speed = minSpeed + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxSpeed - minSpeed)
+	meleDamageAmount = int(minMeleDamageAmount + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxMeleDamageAmount - minMeleDamageAmount))
+	shootDamageAmount = int(minShootDamageAmount + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxShootDamageAmount - minShootDamageAmount))
 	
 	if (!ranged):
 		$hit_hitbox/fire_point.queue_free()
@@ -81,6 +94,7 @@ func shoot():
 	var attack:Spell = attacks.pick_random().instantiate()
 	attack.direction = Vector2(cos(ray_cast.rotation), sin(ray_cast.rotation))
 	attack.position = $hit_hitbox/fire_point.position + position
+	attack.damageAmount = shootDamageAmount
 	get_parent().add_child(attack)
 
 func movement_handler(dir:Vector2, delta):

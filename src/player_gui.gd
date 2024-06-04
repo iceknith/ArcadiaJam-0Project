@@ -97,7 +97,7 @@ func spell_change(spellNum:int, newSpell:String, newSpellType:String, newSpellCo
 	var spell_icon = load(str("res://assets/spells/",newSpell,"/icon.png"))
 	var spell_sprite:Sprite2D = Sprite2D.new()
 	spell_sprite.texture = spell_icon
-	spell_sprite.scale = Vector2(0.5, 0.5)
+	spell_sprite.scale = Vector2(0.15, 0.15)
 	pos.add_child(spell_sprite)
 	
 	label.text = str(newSpellCost)

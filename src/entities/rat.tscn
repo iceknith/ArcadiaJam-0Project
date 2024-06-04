@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://xhhxrd05j5n0"]
+
+[ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_s2dd4"]
+[ext_resource type="Texture2D" uid="uid://2fiqdchkmn3b" path="res://assets/mobs/rat/rat_walk_0000.png" id="2_ugplh"]
+[ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="3_tvjn7"]
+[ext_resource type="Texture2D" uid="uid://csjjkpt2aw67w" path="res://assets/mobs/rat/rat_walk_0001.png" id="4_vdlju"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vya5g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tvjn7")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ugplh")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ugplh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ugplh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vdlju")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6i68e"]
+radius = 46.0
+height = 92.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4thmf"]
+size = Vector2(325.389, 109.622)
+
+[node name="rat" instance=ExtResource("1_s2dd4")]
+minSpeed = 1750.0
+maxSpeed = 2250.0
+acceleration = 75.0
+knockbackSpeed = 1000.0
+minHealth = 10.0
+maxHealth = 20.0
+meleDamageType = ["yellow", "gray"]
+minMeleDamageAmount = 6
+maxMeleDamageAmount = 10
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, -225)
+sprite_frames = SubResource("SpriteFrames_vya5g")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CapsuleShape2D_6i68e")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+position = Vector2(-0.399726, -11.5512)
+rotation = 0.541052
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_4thmf")

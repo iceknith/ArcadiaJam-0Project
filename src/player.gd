@@ -8,7 +8,7 @@ signal death
 
 @export var defaultSpeed = 2000.0
 @export var defaultAcceleration = 50.0
-@export var defaultKnockbackForce = 50.0
+@export var defaultKnockbackForce = 1500.0
 @export var defaultInvincibilityTimer = 2.0
 @export var defaultDashCost = 12
 @export var defaultDashSpeed = 4000.0
@@ -408,10 +408,10 @@ func addPassive(passiveName:String, passiveLevel:int):
 		elif passiveLevel == 3: dashDuration = defaultDashDuration * 0.6
 		
 	elif (passiveName == "Speed"):
-		if passiveLevel == 0: speed = defaultSpeed * 0.05
-		elif passiveLevel == 1: speed = defaultSpeed * 0.1
-		elif passiveLevel == 2: speed = defaultSpeed * 0.2
-		elif passiveLevel == 3: speed = defaultSpeed * 0.3
+		if passiveLevel == 0: speed = defaultSpeed * 1.05
+		elif passiveLevel == 1: speed = defaultSpeed * 1.1
+		elif passiveLevel == 2: speed = defaultSpeed * 1.2
+		elif passiveLevel == 3: speed = defaultSpeed * 1.3
 		
 	elif (passiveName == "Life Leech"):
 		if passiveLevel == 0: stabLifeLeechAmount = 8

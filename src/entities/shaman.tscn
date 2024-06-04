@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8i64yn6bl555"]
+
+[ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_dw82e"]
+[ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_8j8u4"]
+[ext_resource type="Script" path="res://src/entities/shaman.gd" id="2_f4ojc"]
+[ext_resource type="Texture2D" uid="uid://c0o4ydn5vjf4e" path="res://assets/mobs/shaman/shaman_fly_0000.png" id="3_rdg2t"]
+[ext_resource type="Texture2D" uid="uid://cli448u18xyot" path="res://assets/mobs/shaman/shaman_fly_0001.png" id="4_qsfdc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6csj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8j8u4")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rdg2t")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rdg2t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rdg2t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qsfdc")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4vb2d"]
+radius = 36.0
+height = 72.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1v1o5"]
+size = Vector2(319, 438)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bpwvs"]
+radius = 500.0
+
+[node name="shaman" instance=ExtResource("1_dw82e")]
+script = ExtResource("2_f4ojc")
+push_back_force = 2.0
+minHealth = 40.0
+maxHealth = 70.0
+meleDamageType = ["blue"]
+minMeleDamageAmount = 10
+maxMeleDamageAmount = 20
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_f6csj")
+animation = &"walk"
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CapsuleShape2D_4vb2d")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+position = Vector2(-36.5, -100)
+shape = SubResource("RectangleShape2D_1v1o5")
+
+[node name="attack_hitbox" type="Area2D" parent="." index="8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitbox" index="0"]
+position = Vector2(0, -75)
+shape = SubResource("CircleShape2D_bpwvs")
+
+[connection signal="area_entered" from="attack_hitbox" to="." method="_on_attack_hitbox_area_entered"]

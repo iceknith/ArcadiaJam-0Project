@@ -7,12 +7,12 @@
 animations = [{
 "frames": [],
 "loop": true,
-"name": &"damage",
+"name": &"dead",
 "speed": 5.0
 }, {
 "frames": [],
 "loop": true,
-"name": &"death",
+"name": &"hit",
 "speed": 5.0
 }, {
 "frames": [],
@@ -27,11 +27,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4ye0"]
-radius = 53.0
-height = 106.0
+radius = 36.0
+height = 72.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xlw4"]
-size = Vector2(89, 644)
+size = Vector2(76.5066, 109.622)
 
 [node name="entity" type="CharacterBody2D"]
 z_index = 9
@@ -43,7 +43,7 @@ script = ExtResource("1_nu8s1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 9
 sprite_frames = SubResource("SpriteFrames_rogsh")
-animation = &"death"
+animation = &"dead"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

@@ -10,6 +10,7 @@ script = ExtResource("1_coytm")
 [node name="playerGUI" parent="." instance=ExtResource("1_ilxe0")]
 
 [node name="Button" type="Button" parent="."]
+visible = false
 offset_right = 181.0
 offset_bottom = 82.0
 text = "Click to generate new dungeon"
