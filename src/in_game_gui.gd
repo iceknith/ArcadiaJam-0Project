@@ -44,6 +44,8 @@ func _on_world_player_signal(signalType, signalValues):
 				iconPath.append("res://assets/passives/icon.png")
 		$Shop.visible = true
 		$Shop.init_item_selection(iconPath, signalValues[0], signalValues[1], signalValues[2])
+	elif (signalType == "showTutorial"):
+		$tutorial_popup.change_text(signalValues[0])
 
 
 func _on_shop_dialogue_end():

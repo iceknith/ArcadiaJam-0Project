@@ -1,0 +1,97 @@
+[gd_scene load_steps=9 format=3 uid="uid://pa3hm0ca2mau"]
+
+[ext_resource type="Script" path="res://src/death_menu.gd" id="1_r2v0p"]
+[ext_resource type="Texture2D" uid="uid://dgpbwk01d1qeh" path="res://assets/cressidadeathscreen.png" id="2_xppbb"]
+[ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="3_nuhsu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hn8rm"]
+font = ExtResource("3_nuhsu")
+font_size = 250
+font_color = Color(0.415686, 0, 0.027451, 1)
+shadow_size = 50
+shadow_color = Color(0, 0, 0, 0.341176)
+shadow_offset = Vector2(25, 25)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yeyo7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hu5x1"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0.894118)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o1ix3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4b1k5"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0.894118)
+
+[node name="death_menu" type="Control"]
+layout_mode = 3
+anchor_right = 0.979
+anchor_bottom = 0.966
+offset_right = 40.3199
+offset_bottom = 36.72
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r2v0p")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xppbb")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 10.0
+offset_right = 2.00012
+offset_bottom = 217.0
+grow_horizontal = 2
+text = "Vous etes décédé"
+label_settings = SubResource("LabelSettings_hn8rm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -247.0
+offset_top = -40.0
+offset_right = 253.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_nuhsu")
+theme_override_font_sizes/font_size = 150
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yeyo7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hu5x1")
+text = "Nouvelle partie"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = 335.0
+offset_right = 160.0
+offset_bottom = 508.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_nuhsu")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o1ix3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4b1k5")
+text = "Quitter"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

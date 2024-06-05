@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0jwy5a53g1bq"]
+
+[ext_resource type="Script" path="res://src/rooms/room.gd" id="1_nsen6"]
+[ext_resource type="TileSet" uid="uid://ctvunq4ln4pe1" path="res://assets/tileset.tres" id="2_qo1tv"]
+[ext_resource type="PackedScene" uid="uid://dyyeoj20j6cyq" path="res://src/spawner.tscn" id="3_icskp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kf4jx"]
+size = Vector2(5600, 5600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qku8s"]
+size = Vector2(4502, 4521)
+
+[node name="roomD" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_nsen6")
+hasMobs = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_qo1tv")
+format = 2
+layer_0/name = "Ground"
+layer_0/tile_data = PackedInt32Array(-131076, 2, 65536, -196605, 2, 65536, 196610, 131074, 0, 262141, 131074, 0, 196604, 2, 0, 131075, 131074, 0, 327677, 2, 0, 327678, 2, 0, 327679, 131074, 0, 262144, 131074, 0, 262145, 2, 0, 262146, 2, 0, 131076, 65538, 0, 65540, 2, 0, 4, 2, 0, -65532, 131074, 0, -131068, 131074, 0, -196604, 65538, 0, -327678, 2, 0, -327679, 131074, 65536, -327680, 131074, 65536, -262145, 2, 65536, -262146, 131074, 65536, -131077, 65538, 0, -65541, 131074, 0, -5, 2, 0, 65531, 2, 0, 131067, 131074, 0, 196603, 65538, 0, 5, 131074, 0, 65541, 131074, 0, 327681, 131074, 0, 327680, 131074, 0, 393215, 2, 0, 393214, 131074, 0, 393213, 2, 65536, 65530, 131074, 0, -6, 131074, 0, -65542, 2, 0, -131078, 131074, 0, -262142, 131074, 0, -262140, 65538, 0, -196611, 131074, 0, -196613, 65538, 0, -262147, 131074, 0, -196614, 131074, 0, -262139, 2, 0, -196603, 2, 0, -131067, 131074, 0, -65531, 131074, 0, 131077, 131074, 0, 196613, 2, 0, 196612, 65538, 0, 262138, 2, 0, 196602, 2, 0, 131066, 2, 0, 262139, 65538, 0, -327683, 131074, 0, -393214, 131074, 0, -196615, 65538, 65537, 262137, 65538, 65537, 196614, 65538, 1, -262138, 65538, 1, 327682, 131074, 65536, 196605, 2, 0, 131074, 2, 0, -196606, 131074, 65536, -131075, 131074, 65536, -327682, 2, 0, -327681, 131074, 0, -393216, 131074, 0, -393215, 2, 0, -327684, 131074, 0, -327685, 65538, 0, -327686, 2, 0, -262150, 65538, 0, -262149, 2, 0, -262148, 2, 0, -196612, 2, 0, 262140, 2, 0, 327674, 65538, 0, 327675, 131074, 0, 327676, 2, 0, 196611, 2, 0, 262147, 131074, 0, 262148, 2, 0, -262141, 131074, 0, -393213, 2, 0, -393212, 65538, 0, -393211, 2, 0, -327675, 65538, 0, -327676, 2, 0, -327677, 2, 0, 262149, 65538, 0, -131069, 65538, 65537, -65533, 65538, 65537, 3, 65538, 65537, 65539, 65538, 65537, 131073, 65538, 65537, 196609, 65538, 65537, -262143, 65538, 65537, -196607, 65538, 65537, -196610, 65538, 1, -131074, 65538, 1, -65540, 65538, 1, -4, 65538, 1, 65532, 65538, 1, 131068, 65538, 1, 196606, 65538, 1, 262142, 65538, 1, 393211, 65538, 131072, 327684, 65538, 131072, 327685, 2, 65536, 327683, 2, 65536, 393212, 131074, 65536, 393210, 2, 65536, 327673, 65538, 65537, 393209, 65538, 65537, 262150, 65538, 1, 327686, 65538, 1, -393210, 65538, 1, -327674, 65538, 1, -327687, 65538, 65537, -262151, 65538, 65537)
+layer_1/name = "Walls"
+layer_1/z_index = 2
+layer_1/tile_data = PackedInt32Array(-196615, 262146, 0, 262137, 262146, 0, 196614, 262146, 0, -262138, 262146, 0, -393220, 196610, 1, -458749, 196610, 1, 458748, 196610, 1, 393219, 196610, 1, -262151, 262146, 0, -327687, 262146, 0, -393223, 262146, 262145, -393222, 196610, 1, -393221, 196610, 1, 327673, 262146, 0, 393209, 262146, 0, 458745, 262146, 65538, 458746, 196610, 1, 458747, 196610, 1, 393220, 196610, 1, 393221, 196610, 1, 393222, 262146, 131074, 262150, 262146, 0, 327686, 262146, 0, -458746, 262146, 327681, -393210, 262146, 0, -327674, 262146, 0, -458747, 196610, 1, -458748, 196610, 1, 131068, 262146, 65538, -65540, 262146, 262145, -4, 262146, 0, 65532, 262146, 0, -65533, 262146, 0, 3, 262146, 0, -131069, 262146, 1, 65539, 262146, 2, 262142, 262146, 65538, 196609, 262146, 131074, 262143, 196610, 1, 196608, 196610, 1, -196609, 196610, 1, -262144, 196610, 1, -262143, 262146, 327681, -196610, 262146, 262145, -65538, 262146, 131074, 131070, 262146, 327681, 65537, 262146, 262145, -131071, 262146, 65538, -131070, 196610, 1, 65538, 196610, 1, 131069, 196610, 1, -65539, 196610, 1, 196606, 262146, 0, 131073, 262146, 0, -196607, 262146, 0, -131074, 262146, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_kf4jx")
+
+[node name="entry1" type="Marker2D" parent="."]
+position = Vector2(0, 2800)
+
+[node name="entry2" type="Marker2D" parent="."]
+position = Vector2(2800, 0)
+
+[node name="entry3" type="Marker2D" parent="."]
+position = Vector2(0, -2800)
+
+[node name="entry4" type="Marker2D" parent="."]
+position = Vector2(-2800, 0)
+
+[node name="spawner" parent="." instance=ExtResource("3_icskp")]
+
+[node name="Marker2D" type="Marker2D" parent="spawner"]
+position = Vector2(-1553, 1522)
+
+[node name="Marker2D2" type="Marker2D" parent="spawner"]
+position = Vector2(-1753, -1790)
+
+[node name="Marker2D3" type="Marker2D" parent="spawner"]
+position = Vector2(1623, -1756)
+
+[node name="Marker2D4" type="Marker2D" parent="spawner"]
+position = Vector2(1762, 1741)
+
+[node name="LootPosition" type="Marker2D" parent="."]
+position = Vector2(-9, 2036)
+
+[node name="PlayerDetectionArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea"]
+position = Vector2(8, -5.5)
+shape = SubResource("RectangleShape2D_qku8s")
+metadata/_edit_lock_ = true
+
+[connection signal="player_entered_first_time" from="." to="spawner" method="_on_player_entered_first_time"]
+[connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_body_entered"]

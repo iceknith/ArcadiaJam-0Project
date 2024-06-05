@@ -2,6 +2,7 @@ extends Node2D
 
 signal playerSignal(signalType:String, signalValues:Array)
 
+var showTutorial:bool = false
 # Called when thZe node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -58,3 +59,8 @@ func _on_gui_gui_signal(signalType, signalValues):
 	elif (signalType == "gain_passive"):
 		$player.addPassive(signalValues[0], signalValues[1])
 
+
+
+func _on_player_show_tutorial(tutorialType):
+	if (showTutorial):
+		playerSignal.emit("showTutorial", [tutorialType])

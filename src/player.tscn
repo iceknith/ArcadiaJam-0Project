@@ -56,7 +56,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_8qpo3")
 }, {
-"duration": 5.0,
+"duration": 20.0,
 "texture": ExtResource("6_fm47p")
 }],
 "loop": true,
@@ -197,7 +197,7 @@ texture = ExtResource("2_rkvtj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2mc8m")
-animation = &"idle_buffed"
+animation = &"dead"
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

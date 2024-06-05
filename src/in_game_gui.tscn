@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://qdqs7qkxu7j1"]
+[gd_scene load_steps=5 format=3 uid="uid://qdqs7qkxu7j1"]
 
 [ext_resource type="Script" path="res://src/in_game_gui.gd" id="1_coytm"]
 [ext_resource type="PackedScene" uid="uid://bbgi5hfe1qdm0" path="res://src/player_gui.tscn" id="1_ilxe0"]
 [ext_resource type="PackedScene" uid="uid://cr1cc4gg313og" path="res://src/shop.tscn" id="3_kcr6l"]
+[ext_resource type="PackedScene" uid="uid://sk4wl00t1dvf" path="res://src/tutorial_popup.tscn" id="4_fs5n5"]
 
 [node name="inGameGui" type="CanvasLayer"]
 script = ExtResource("1_coytm")
+
+[node name="tutorial_popup" parent="." instance=ExtResource("4_fs5n5")]
 
 [node name="playerGUI" parent="." instance=ExtResource("1_ilxe0")]
 

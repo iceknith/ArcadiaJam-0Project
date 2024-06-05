@@ -62,8 +62,10 @@ func _on_body_entered(body):
 		playerEntered = true
 		if (hasMobs):
 			doorClosed = true
-			#await get_tree().create_timer(0.5).timeout
 			close_doors()
+			if (!player.firstAttackMob):
+				player.firstAttackMob = true
+				player.showTutorial.emit("mob")
 		
 func close_doors():
 	var i:int = 0

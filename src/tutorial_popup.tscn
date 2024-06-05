@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://sk4wl00t1dvf"]
+
+[ext_resource type="Script" path="res://src/tutorial_popup.gd" id="1_b0eet"]
+[ext_resource type="Texture2D" uid="uid://bt4iltu4eusyn" path="res://assets/cressida/icon.png" id="2_cct5n"]
+[ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="2_clnaf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2rr4l"]
+font = ExtResource("2_clnaf")
+font_size = 35
+
+[node name="tutorial_popup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b0eet")
+metadata/_edit_lock_ = true
+
+[node name="tutorial_text" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 259.0
+offset_top = 24.0
+offset_right = 758.0
+offset_bottom = 190.0
+text = "placeholder"
+label_settings = SubResource("LabelSettings_2rr4l")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="cressidia_icon" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 14.0
+offset_top = 1.0
+offset_right = 311.0
+offset_bottom = 252.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_cct5n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

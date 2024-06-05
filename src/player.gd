@@ -5,6 +5,7 @@ signal healthChange(healthType:String, maxHealthChange:bool, newValue:int)
 signal spellChange(spellNum:int, newSpell:String, newSpellType:String, newSpellCost:int)
 signal passiveChange(passive:String, passive_level:int)
 signal death
+signal showTutorial(tutorialType:String)
 
 @export var defaultSpeed = 2000.0
 @export var defaultAcceleration = 50.0
@@ -44,6 +45,12 @@ var spell_levels:Array[int] = [0, 0, 0, 0]
 var passives:Array[String] = []
 var passive_levels:Array[int] = []
 
+var firstExistance:bool = false
+var firstSpell:bool = false
+var firstSpellCasted:bool = false
+var firstLowHealth:bool = false
+var firstAttackMob:bool = false
+
 var state:String = "idle"
 var is_buffed:bool = false
 var time_since_state_change:float = 0
@@ -81,6 +88,13 @@ func _process(delta):
 	#consequences
 	if (gray <= 0 and state != "dead"):
 		state = "dead"
+	elif (!firstLowHealth && gray <= 50):
+		firstLowHealth = true
+		showTutorial.emit("lowHealth")
+		
+	if (!firstExistance):
+		firstExistance = true
+		showTutorial.emit("intro")
 		
 	if (state == "stab"): stab_handler(delta)
 	elif (state == "spell"): spell_handler(buffer_direction, delta)
@@ -225,6 +239,10 @@ func dash_handler(delta):
 			time_since_state_change = 0
 
 func spell_handler(input:Vector2, delta):
+	if (!firstSpellCasted):
+		firstSpellCasted = true
+		showTutorial.emit("spell_use")
+	
 	$AnimatedSprite2D.animation = "spell"
 	time_since_state_change += delta
 	if (time_since_state_change >= 0.5):
@@ -258,7 +276,7 @@ func hit_handler(delta):
 func dead_handler(delta):
 	$AnimatedSprite2D.animation = "dead"
 	time_since_state_change += delta
-	if (time_since_state_change >= 1.95):
+	if (time_since_state_change >= 2):
 		death.emit()
 
 func damage(damage_amount:int, damage_direction:Vector2, damageType:Array):
@@ -323,6 +341,10 @@ func heal(heal_amount:int, heal_type:Array):
 		healthChange.emit("blue", false, blue)
 
 func replaceSpell(spell_num:int, new_spell:PackedScene, new_spell_level:int):
+	if (!firstSpell):
+		firstSpell = true
+		showTutorial.emit("spell")
+	
 	#update max-life
 	if (spells[spell_num - 1] != null):
 		var oldSpell:Spell = spells[spell_num - 1].instantiate()
