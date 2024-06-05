@@ -6,7 +6,7 @@
 [node name="Accélération fulgurante" instance=ExtResource("1_hyqqy")]
 script = ExtResource("2_f74t6")
 duration_per_level = Array[float]([8.0, 8.0, 12.0, 12.0])
-speed_percent_per_level = Array[float]([0.2, 0.4, 0.8, 1.6])
+speed_percent_per_level = Array[float]([0.7, 1.2, 1.8, 2.3])
 utilitySpell = true
 costType = "blue"
 maxColorAdd_per_level = Array[int]([20, 20, 20, 20])

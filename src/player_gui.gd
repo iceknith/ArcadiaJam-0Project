@@ -9,6 +9,8 @@ var yellow:int = 0
 var maxGray:int = 100
 var gray:int = 100
 
+var levelLabel:Array = ["I","II","III","IV"]
+
 var grayImages:Array = [preload("res://assets/GUI/hp_bar/gray1.png"),
 						preload("res://assets/GUI/hp_bar/gray2.png"),
 						preload("res://assets/GUI/hp_bar/gray3.png"),
@@ -121,5 +123,5 @@ func passive_change(passive:String, passiveLevel:int):
 func display_passives():
 	var text:String = ""
 	for i in passives.size():
-		text = str(text, passives[i], " Niveau: ", passive_levels[i]+1 ,"\n")
+		text = str(text, passives[i], " ", " ", levelLabel[passive_levels[i]],"\n")
 	$passive_label.text = text

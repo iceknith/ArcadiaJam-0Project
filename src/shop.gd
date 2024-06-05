@@ -12,6 +12,8 @@ var selectedItem:PackedScene
 var selectedItemLevel:int
 var itemTypes:Array
 
+var levelLabel:Array = ["I","II","III","IV"]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -38,11 +40,11 @@ func init_item_selection(itemIconPath:Array, itemPointer:Array, itemType:Array, 
 			elif ("spell" in itemType[i]):
 				var spell:Spell = itemPointers[i].instantiate()
 				spell.level = itemLevels[i]
-				marker.get_node("description").text = str(spell.name, "\n Niveau: ", spell.level + 1,
-				"\n Coût: ", spell.costs_per_level[spell.level], " ", spell.costType, "\n Max Vie: +",
+				marker.get_node("description").text = str(spell.name, " ", levelLabel[spell.level],
+				"\n Coût : ", spell.costs_per_level[spell.level], " ", spell.costType, "\n Essence max : +",
 				 spell.maxColorAdd_per_level[spell.level], " ", spell.costType)
 			elif ("passive_" in itemType[i]):
-				marker.get_node("description").text = str(itemType[i].split("_")[1],"\nNiveau: ", itemLevels[i]+1)
+				marker.get_node("description").text = str(itemType[i].split("_")[1], " ", levelLabel[itemLevels[i]])
 		else:
 			marker.visible = false
 	

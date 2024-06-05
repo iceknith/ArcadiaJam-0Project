@@ -23,8 +23,8 @@ var spells:Array[PackedScene] = [load("res://src/spells/fire_ball.tscn"),
 								load("res://src/spells/grenade_à_fragmentation.tscn"),
 								load("res://src/spells/attack_burst.tscn"),
 								load("res://src/spells/the_world.tscn")]
-var passives:Array[String] = ["Passive Regenation", "Max Gray", "Stab Cost", "Dash Cost", 
-							"Dash Duration", "Speed", "Life Leech", "Stab Damage"]
+var passives:Array[String] = ["Régénération", "Esprit renforcé", "Couteau économe", "Dash économe", 
+							"Grand bond", "Marathon", "Vol d'esprit", "Lame pointue"]
 
 signal choose_new_spell(spellPointer:PackedScene)
 signal open_shop(items:Array[PackedScene], itemType:Array[String], itemLevels:Array[int])

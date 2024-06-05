@@ -63,13 +63,13 @@ animations = [{
 
 [node name="Orbe enflammé" instance=ExtResource("1_ad7vk")]
 script = ExtResource("2_kcf2o")
-explosion_radius = 5000.0
+explosion_radius = 750.0
 attackEntities = true
 costType = "yellow"
 maxLevels = 4
 maxColorAdd_per_level = Array[int]([25, 25, 30, 30])
-costs_per_level = Array[int]([15, 15, 15, 15])
-damageAmount_per_level = Array[int]([20, 22, 25, 28])
+costs_per_level = Array[int]([8, 8, 6, 6])
+damageAmount_per_level = Array[int]([25, 25, 25, 30])
 acceleration_per_leve = Array[float]([75.0, 75.0, 75.0, 75.0])
 speed_per_level = Array[float]([2750.0, 2750.0, 2750.0, 2750.0])
 maxDuration_per_level = Array[float]([5.0, 5.0, 5.0, 5.0])

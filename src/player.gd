@@ -37,7 +37,7 @@ var maxBlue:int = 0
 var blue:int = 0
 var maxYellow:int = 0
 var yellow:int = 0
-var maxGray:int
+var maxGray:int = 1000
 var gray:int = 100
 
 var spells:Array[PackedScene] = [null, null, null, null]
@@ -396,7 +396,7 @@ func replaceSpell(spell_num:int, new_spell:PackedScene, new_spell_level:int):
 
 func addPassive(passiveName:String, passiveLevel:int):
 	
-	if (passiveName == "Passive Regenation"):
+	if (passiveName == "Régénération"):
 		$RegenerationTimer.stop()
 		if passiveLevel == 0: $RegenerationTimer.wait_time = 5
 		elif passiveLevel == 1: $RegenerationTimer.wait_time = 3
@@ -404,44 +404,44 @@ func addPassive(passiveName:String, passiveLevel:int):
 		elif passiveLevel == 3: $RegenerationTimer.wait_time = 1.5
 		$RegenerationTimer.start()
 		
-	elif (passiveName == "Max Gray"):
+	elif (passiveName == "Esprit renforcé"):
 		if passiveLevel == 0: maxGray = defaultMaxGray + 30
 		elif passiveLevel == 1: maxGray = defaultMaxGray + 70
 		elif passiveLevel == 2: maxGray = defaultMaxGray + 100
 		elif passiveLevel == 3: maxGray = defaultMaxGray + 130
 		healthChange.emit("gray", true, maxGray)
 		
-	elif (passiveName == "Stab Cost"):
+	elif (passiveName == "Couteau économe"):
 		if passiveLevel == 0: stabCost = defaultStabCost - 1
 		elif passiveLevel == 1: stabCost = defaultStabCost - 2
 		elif passiveLevel == 2: stabCost = defaultStabCost - 4
 		elif passiveLevel == 3: stabCost = defaultStabCost - 5
 		
-	elif (passiveName == "Dash Cost"):
+	elif (passiveName == "Bond économe"):
 		if passiveLevel == 0: dashCost = defaultDashCost - 1
 		elif passiveLevel == 1: dashCost = defaultDashCost - 2
 		elif passiveLevel == 2: dashCost = defaultDashCost - 4
 		elif passiveLevel == 3: dashCost = defaultDashCost - 5
 		
-	elif (passiveName == "Dash Duration"):
-		if passiveLevel == 0: dashDuration = defaultDashDuration * 0.1
-		elif passiveLevel == 1: dashDuration = defaultDashDuration * 0.25
-		elif passiveLevel == 2: dashDuration = defaultDashDuration * 0.45
-		elif passiveLevel == 3: dashDuration = defaultDashDuration * 0.6
+	elif (passiveName == "Grand bond"):
+		if passiveLevel == 0: dashDuration = defaultDashDuration * 1.1
+		elif passiveLevel == 1: dashDuration = defaultDashDuration * 1.25
+		elif passiveLevel == 2: dashDuration = defaultDashDuration * 1.45
+		elif passiveLevel == 3: dashDuration = defaultDashDuration * 1.6
 		
-	elif (passiveName == "Speed"):
-		if passiveLevel == 0: speed = defaultSpeed * 1.05
-		elif passiveLevel == 1: speed = defaultSpeed * 1.1
-		elif passiveLevel == 2: speed = defaultSpeed * 1.2
-		elif passiveLevel == 3: speed = defaultSpeed * 1.3
+	elif (passiveName == "Marathon"):
+		if passiveLevel == 0: speed = defaultSpeed * 1.2
+		elif passiveLevel == 1: speed = defaultSpeed * 1.3
+		elif passiveLevel == 2: speed = defaultSpeed * 1.4
+		elif passiveLevel == 3: speed = defaultSpeed * 1.5
 		
-	elif (passiveName == "Life Leech"):
+	elif (passiveName == "Vol d'esprit"):
 		if passiveLevel == 0: stabLifeLeechAmount = 8
 		elif passiveLevel == 1: stabLifeLeechAmount = 15 
 		elif passiveLevel == 2: stabLifeLeechAmount = 20
 		elif passiveLevel == 3: stabLifeLeechAmount = 25
 		
-	elif (passiveName == "Stab Damage"):
+	elif (passiveName == "Lame pointue"):
 		if passiveLevel == 0: additionalStabDamage = 3
 		elif passiveLevel == 1: additionalStabDamage = 5
 		elif passiveLevel == 2: additionalStabDamage = 8

@@ -64,6 +64,7 @@ animations = [{
 [node name="Fire Ball" instance=ExtResource("1_1s7nq")]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("2_5o4mt")
+attackPlayer = true
 acceleration_per_leve = Array[float]([25.0])
 speed_per_level = Array[float]([1000.0])
 maxDuration_per_level = Array[float]([5.0])

@@ -13,7 +13,7 @@ signal player_entered_first_time(player:Player)
 						preload("res://src/items/heal_yellow.tscn"),
 						preload("res://src/items/heal_blue.tscn")]
 						
-@export var minHeal:float = 0.1
+@export var minHeal:float = 0.3
 @export var maxHeal:float = 0.6
 
 var player:Player
@@ -128,11 +128,11 @@ func player_get_needed_colors()->Array:
 	if (player.red < player.maxRed):
 		result.append([1, int(player.maxRed * randf_range(minHeal, maxHeal))])
 	if (player.yellow < player.maxYellow):
-		result.append([2, int(player.maxYellow * randf_range(minHeal, maxHeal))])
+		result.append([2, int(player.maxYellow * randf_range(minHeal, maxHeal))+0.3])
 	if (player.blue < player.maxBlue):
-		result.append([3, int(player.maxBlue * randf_range(minHeal, maxHeal))])
+		result.append([3, int(player.maxBlue * randf_range(minHeal, maxHeal))+0.3])
 	if (player.gray < player.maxGray || result.is_empty()):
-		result.append([0, int(player.maxGray * randf_range(minHeal, maxHeal))])
+		result.append([0, int(player.maxGray * randf_range(minHeal, maxHeal))+0.3])
 	
 	return result
 

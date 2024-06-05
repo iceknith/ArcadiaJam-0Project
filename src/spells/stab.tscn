@@ -8,8 +8,8 @@ size = Vector2(702, 92)
 [node name="stab" instance=ExtResource("1_vruxd")]
 attackEntities = true
 maxLevels = 1
-costs_per_level = Array[int]([10])
-damageAmount_per_level = Array[int]([7])
+costs_per_level = Array[int]([7])
+damageAmount_per_level = Array[int]([10])
 maxDuration_per_level = Array[float]([0.2])
 
 [node name="CollisionShape2D" parent="." index="0"]

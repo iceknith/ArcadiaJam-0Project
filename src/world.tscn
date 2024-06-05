@@ -22,7 +22,7 @@ defaultDashCost = 15
 defaultDashSpeed = 6000.0
 defaultDashAcceleration = 100.0
 defaultDashDuration = 0.6
-defaultStabCost = 0
+defaultStabCost = 7
 
 [connection signal="death" from="player" to="." method="_on_player_death"]
 [connection signal="healthChange" from="player" to="." method="_on_player_health_change"]
