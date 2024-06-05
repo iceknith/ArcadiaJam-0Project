@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://boml7bi1wflci"
+path="res://.godot/imported/Home - Resonance METAL COVER (Lo-fi Goes Metal, Vol. 1).mp3-ced019d2624d6d85d6ecb76c6f2c4583.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Home - Resonance METAL COVER (Lo-fi Goes Metal, Vol. 1).mp3"
+dest_files=["res://.godot/imported/Home - Resonance METAL COVER (Lo-fi Goes Metal, Vol. 1).mp3-ced019d2624d6d85d6ecb76c6f2c4583.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

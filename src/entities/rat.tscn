@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://xhhxrd05j5n0"]
+[gd_scene load_steps=9 format=3 uid="uid://xhhxrd05j5n0"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_s2dd4"]
 [ext_resource type="Texture2D" uid="uid://2fiqdchkmn3b" path="res://assets/mobs/rat/rat_walk_0000.png" id="2_ugplh"]
 [ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="3_tvjn7"]
 [ext_resource type="Texture2D" uid="uid://csjjkpt2aw67w" path="res://assets/mobs/rat/rat_walk_0001.png" id="4_vdlju"]
+[ext_resource type="Texture2D" uid="uid://dlrq2rxlxk02a" path="res://assets/shadow.png" id="5_j0rye"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vya5g"]
 animations = [{
@@ -64,6 +65,7 @@ maxMeleDamageAmount = 10
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -225)
 sprite_frames = SubResource("SpriteFrames_vya5g")
+animation = &"idle"
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CapsuleShape2D_6i68e")
@@ -72,3 +74,8 @@ shape = SubResource("CapsuleShape2D_6i68e")
 position = Vector2(-0.399726, -11.5512)
 rotation = 0.541052
 shape = SubResource("RectangleShape2D_4thmf")
+
+[node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="2"]
+position = Vector2(14, 127)
+scale = Vector2(1.1975, 0.4225)
+texture = ExtResource("5_j0rye")

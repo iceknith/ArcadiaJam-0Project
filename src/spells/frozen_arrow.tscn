@@ -1,19 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1mijdb83do0e"]
+[gd_scene load_steps=10 format=3 uid="uid://d1mijdb83do0e"]
 
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_xhun5"]
 [ext_resource type="Script" path="res://src/spells/frozen_arrow.gd" id="2_bjena"]
-[ext_resource type="Texture2D" uid="uid://cap4tq3gyfn32" path="res://assets/spells/Orbe explosif/spell_orb_0003.png" id="3_pftr4"]
-[ext_resource type="Texture2D" uid="uid://bv8vv2wlyv258" path="res://assets/spells/Flèches givrées/arrow_0003.png" id="4_pu5w0"]
-[ext_resource type="Texture2D" uid="uid://d2wrosw8hapb5" path="res://assets/spells/Flèches givrées/arrow_0000.png" id="5_67a0v"]
-[ext_resource type="Texture2D" uid="uid://bb5fig04ucp8g" path="res://assets/spells/Flèches givrées/arrow_0001.png" id="6_nk6hu"]
-[ext_resource type="Texture2D" uid="uid://cj7xfefacfjsx" path="res://assets/spells/Flèches givrées/arrow_0002.png" id="7_6mk18"]
+[ext_resource type="Texture2D" uid="uid://bfbfaes1hq52i" path="res://assets/spells/Flèches givrées/fleche_givree_0003.png" id="3_12ncm"]
+[ext_resource type="Texture2D" uid="uid://fope2nw4b58p" path="res://assets/spells/Flèches givrées/fleche_givree_0000.png" id="4_kphlv"]
+[ext_resource type="Texture2D" uid="uid://kriohrayvw6f" path="res://assets/spells/Flèches givrées/fleche_givree_0001.png" id="5_q7cxj"]
+[ext_resource type="Texture2D" uid="uid://du2gmmqomwjof" path="res://assets/spells/Flèches givrées/fleche_givree_0002.png" id="6_v6gsj"]
 [ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="8_0be3k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vmbkf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_pftr4")
+"texture": ExtResource("3_12ncm")
 }],
 "loop": true,
 "name": &"explode",
@@ -21,7 +20,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_pu5w0")
+"texture": ExtResource("3_12ncm")
 }],
 "loop": true,
 "name": &"fly",
@@ -29,13 +28,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_67a0v")
+"texture": ExtResource("4_kphlv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_nk6hu")
+"texture": ExtResource("5_q7cxj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_6mk18")
+"texture": ExtResource("6_v6gsj")
 }],
 "loop": true,
 "name": &"spawn",
@@ -65,7 +64,9 @@ autoDisapear = false
 position = Vector2(2, -0.999998)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_vmbkf")
-animation = &"fly"
+animation = &"spawn"
+frame = 2
+frame_progress = 0.0236644
 script = ExtResource("8_0be3k")
 spawnAnimationTime = 0.5
 explosionAnimationTime = 0.25

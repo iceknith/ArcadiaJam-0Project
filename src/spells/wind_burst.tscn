@@ -1,38 +1,38 @@
 [gd_scene load_steps=14 format=3 uid="uid://b4e4ewjircwwt"]
 
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_kcpdx"]
-[ext_resource type="Texture2D" uid="uid://b0sl3mi2hcukw" path="res://assets/spells/Explosion_red/explosion0000.png" id="2_2uext"]
 [ext_resource type="Script" path="res://src/spells/wind_burst.gd" id="2_nynf2"]
-[ext_resource type="Texture2D" uid="uid://byc5ef3tb7ctk" path="res://assets/spells/Explosion_red/explosion0001.png" id="3_y1b1q"]
-[ext_resource type="Texture2D" uid="uid://d1icvjlrhopwx" path="res://assets/spells/Explosion_red/explosion0002.png" id="4_xwon7"]
-[ext_resource type="Texture2D" uid="uid://bcm0ngn6fp17a" path="res://assets/spells/Explosion_red/explosion0003.png" id="5_8ii7k"]
-[ext_resource type="Texture2D" uid="uid://sca7m3432dcn" path="res://assets/spells/Explosion_red/explosion0004.png" id="6_k83m7"]
-[ext_resource type="Texture2D" uid="uid://bn8nvdbuele6u" path="res://assets/spells/Explosion_red/explosion0005.png" id="7_1j6ok"]
-[ext_resource type="Texture2D" uid="uid://bewqhys5bkoq5" path="res://assets/spells/Bourrasque/crescent_0002.png" id="8_xkvx2"]
-[ext_resource type="Texture2D" uid="uid://bpp2024v0vsvu" path="res://assets/spells/crescent_0000.png" id="9_w6ddo"]
-[ext_resource type="Texture2D" uid="uid://cqat4pm0c2o61" path="res://assets/spells/Bourrasque/crescent_0001.png" id="10_jyxsc"]
+[ext_resource type="Texture2D" uid="uid://ki1njm8xwt" path="res://assets/spells/Bourrasque/explosion_blue0000.png" id="3_mg7u0"]
+[ext_resource type="Texture2D" uid="uid://d3fnhdeeicskw" path="res://assets/spells/Bourrasque/explosion_blue0001.png" id="4_1wjom"]
+[ext_resource type="Texture2D" uid="uid://c0b6guhuhht14" path="res://assets/spells/Bourrasque/explosion_blue0002.png" id="5_ceuo6"]
+[ext_resource type="Texture2D" uid="uid://biuvjvex6ka4u" path="res://assets/spells/Bourrasque/explosion_blue0003.png" id="6_eh6qq"]
+[ext_resource type="Texture2D" uid="uid://c0q4u71yfw4hr" path="res://assets/spells/Bourrasque/explosion_blue0004.png" id="7_tlpca"]
+[ext_resource type="Texture2D" uid="uid://dy0irob8f2x48" path="res://assets/spells/Bourrasque/explosion_blue0005.png" id="8_6g1c6"]
+[ext_resource type="Texture2D" uid="uid://cfhy448nu52kp" path="res://assets/spells/Lame scintillante/lame_scintillante_0002.png" id="9_bp05n"]
+[ext_resource type="Texture2D" uid="uid://cunoc16wdacnk" path="res://assets/spells/Lame scintillante/lame_scintillante_0000.png" id="10_vyma5"]
+[ext_resource type="Texture2D" uid="uid://ijlulurvdmuf" path="res://assets/spells/Lame scintillante/lame_scintillante_0001.png" id="11_y6k8g"]
 [ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="12_jh072"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ju8rl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2uext")
+"texture": ExtResource("3_mg7u0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_y1b1q")
+"texture": ExtResource("4_1wjom")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_xwon7")
+"texture": ExtResource("5_ceuo6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_8ii7k")
+"texture": ExtResource("6_eh6qq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_k83m7")
+"texture": ExtResource("7_tlpca")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_1j6ok")
+"texture": ExtResource("8_6g1c6")
 }],
 "loop": true,
 "name": &"explode",
@@ -40,7 +40,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_xkvx2")
+"texture": ExtResource("9_bp05n")
 }],
 "loop": true,
 "name": &"fly",
@@ -48,13 +48,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_w6ddo")
+"texture": ExtResource("10_vyma5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_jyxsc")
+"texture": ExtResource("11_y6k8g")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_xkvx2")
+"texture": ExtResource("9_bp05n")
 }],
 "loop": true,
 "name": &"spawn",
@@ -76,11 +76,10 @@ maxDuration_per_level = Array[float]([20.0, 20.0, 20.0, 20.0])
 damageType = []
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(2, -0.999998)
+position = Vector2(114, 1)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_ju8rl")
-animation = &"explode"
-frame_progress = 0.0266159
+animation = &"fly"
 script = ExtResource("12_jh072")
 spawnAnimationTime = 0.5
 explosionAnimationTime = 0.5

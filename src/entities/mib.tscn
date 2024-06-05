@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bovjfu1ap5g6x"]
+[gd_scene load_steps=11 format=3 uid="uid://bovjfu1ap5g6x"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_fc1pa"]
 [ext_resource type="PackedScene" uid="uid://cahhc0oyqsiev" path="res://src/spells/bullet.tscn" id="2_iv5vg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="3_uc0cj"]
 [ext_resource type="Texture2D" uid="uid://c8uxrhsu13a0d" path="res://assets/mobs/MIB/mib_walk_0000.png" id="5_j4jow"]
 [ext_resource type="Texture2D" uid="uid://c0gtp0qt3xci4" path="res://assets/mobs/MIB/mib_walk_0001.png" id="6_h0fhl"]
+[ext_resource type="Texture2D" uid="uid://dlrq2rxlxk02a" path="res://assets/shadow.png" id="7_6jvw7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ih8ah"]
 animations = [{
@@ -75,18 +76,20 @@ target_desired_distance = 2000.0
 [node name="deathAnimationTimer" parent="." index="5"]
 wait_time = 2.0
 
-[node name="hit_hitbox" parent="." index="7"]
-visible = false
+[node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="0"]
+position = Vector2(58, 356)
+scale = Vector2(1, 0.4225)
+texture = ExtResource("7_6jvw7")
 
-[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+[node name="CollisionShape2D" parent="hit_hitbox" index="1"]
 position = Vector2(31, 17)
 shape = SubResource("CapsuleShape2D_0bb23")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="1"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="2"]
 position = Vector2(-36, -47)
 shape = SubResource("RectangleShape2D_dgvtj")
 
-[node name="fire_point" parent="hit_hitbox" index="2"]
+[node name="fire_point" parent="hit_hitbox" index="3"]
 position = Vector2(-334, -160)
 
 [node name="RayCast2D" parent="hit_hitbox/fire_point" index="0"]

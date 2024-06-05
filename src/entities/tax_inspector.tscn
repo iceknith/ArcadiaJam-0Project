@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtk0o70d7hw7e"]
+[gd_scene load_steps=9 format=3 uid="uid://dtk0o70d7hw7e"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_4o2iu"]
 [ext_resource type="Script" path="res://src/entities/tax_inspector.gd" id="2_2ylcn"]
 [ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_ahlo0"]
 [ext_resource type="Texture2D" uid="uid://dsg3pqvvakn5p" path="res://assets/mobs/tax_inspector/tax_inspector_walk_0000.png" id="3_2s80a"]
 [ext_resource type="Texture2D" uid="uid://kpvm8qhfdh6c" path="res://assets/mobs/tax_inspector/tax_inspector_walk_0001.png" id="4_v11i6"]
+[ext_resource type="Texture2D" uid="uid://dlrq2rxlxk02a" path="res://assets/shadow.png" id="6_tay10"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vlu8q"]
 animations = [{
@@ -67,3 +68,8 @@ frame_progress = 0.596018
 [node name="CollisionShape2D" parent="hit_hitbox" index="0"]
 position = Vector2(-59, 29)
 shape = SubResource("RectangleShape2D_hgy4o")
+
+[node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="2"]
+position = Vector2(-67.5, 367)
+scale = Vector2(0.9125, 0.31375)
+texture = ExtResource("6_tay10")

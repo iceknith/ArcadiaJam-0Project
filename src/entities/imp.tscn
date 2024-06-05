@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp545nlw4cfoq"]
+[gd_scene load_steps=11 format=3 uid="uid://bp545nlw4cfoq"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_d8tgb"]
 [ext_resource type="PackedScene" uid="uid://6dycdw4x0es6" path="res://src/spells/imp_fire_ball.tscn" id="2_ihwsx"]
 [ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_nu2fu"]
 [ext_resource type="Texture2D" uid="uid://cfkomfiuce06x" path="res://assets/mobs/imp/imp_fly_0000.png" id="3_y0mxo"]
 [ext_resource type="Texture2D" uid="uid://bdbfrawsio8q2" path="res://assets/mobs/imp/imp_fly_0001.png" id="4_y5rkh"]
+[ext_resource type="Texture2D" uid="uid://dlrq2rxlxk02a" path="res://assets/shadow.png" id="6_4twid"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s1l5d"]
 animations = [{
@@ -93,5 +94,10 @@ target_position = Vector2(4000, 0)
 
 [node name="shootCooldown" parent="hit_hitbox/fire_point" index="1"]
 wait_time = 0.75
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="8"]
+position = Vector2(-7.62939e-06, 340.875)
+scale = Vector2(0.6625, 0.210625)
+texture = ExtResource("6_4twid")
 
 [connection signal="timeout" from="hit_hitbox/fire_point/shootCooldown" to="." method="_on_shoot_cooldown_timeout"]

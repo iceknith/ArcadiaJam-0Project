@@ -9,14 +9,14 @@ func _on_hitbox_area_collision(area):
 		var player:Player = body
 		var damagedPlayer:bool = false
 		if ("red" in meleDamageType && player.red > 0):
-			player.damage(player.red*meleDamageAmount/100, direction, ["red"])
+			player.damage(max(1,player.red*meleDamageAmount/100), direction, ["red"])
 			damagedPlayer = true
 		if ("yellow" in meleDamageType && player.yellow > 0):
-			player.damage(player.yellow*meleDamageAmount/100, direction, ["yellow"])
+			player.damage(max(1,player.yellow*meleDamageAmount/100), direction, ["yellow"])
 			damagedPlayer = true
 		if ("blue" in meleDamageType && player.blue > 0):
-			player.damage(player.blue*meleDamageAmount/100, direction, ["blue"])
+			player.damage(max(1,player.blue*meleDamageAmount/100), direction, ["blue"])
 			damagedPlayer = true
 		if ((!damagedPlayer || "gray" in meleDamageType) && player.gray > 0):
-			player.damage(player.gray*meleDamageAmount/100, direction, ["gray"])
+			player.damage(max(1,player.gray*meleDamageAmount/100), direction, ["gray"])
 			damagedPlayer = true

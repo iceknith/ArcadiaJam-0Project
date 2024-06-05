@@ -3,6 +3,7 @@ extends Node2D
 var rooms:Array = [];
 var corridors:Array = [];
 var walls:Array = []
+var shopRooms:Array = []
 var finishRooms:Array = []
 var grid:Array = [];
 
@@ -12,6 +13,8 @@ var shopCount:int
 @export var default_room_cnt:int = 5
 @export var max_try_to_spawn_room:int = 5
 @export var max_room_to_corridor = 1
+@export var minRoomToShop:int = 3
+@export var maxRoomToShop:int = 6
 
 var world = 1
 
@@ -24,6 +27,7 @@ func _ready():
 	while file.dir_exists(world_dir):
 		rooms.append([])
 		corridors.append([])
+		shopRooms.append([])
 		finishRooms.append([])
 		walls.append([null, null, null, null])
 		
@@ -42,6 +46,8 @@ func _ready():
 				walls[i-1][2] = load(str("res://src/rooms/world",i,"/",room)) as PackedScene
 			elif "wallUp" in room: 
 				walls[i-1][3] = load(str("res://src/rooms/world",i,"/",room)) as PackedScene
+			elif "shopRoom" in room: 
+				shopRooms[i-1].append(load(str("res://src/rooms/world",i,"/",room)) as PackedScene)
 			elif "finishRoom" in room: 
 				finishRooms[i-1].append(load(str("res://src/rooms/world",i,"/",room)) as PackedScene)
 			else:
@@ -77,6 +83,7 @@ func generateDungeon(worldNum:int, roomNum:int):
 	var prevRoom:Room = null
 
 	var room_to_corridor = max_room_to_corridor
+	var room_to_shop = 0
 	var i:int = 0
 	
 	while i < roomNum:
@@ -91,7 +98,11 @@ func generateDungeon(worldNum:int, roomNum:int):
 			possible_rooms = finishRooms[worldNum].duplicate()
 		elif (room_to_corridor == 0):
 			possible_rooms = corridor_used.duplicate()
+		elif (i == 1 || (room_to_shop == maxRoomToShop) || (room_to_corridor > minRoomToShop && randi_range(0,1) == 1)):
+			possible_rooms = shopRooms[worldNum].duplicate()
+			room_to_shop = 0
 		else:
+			room_to_shop += 1
 			possible_rooms = rooms_used.duplicate()
 		possible_rooms.shuffle()
 		
