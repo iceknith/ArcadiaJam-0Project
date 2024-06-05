@@ -7,8 +7,6 @@
 [node name="dungeon" type="Node2D"]
 script = ExtResource("1_b1y67")
 default_room_cnt = 15
-minRoomToShop = 0
-maxRoomToShop = 0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true

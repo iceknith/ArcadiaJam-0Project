@@ -41,7 +41,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_cct5n")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 9.0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

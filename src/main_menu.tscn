@@ -6,7 +6,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_7k6o3"]
 font = ExtResource("2_odj4d")
-font_size = 250
+font_size = 70
+font_color = Color(1, 1, 1, 0.34902)
 shadow_size = 50
 shadow_color = Color(0, 0, 0, 0.341176)
 shadow_offset = Vector2(25, 25)
@@ -49,14 +50,29 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -241.0
-offset_top = 210.0
-offset_right = 259.0
-offset_bottom = 460.0
+offset_left = -260.0
+offset_top = 203.0
+offset_right = 240.0
+offset_bottom = 453.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_odj4d")
 theme_override_font_sizes/font_size = 200
-text = "Play"
+text = "Jouer"
+
+[node name="Signature" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 25.0
+offset_top = 854.0
+offset_right = -1557.0
+offset_bottom = 1070.0
+grow_horizontal = 2
+text = "Iceknith
+Creatchure
+Deysox"
+label_settings = SubResource("LabelSettings_7k6o3")
+vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
