@@ -8,7 +8,7 @@ radius = 150.0
 
 [node name="healBlue" instance=ExtResource("1_f14im")]
 isHeal = true
-healType = ["blue"]
+healType = ["gray", "blue"]
 healAmount = 20
 
 [node name="CollisionShape2D" parent="." index="0"]

@@ -35,7 +35,7 @@ func _ready():
 	for child in get_children():
 		if (child.is_class("Marker2D")):
 			positions.append(child.position)
-	for i in int(minEntities + clampf(randf_range(difficulty*0.8, difficulty*1.2), 0, 1)*(maxEntities - minEntities)):
+	for i in int(minEntities + clampf(randf_range(difficulty*0.9, difficulty*1.1), 0, 1)*(maxEntities - minEntities)):
 		var entity:Entity = entitiesList[level].pick_random().instantiate()
 		entity.position = positions.pick_random()
 		entity.level = difficulty

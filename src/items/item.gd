@@ -10,20 +10,21 @@ class_name Item
 
 var spells:Array[PackedScene] = [load("res://src/spells/fire_ball.tscn"),
 								load("res://src/spells/blood_blade.tscn"),
-								load("res://src/spells/cutting_frenzy.tscn"),
-								load("res://src/spells/cutting_freak.tscn"),
+								#load("res://src/spells/cutting_frenzy.tscn"),
+								#load("res://src/spells/cutting_freak.tscn"),
 								load("res://src/spells/quadruple_slash.tscn"),
 								load("res://src/spells/wind_burst.tscn"),
-								load("res://src/spells/speed_burst.tscn"),
-								load("res://src/spells/dash_burst.tscn"),
+								#load("res://src/spells/speed_burst.tscn"),
+								#load("res://src/spells/dash_burst.tscn"),
 								load("res://src/spells/sword_of_justice.tscn"),
 								load("res://src/spells/frozen_arrow.tscn"),
 								load("res://src/spells/fire_orb.tscn"),
 								load("res://src/spells/butterflies.tscn"),
 								load("res://src/spells/grenade_à_fragmentation.tscn"),
-								load("res://src/spells/attack_burst.tscn"),
-								load("res://src/spells/the_world.tscn")]
-var passives:Array[String] = ["Régénération", "Esprit renforcé", "Couteau économe", "Dash économe", 
+								#load("res://src/spells/attack_burst.tscn"),
+								#load("res://src/spells/the_world.tscn")
+								]
+var passives:Array[String] = ["Esprit renforcé", "Couteau économe", "Dash économe", 
 							"Grand bond", "Marathon", "Vol d'esprit", "Lame pointue"]
 
 signal choose_new_spell(spellPointer:PackedScene)
@@ -76,14 +77,10 @@ func shop_handler(player:Player):
 				break
 			
 	#first item
-	if (randi_range(1, 2) == 1):
-		items.append(spells.pick_random())
-		itemLevels.append(0)
-		itemType.append("spell")
-	else:
-		items.append(null)
-		itemLevels.append(0)
-		itemType.append(str("passive_", passives.pick_random()))
+	
+	items.append(spells.pick_random())
+	itemLevels.append(0)
+	itemType.append("spell")
 	
 	#second item
 	if player_can_upgrade_passive:

@@ -13,8 +13,8 @@ var shopCount:int
 @export var default_room_cnt:int = 5
 @export var max_try_to_spawn_room:int = 5
 @export var max_room_to_corridor = 1
-@export var minRoomToShop:int = 3
-@export var maxRoomToShop:int = 6
+@export var minRoomToShop:int = 2
+@export var maxRoomToShop:int = 4
 
 var world = 1
 
@@ -98,7 +98,7 @@ func generateDungeon(worldNum:int, roomNum:int):
 			possible_rooms = finishRooms[worldNum].duplicate()
 		elif (room_to_corridor == 0):
 			possible_rooms = corridor_used.duplicate()
-		elif (i == 1 || (room_to_shop == maxRoomToShop) || (room_to_corridor > minRoomToShop && randi_range(0,1) == 1)):
+		elif (i == 1 || (room_to_shop >= maxRoomToShop) || (room_to_shop >= minRoomToShop && randi_range(0,1) == 1)):
 			possible_rooms = shopRooms[worldNum].duplicate()
 			room_to_shop = 0
 		else:
@@ -235,4 +235,4 @@ func deleteDungeon():
 			remove_child(child)
 
 func get_difficulty(roomCount:int, shopCount:int)->float:
-	return clamp((roomCount + 5*shopCount)/100, 0, 1)
+	return clampf(float(roomCount + 3*shopCount)/75, 0, 1)

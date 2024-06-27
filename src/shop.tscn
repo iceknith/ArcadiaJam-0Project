@@ -119,6 +119,7 @@ label_settings = SubResource("LabelSettings_oe5dv")
 horizontal_alignment = 1
 
 [node name="back_button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 748.0
 offset_top = 874.0

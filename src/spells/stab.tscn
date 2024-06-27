@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_vruxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6cmxg"]
-size = Vector2(702, 92)
+size = Vector2(644, 171)
 
 [node name="stab" instance=ExtResource("1_vruxd")]
 attackEntities = true
@@ -13,5 +13,5 @@ damageAmount_per_level = Array[int]([10])
 maxDuration_per_level = Array[float]([0.2])
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(351, 0)
+position = Vector2(322, -1)
 shape = SubResource("RectangleShape2D_6cmxg")

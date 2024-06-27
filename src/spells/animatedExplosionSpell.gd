@@ -28,6 +28,7 @@ func _on_hit(bodyType:String, body:Node2D):
 	if (explodeToContact || bodyType == "TileMap"):
 		hasExploded = true
 		animation = "explode"
+		get_parent().isAlive = false
 		time = 0
 	else:
 		get_parent().isAlive = true

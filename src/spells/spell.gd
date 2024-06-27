@@ -15,6 +15,7 @@ class_name Spell
 @export var maxDuration_per_level:Array[float] = [.0]
 @export var damageType:Array = ["yellow","blue","red","gray"]
 @export var autoDisapear:bool = true
+@export var deleted_by_map:bool = true
 
 signal hit(bodyType:String, body:Node2D)
 signal kill
@@ -60,24 +61,23 @@ func _physics_process(delta):
 		position += velocity * delta
 
 func _on_body_entered(body):
-	if ("TileMap" in body.name):
+	if ("TileMap" in body.name && deleted_by_map):
 		isAlive = false
 		hit.emit("TileMap", body)
 		if autoDisapear: queue_free()
 
 func _on_area_entered(area):
 	var body:Node2D = area.get_parent()
+	if (!isAlive): return
 	if ("player" in body.name && attackPlayer):
 		var player:Player = body
 		player.damage(damageAmount, direction, damageType)
-		isAlive = false
 		if (player.gray <= 0): kill.emit()
 		hit.emit("player", player)
 		if autoDisapear: queue_free()
 	elif ("hit_hitbox" in area.name && attackEntities):
 		var entity:Entity = body
 		entity.damage(damageAmount, direction)
-		isAlive = false
 		if (entity.health <= 0): kill.emit()
 		hit.emit("entity", entity)
 		if autoDisapear: queue_free()

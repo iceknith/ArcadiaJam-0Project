@@ -121,24 +121,22 @@ func action_handler():
 	if (state == "idle" || state == "walk" || state == "invincible"):
 		#dash
 		if (Input.is_action_just_pressed("dash")):
-			if (gray >= dashCost):
-				state = "dash"
-				time_since_state_change = 0
-				gray -= dashCost
-				healthChange.emit("gray", false, gray)
-				spawn_text_popup("gray", str("- ", dashCost), 2, 500)
-				return
+			state = "dash"
+			time_since_state_change = 0
+			gray = max(0, gray-dashCost)
+			healthChange.emit("gray", false, gray)
+			spawn_text_popup("gray", str("- ", dashCost), 2, 500)
+			return
 		
 		#stab
 		if (Input.is_action_just_pressed("stab")):
-			if (gray >= stabCost):
-				state = "stab"
-				spell_spawned = false
-				time_since_state_change = 0
-				gray -= stabCost
-				healthChange.emit("gray", false, gray)
-				spawn_text_popup("gray", str("- ", stabCost), 2, 500)
-				return
+			state = "stab"
+			spell_spawned = false
+			time_since_state_change = 0
+			gray = max(0, gray-stabCost)
+			healthChange.emit("gray", false, gray)
+			spawn_text_popup("gray", str("- ", stabCost), 2, 500)
+			return
 		
 		#spells
 		var spellList = ["spellUp", "spellLeft", "spellDown", "spellRight"]

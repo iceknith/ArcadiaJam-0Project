@@ -13,8 +13,8 @@ signal player_entered_first_time(player:Player)
 						preload("res://src/items/heal_yellow.tscn"),
 						preload("res://src/items/heal_blue.tscn")]
 						
-@export var minHeal:float = 0.3
-@export var maxHeal:float = 0.6
+@export var minHeal:float = 0.4
+@export var maxHeal:float = 0.8
 
 var player:Player
 var playerEntered:bool = false
@@ -31,7 +31,7 @@ var openDoorTimer = 0
 func _ready():
 	collisionRect = $CollisionShape2D.get_shape().get_rect();
 	
-	num_entries = min(4, max(0, num_entries))
+	num_entries = clamp(num_entries, 0, 4)
 	for i:int in range(num_entries):
 		if (get_node_or_null(str("entry",i+1)) == null):
 			push_error(str("entry",i+1,". Missing from room object"))
