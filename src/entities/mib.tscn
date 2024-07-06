@@ -58,7 +58,7 @@ minSpeed = 1250.0
 maxSpeed = 1500.0
 minHealth = 25.0
 maxHealth = 45.0
-meleDamageType = ["gray", "red"]
+meleDamageType = ["gray", "blue"]
 ranged = true
 attacks = Array[PackedScene]([ExtResource("2_iv5vg")])
 rotatedOffsetX = 150.0
@@ -96,6 +96,6 @@ position = Vector2(-334, -160)
 target_position = Vector2(3000, 0)
 
 [node name="shootCooldown" parent="hit_hitbox/fire_point" index="1"]
-wait_time = 3.0
+wait_time = 5.0
 
 [connection signal="timeout" from="hit_hitbox/fire_point/shootCooldown" to="." method="_on_shoot_cooldown_timeout"]
