@@ -41,7 +41,7 @@ func init_item_selection(itemIconPath:Array, itemPointer:Array, itemType:Array, 
 				var spell:Spell = itemPointers[i].instantiate()
 				spell.level = itemLevels[i]
 				marker.get_node("description").text = str(spell.name, " ", levelLabel[spell.level],
-				"\n Coût : ", spell.costs_per_level[spell.level], " ", spell.costType, "\n Essence max : +",
+				"\n Essence consommée : ", spell.costs_per_level[spell.level], " ", spell.costType, "\n Essence max : +",
 				 spell.maxColorAdd_per_level[spell.level], " ", spell.costType)
 			elif ("passive_" in itemType[i]):
 				marker.get_node("description").text = str(itemType[i].split("_")[1], " ", levelLabel[itemLevels[i]])

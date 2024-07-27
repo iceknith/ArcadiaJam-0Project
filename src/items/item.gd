@@ -13,6 +13,7 @@ var spells:Array[PackedScene] = [load("res://src/spells/fire_ball.tscn"),
 								#load("res://src/spells/cutting_frenzy.tscn"),
 								#load("res://src/spells/cutting_freak.tscn"),
 								load("res://src/spells/quadruple_slash.tscn"),
+								load("res://src/spells/laser_blade.tscn"),
 								load("res://src/spells/wind_burst.tscn"),
 								#load("res://src/spells/speed_burst.tscn"),
 								#load("res://src/spells/dash_burst.tscn"),
@@ -48,6 +49,7 @@ func _on_body_entered(body:Node2D):
 		var player:Player = body
 		if (isHeal):
 			player.heal(healAmount, healType)
+			player.heal(healAmount, ["gray"])
 			queue_free()
 		elif (isSpell):
 			choose_new_spell.emit(spellPointer)

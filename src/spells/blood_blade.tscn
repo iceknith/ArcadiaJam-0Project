@@ -67,14 +67,13 @@ size_per_levels = Array[float]([2.0, 2.0, 3.0, 3.0])
 attackEntities = true
 costType = "red"
 maxLevels = 4
-maxColorAdd_per_level = Array[int]([20, 25, 25, 30])
-costs_per_level = Array[int]([10, 10, 8, 5])
-damageAmount_per_level = Array[int]([25, 27, 30, 35])
+maxColorAdd_per_level = Array[int]([25, 30, 35, 40])
+costs_per_level = Array[int]([14, 12, 10, 8])
+damageAmount_per_level = Array[int]([20, 23, 26, 30])
 acceleration_per_leve = Array[float]([50.0, 50.0, 50.0, 50.0])
 speed_per_level = Array[float]([2500.0, 2500.0, 3000.0, 3000.0])
 maxDuration_per_level = Array[float]([2.0, 2.0, 3.0, 3.0])
 damageType = []
-autoDisapear = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(2, -0.999998)

@@ -235,4 +235,4 @@ func deleteDungeon():
 			remove_child(child)
 
 func get_difficulty(roomCount:int, shopCount:int)->float:
-	return clampf(float(roomCount + 3*shopCount)/75, 0, 1)
+	return clampf(float(roomCount + 2.5*shopCount)/90, 0, 1)

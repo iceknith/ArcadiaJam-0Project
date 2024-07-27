@@ -126,12 +126,12 @@ func player_get_needed_colors()->Array:
 	if player == null: return result
 	
 	if (player.red < player.maxRed):
-		result.append([1, int(player.maxRed * randf_range(minHeal, maxHeal))])
+		result.append([1, int(player.maxRed * randf_range(minHeal, maxHeal))+0.3])
 	if (player.yellow < player.maxYellow):
 		result.append([2, int(player.maxYellow * randf_range(minHeal, maxHeal))+0.3])
 	if (player.blue < player.maxBlue):
 		result.append([3, int(player.maxBlue * randf_range(minHeal, maxHeal))+0.3])
-	if (player.gray < player.maxGray || result.is_empty()):
+	if (result.is_empty()):
 		result.append([0, int(player.maxGray * randf_range(minHeal, maxHeal))+0.3])
 	
 	return result

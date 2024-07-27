@@ -11,13 +11,12 @@ utilitySpell = true
 costType = "blue"
 maxLevels = 4
 maxColorAdd_per_level = Array[int]([20, 20, 20, 20])
-costs_per_level = Array[int]([7, 7, 5, 5])
+costs_per_level = Array[int]([5, 5, 3, 3])
 damageAmount_per_level = Array[int]([0, 0, 0, 0])
 acceleration_per_leve = Array[float]([0.0, 0.0, 0.0, 0.0])
 speed_per_level = Array[float]([0.0, 0.0, 0.0, 0.0])
 maxDuration_per_level = Array[float]([0.0, 0.0, 0.0, 0.0])
 damageType = []
-autoDisapear = false
 
 [node name="Timer" type="Timer" parent="." index="1"]
 

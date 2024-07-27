@@ -68,10 +68,10 @@ attackEntities = true
 costType = "blue"
 maxLevels = 4
 maxColorAdd_per_level = Array[int]([15, 15, 20, 25])
-costs_per_level = Array[int]([3, 3, 3, 3])
-damageAmount_per_level = Array[int]([2, 4, 4, 6])
+costs_per_level = Array[int]([1, 1, 1, 1])
+damageAmount_per_level = Array[int]([2, 3, 4, 4])
 acceleration_per_leve = Array[float]([25.0, 25.0, 25.0, 25.0])
-speed_per_level = Array[float]([1000.0, 1000.0, 1000.0, 1000.0])
+speed_per_level = Array[float]([3500.0, 3500.0, 3500.0, 3500.0])
 maxDuration_per_level = Array[float]([20.0, 20.0, 20.0, 20.0])
 damageType = []
 
