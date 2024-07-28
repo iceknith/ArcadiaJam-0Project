@@ -54,7 +54,7 @@ radius = 134.034
 minSpeed = 1250.0
 maxSpeed = 1500.0
 minHealth = 5.0
-damageToKill = 5
+damageToKill = 15
 meleDamageType = ["gray"]
 minMeleDamageAmount = 25
 

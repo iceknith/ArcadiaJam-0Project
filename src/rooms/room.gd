@@ -16,6 +16,7 @@ signal player_entered_first_time(player:Player)
 @export var minHeal:float = 0.4
 @export var maxHeal:float = 0.8
 var damageHealed:int = 0 #describes the amount of damage the player should be able to inflict thanks to the heal provided by the room
+var healPercent = 0
 
 var player:Player
 var playerEntered:bool = false
@@ -24,7 +25,6 @@ var collisionRect:Rect2;
 var entries_dir:Array = []
 var door_to_close:Array = []
 var walls:Array = []
-
 var openDoorTimer = 0
 
 
@@ -59,6 +59,7 @@ func _process(delta):
 func _on_body_entered(body):
 	if ("player" in body.name && !playerEntered):
 		player = body
+		player.damage_emitted = 0
 		player_entered_first_time.emit(player)
 		playerEntered = true
 		if (hasMobs):
@@ -92,6 +93,7 @@ func open_doors():
 		if "wall" in child.name: child.queue_free()
 	
 	if (hasMobs):
+		damageHealed =min(damageHealed, player.damage_emitted)
 		var lootStat = player_get_heal()
 		var lootItem:Item = loot[lootStat[0]].instantiate()
 		lootItem.healTypes = lootStat[1]
@@ -136,13 +138,11 @@ func player_get_heal()->Array:
 	
 	var maxColor = "gray"
 	var maxHeal = 0
-	print("heal dmg: ", damageToHeal)
 	#If the player really needs to be healed gray
 	if (player.gray < player.maxGray/2):
 		result[1].append("gray")
 		result[2].append((int) (min(player.maxGray - player.gray, damageToHeal/damage_per_color["gray"])))
 		damageToHeal -= result[2][-1] * damage_per_color["gray"]
-		print(damage_per_color)
 		maxHeal = result[2][-1]
 	
 	for c in colors:

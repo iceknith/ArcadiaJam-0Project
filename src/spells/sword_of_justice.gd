@@ -7,7 +7,7 @@ var entities:Array[Entity]
 func _physics_process(delta):
 	super._physics_process(delta)
 	
-	if (hasHitEntity and isAlive):
+	if (hasHitEntity and !is_queued_for_deletion()):
 		for entity in entities:
 			entity.velocity = Vector2.ZERO
 			entity.position += velocity * delta

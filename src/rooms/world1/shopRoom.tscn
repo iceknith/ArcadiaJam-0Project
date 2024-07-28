@@ -11,13 +11,6 @@ size = Vector2(5600, 5600)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_bi43h")
-num_entries = null
-isCorridor = null
-hasMobs = null
-check_if_open_door_time = null
-loot = null
-minHeal = null
-maxHeal = null
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_yrdha")

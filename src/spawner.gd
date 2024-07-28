@@ -33,7 +33,6 @@ var positions:Array[Vector2] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(roomHP)
 	for child in get_children():
 		if (child.is_class("Marker2D")):
 			positions.append(child.position)
@@ -41,12 +40,12 @@ func _ready():
 	#add entities to room, so that it comes near to the roomHP
 	var haveFoundMob:bool = true
 	var activeRoommHP:int  = 0
-	while haveFoundMob:
+	while haveFoundMob && activeRoommHP < roomHP:
 		haveFoundMob = false
 		entitiesList[level].shuffle()
 		for entity_scene:PackedScene in entitiesList[level]:
 			var entity:Entity = entity_scene.instantiate()
-			if (activeRoommHP + entity.damageToKill < roomHP):
+			if (activeRoommHP + entity.damageToKill < roomHP * 1.2):
 				activeRoommHP += entity.damageToKill
 				entity.level = 0
 				entity.position = positions.pick_random()

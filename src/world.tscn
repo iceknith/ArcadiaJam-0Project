@@ -16,6 +16,7 @@ scale = Vector2(1.25, 1.25)
 default_room_cnt = 21
 minRoomToShop = 2
 maxRoomToShop = 3
+roomHealPercent = 0.9
 
 [node name="player" parent="." instance=ExtResource("2_xiut1")]
 z_index = 10

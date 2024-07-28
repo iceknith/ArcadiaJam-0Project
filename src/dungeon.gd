@@ -119,9 +119,9 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 			#change the mob count of the room
 			if (room.hasMobs):
 				room.get_node("spawner").level = worldNum
-				room.get_node("spawner").roomHP = (pow((float)(i)/roomNum, 2) * (playerDamage/2) + (playerDamage/2)) * get_difficulty()
-				room.damageHealed = (pow((float)(i)/roomNum, 2) * (playerDamage/2) + (playerDamage/2)) * (get_difficulty() *roomHealPercent)
-				#the player has roomHealTolerance % more damage "healed" than damage he theoretically has to cast
+				room.get_node("spawner").roomHP = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * get_difficulty()
+				room.damageHealed = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * (get_difficulty() * roomHealPercent)
+				room.healPercent = roomHealPercent
 			#if the room is a shop
 			elif (!room.isCorridor && i != roomNum):
 				room.get_node("Shop").newSpellExpectedDamage = randi_range(spellMinDamage, spellMaxDamage)
@@ -273,4 +273,4 @@ func deleteDungeon():
 			remove_child(child)
 
 func get_difficulty()->float:
-	return (log(visited_worlds)/1.4) + 0.3
+	return log(visited_worlds)/2 + 0.3

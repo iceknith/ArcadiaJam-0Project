@@ -40,6 +40,8 @@ var yellow:int = 0
 var maxGray:int = 1000
 var gray:int = 100
 
+var damage_emitted:int = 0
+
 var spells:Array[PackedScene] = [null, null, null, null]
 var spell_levels:Array[int] = [0, 0, 0, 0]
 var passives:Array[String] = []
@@ -219,6 +221,7 @@ func stab_handler(delta):
 			stab_instance.position.x -= stab_instance.get_node("CollisionShape2D").get_shape().get_rect().size.x
 		get_parent().add_child(stab_instance)
 		stab_instance.damageAmount += additionalStabDamage
+		damage_emitted += stab_instance.damageAmount
 		spell_spawned = true
 
 func dash_handler(delta):
@@ -255,6 +258,7 @@ func spell_handler(input:Vector2, delta):
 		spell_instance.position = position
 		spell_instance.player = self
 		spell_instance.level = spell_levels[spell_selected]
+		damage_emitted += spell_instance.damageAmount_per_level[spell_levels[spell_selected]]
 		get_parent().add_child(spell_instance)
 		spell_instance.damageAmount *= damageMultiplier
 		spell_spawned = true
