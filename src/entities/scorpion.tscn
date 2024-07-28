@@ -54,10 +54,9 @@ radius = 134.034
 minSpeed = 1250.0
 maxSpeed = 1500.0
 minHealth = 5.0
-maxHealth = 10.0
+damageToKill = 5
 meleDamageType = ["gray"]
 minMeleDamageAmount = 25
-maxMeleDamageAmount = 40
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(1, -250)

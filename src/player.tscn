@@ -116,7 +116,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"spell",
-"speed": 4.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -197,7 +197,9 @@ texture = ExtResource("2_rkvtj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2mc8m")
-animation = &"dead"
+animation = &"spell"
+frame = 1
+frame_progress = 0.364433
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

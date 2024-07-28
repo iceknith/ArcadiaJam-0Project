@@ -53,11 +53,10 @@ script = ExtResource("2_2ylcn")
 minSpeed = 1500.0
 maxSpeed = 1750.0
 acceleration = 20.0
-minHealth = 25.0
-maxHealth = 60.0
+minHealth = 20.0
+damageToKill = 20
 meleDamageType = ["yellow"]
 minMeleDamageAmount = 15
-maxMeleDamageAmount = 30
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(2, -1)

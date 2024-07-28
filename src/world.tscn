@@ -14,7 +14,8 @@ color = Color(0.25098, 0.25098, 0.25098, 1)
 position = Vector2(953, 543)
 scale = Vector2(1.25, 1.25)
 default_room_cnt = 21
-max_try_to_spawn_room = 10
+minRoomToShop = 2
+maxRoomToShop = 3
 
 [node name="player" parent="." instance=ExtResource("2_xiut1")]
 z_index = 10

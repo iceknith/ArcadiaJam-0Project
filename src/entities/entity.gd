@@ -9,14 +9,12 @@ signal rotate
 @export var acceleration = 50.0
 @export var knockbackSpeed = 750.0
 @export var minHealth = 100.0
-@export var maxHealth = 100.0
+@export var damageToKill:int = 100
 @export var meleDamageType:Array = ["gray","blue","yellow","red"]
 @export var minMeleDamageAmount:int = 0
-@export var maxMeleDamageAmount:int = 0
 @export var ranged:bool = false
 @export var shootRange:float = 1000
 @export var minShootDamageAmount:int = 0
-@export var maxShootDamageAmount:int = 0
 @export var attacks:Array[PackedScene]
 @export var rotatedOffsetX:float = 0
 
@@ -40,10 +38,10 @@ var popup_text = preload("res://src/popup_text.tscn")
 func _ready():
 	$AnimatedSprite2D.animation = "idle"
 	$AnimatedSprite2D.play()
-	health = int(minHealth + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxHealth - minHealth))
+	health = minHealth
 	speed = minSpeed + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxSpeed - minSpeed)
-	meleDamageAmount = int(minMeleDamageAmount + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxMeleDamageAmount - minMeleDamageAmount))
-	shootDamageAmount = int(minShootDamageAmount + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxShootDamageAmount - minShootDamageAmount))
+	meleDamageAmount = minMeleDamageAmount
+	shootDamageAmount = minShootDamageAmount
 	
 	if (!ranged):
 		$hit_hitbox/fire_point.queue_free()

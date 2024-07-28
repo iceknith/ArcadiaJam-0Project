@@ -2,8 +2,8 @@ extends Area2D
 class_name Item
 
 @export var isHeal:bool = false
-@export var healType:Array = ["gray","red","yellow","blue"]
-@export var healAmount:int = 0
+@export var healTypes:Array = ["gray","red","yellow","blue"]
+@export var healAmounts:Array = [0, 0, 0, 0]
 @export var isSpell:bool = false
 @export var spellPointer:PackedScene
 @export var isShop:bool
@@ -26,6 +26,7 @@ var spells:Array[PackedScene] = [load("res://src/spells/fire_ball.tscn"),
 								]
 var passives:Array[String] = ["Esprit renforcé", "Couteau économe", "Dash économe", 
 							"Grand bond", "Marathon", "Vol d'esprit", "Lame pointue"]
+var newSpellExpectedDamage:int = 0
 
 signal choose_new_spell(spellPointer:PackedScene)
 signal open_shop(items:Array[PackedScene], itemType:Array[String], itemLevels:Array[int])
@@ -36,6 +37,15 @@ func _ready():
 		choose_new_spell.connect(get_parent().get_parent().get_parent()._on_player_choosing_spell)
 	elif isShop:
 		open_shop.connect(get_parent().get_parent().get_parent()._on_player_open_shop)
+		
+	#test to see the avg damage per cost
+	"""
+	for spell_scene:PackedScene in spells:
+		var spell:Spell = spell_scene.instantiate()
+		for i in range(0, spell.maxLevels):
+			print(spell.name, " has ", spell.damageAmount_per_level[i] * spell.maxColorAdd_per_level[i]/spell.costs_per_level[i])
+		spell.queue_free()
+	"""
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,7 +57,7 @@ func _on_body_entered(body:Node2D):
 	if ("player" in body.name):
 		var player:Player = body
 		if (isHeal):
-			player.heal(healAmount, healType)
+			player.heal(healAmounts, healTypes)
 			queue_free()
 		elif (isSpell):
 			choose_new_spell.emit(spellPointer)
@@ -70,15 +80,22 @@ func shop_handler(player:Player):
 	var player_can_upgrade_passive = false
 	if (player.passives.is_empty()): player_can_upgrade_passive = false
 	else:
-		print(player.passives)
 		for level in player.passive_levels:
 			if level < 3:
 				player_can_upgrade_passive = true
 				break
 			
 	#first item
+	spells.shuffle()
+	var chosenSpell:PackedScene = spells[0]
+	var spellDistanecToExpectations:int = abs(newSpellExpectedDamage - spellDamage(chosenSpell))
+	for spell_scene in spells:
+		var distance:int = abs(newSpellExpectedDamage - spellDamage(chosenSpell))
+		if distance < spellDistanecToExpectations:
+			chosenSpell = spell_scene
+			spellDistanecToExpectations = distance
 	
-	items.append(spells.pick_random())
+	items.append(chosenSpell)
 	itemLevels.append(0)
 	itemType.append("spell")
 	
@@ -115,3 +132,9 @@ func shop_handler(player:Player):
 	
 	#choose what items to display, depending on player stats
 	open_shop.emit(items, itemType, itemLevels)
+
+func spellDamage(spell_scene:PackedScene)->int:
+	var spell:Spell = spell_scene.instantiate()
+	var result:int = spell.damageAmount_per_level[0] * spell.maxColorAdd_per_level[0]/spell.costs_per_level[0];
+	spell.queue_free()
+	return result

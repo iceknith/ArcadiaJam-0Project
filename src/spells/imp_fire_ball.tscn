@@ -62,7 +62,7 @@ animations = [{
 }]
 
 [node name="Fire Ball" instance=ExtResource("1_1s7nq")]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_5o4mt")
 attackPlayer = true
 acceleration_per_leve = Array[float]([25.0])
@@ -76,8 +76,7 @@ shape = SubResource("CircleShape2D_36dy8")
 position = Vector2(32, 22)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_fcuen")
-animation = &"spawn"
-frame_progress = 0.0202512
+animation = &"fly"
 script = ExtResource("11_pv5io")
 spawnAnimationTime = 0.25
 explosionAnimationTime = 0.5

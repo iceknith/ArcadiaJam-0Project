@@ -14,9 +14,6 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_button_pressed():
-	GUISignal.emit("generate_dungeon", [])
-
 func _on_world_player_signal(signalType, signalValues):
 	if (signalType == "death"):
 		print("Player died")
@@ -62,3 +59,7 @@ func _on_shop_player_gain_item(health_type, is_max_health, change):
 
 func _on_shop_player_gain_passive(passive_name, passive_level):
 	GUISignal.emit("gain_passive", [passive_name, passive_level])
+
+
+func _on_generate_dungeon_button_down():
+	get_parent().get_node("world").nextLevel()

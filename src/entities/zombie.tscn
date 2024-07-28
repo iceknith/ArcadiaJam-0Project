@@ -58,10 +58,9 @@ size = Vector2(140.139, 56.9019)
 [node name="zombie" instance=ExtResource("1_1xsno")]
 acceleration = 20.0
 minHealth = 35.0
-maxHealth = 80.0
+damageToKill = 35
 meleDamageType = ["red"]
 minMeleDamageAmount = 10
-maxMeleDamageAmount = 20
 rotatedOffsetX = 115.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]

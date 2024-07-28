@@ -15,6 +15,7 @@ signal player_entered_first_time(player:Player)
 						
 @export var minHeal:float = 0.4
 @export var maxHeal:float = 0.8
+var damageHealed:int = 0 #describes the amount of damage the player should be able to inflict thanks to the heal provided by the room
 
 var player:Player
 var playerEntered:bool = false
@@ -91,9 +92,10 @@ func open_doors():
 		if "wall" in child.name: child.queue_free()
 	
 	if (hasMobs):
-		var lootStat = player_get_needed_colors().pick_random()
+		var lootStat = player_get_heal()
 		var lootItem:Item = loot[lootStat[0]].instantiate()
-		lootItem.healAmount = lootStat[1]
+		lootItem.healTypes = lootStat[1]
+		lootItem.healAmounts = lootStat[2]
 		lootItem.position = get_node("LootPosition").position
 		add_child(lootItem)
 
@@ -120,21 +122,73 @@ func remove_entities():
 		if (deleteChild): 
 			child.queue_free()
 
-func player_get_needed_colors()->Array:
-	var result:Array = []
+func player_get_heal()->Array:
+	if player == null:
+		push_error("ERROR: Attempt to spawn heal without player")
+		
+		
+	var colors = ["gray", "red", "yellow", "blue"]
+	colors.shuffle()
+	var damage_per_color:Dictionary = get_damage_per_color(player)
+	var heal_per_color:Dictionary = {"gray":0, "red":0, "yellow":0, "blue":0}
+	var damageToHeal:int = damageHealed
+	var result:Array = [0, [], []]
 	
-	if player == null: return result
+	var maxColor = "gray"
+	var maxHeal = 0
 	
-	if (player.red < player.maxRed):
-		result.append([1, int(player.maxRed * randf_range(minHeal, maxHeal))])
-	if (player.yellow < player.maxYellow):
-		result.append([2, int(player.maxYellow * randf_range(minHeal, maxHeal))+0.3])
-	if (player.blue < player.maxBlue):
-		result.append([3, int(player.maxBlue * randf_range(minHeal, maxHeal))+0.3])
-	if (player.gray < player.maxGray || result.is_empty()):
-		result.append([0, int(player.maxGray * randf_range(minHeal, maxHeal))+0.3])
+	print("heal dmg: ", damageToHeal)
+	#If the player really needs to be healed gray
+	if (player.gray < player.maxGray/2):
+		result[1].append("gray")
+		result[2].append((int) (min(player.maxGray - player.gray, damageToHeal/damage_per_color["gray"])))
+		damageToHeal -= result[2][-1] * damage_per_color["gray"]
+		print(damage_per_color)
+		maxHeal = result[2][-1]
+	
+	for c in colors:
+		#Check if we have to exit
+		if (damageToHeal <= 0): break
+		
+		if player.get_color(c) < player.get_max_color(c) && damage_per_color[c]:
+			result[1].append(c)
+			result[2].append((int) (min(player.get_max_color(c) - player.get_color(c), damageToHeal/damage_per_color[c])))
+			heal_per_color[c] += result[2][-1]
+			damageToHeal -= result[2][-1] * damage_per_color[c]
+			
+			if result[2][-1] > maxHeal:
+				maxColor = c
+				maxHeal = result[2][-1]
+			
+	result[0] = ["gray", "red", "yellow", "blue"].find(maxColor)
 	
 	return result
+
+func get_damage_per_color(player:Player)->Dictionary:
+	var spells:Array[PackedScene] = player.spells.duplicate()
+	spells.append(player.stab)
+	var spell_levels:Array[int] = player.spell_levels.duplicate()
+	spell_levels.append(0)
+	
+	var colorSpells:Dictionary = {"gray":0, "red":0, "yellow":0, "blue":0}
+	var colorDamage:Dictionary ={"gray":.0, "red":.0, "yellow":.0, "blue":.0}
+	var colors:Array[String] = ["gray", "red", "yellow", "blue"]
+	
+	for i in range(spells.size()):
+		if spells[i] == null: continue
+		var spell:Spell = spells[i].instantiate()
+		var spell_level:int = spell_levels[i]
+		for c in colors:
+			if c == spell.costType:
+				colorDamage[c] += (float) (spell.damageAmount_per_level[spell_level]) / spell.costs_per_level[spell_level]
+				colorSpells[c] += 1
+				break
+		spell.queue_free()
+		
+	for c in colors:
+		if colorSpells[c]:
+			colorDamage[c] /= colorSpells[c]
+	return colorDamage
 
 func _on_finish_timer_timeout():
 	for body in get_overlapping_bodies():

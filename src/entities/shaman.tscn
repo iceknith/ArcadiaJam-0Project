@@ -53,16 +53,15 @@ height = 72.0
 size = Vector2(319, 438)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bpwvs"]
-radius = 500.0
+radius = 677.106
 
 [node name="shaman" instance=ExtResource("1_dw82e")]
 script = ExtResource("2_f4ojc")
 push_back_force = 2.0
-minHealth = 40.0
-maxHealth = 70.0
+minHealth = 5.0
+damageToKill = 20
 meleDamageType = ["blue"]
 minMeleDamageAmount = 10
-maxMeleDamageAmount = 20
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_f6csj")

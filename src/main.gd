@@ -28,3 +28,7 @@ func endGame():
 	get_node("game").queue_free()
 	var death_menu_instance = death_menu.instantiate()
 	add_child(death_menu.instantiate())
+
+
+func gen_dungeon():
+	get_node("game").get_node("world").nextLevel()

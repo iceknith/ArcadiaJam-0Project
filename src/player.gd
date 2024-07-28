@@ -243,9 +243,9 @@ func spell_handler(input:Vector2, delta):
 	
 	$AnimatedSprite2D.animation = "spell"
 	time_since_state_change += delta
-	if (time_since_state_change >= 0.5):
+	if (time_since_state_change >= 0.25):
 		state = "idle"
-	elif (time_since_state_change > 0.25 && !spell_spawned):
+	elif (time_since_state_change > 0.125 && !spell_spawned):
 		var spell_instance:Spell = spells[spell_selected].instantiate()
 		
 		if (input == Vector2.ZERO):
@@ -278,7 +278,7 @@ func dead_handler(delta):
 		death.emit()
 
 func damage(damage_amount:int, damage_direction:Vector2, damageType:Array):
-	if (state == "dash" || state == "hit" || state == "invincible"): return
+	if (state == "dash" || state == "hit" || state == "invincible" || state == "dead"): return
 	
 	state = "hit"
 	velocity = knockbackForce * damage_direction
@@ -316,27 +316,29 @@ func damage(damage_amount:int, damage_direction:Vector2, damageType:Array):
 		spawn_text_popup("gray", str("- ", damage_gray), 2, y_popup_margin)
 		healthChange.emit("gray", false, gray)		
 
-func heal(heal_amount:int, heal_type:Array):
+func heal(heal_amount:Array, heal_type:Array):
 	var y_popup_margin = 500
-	if ("gray" in heal_type):
-		gray = min(maxGray, gray + heal_amount)
-		spawn_text_popup("gray", str("+ ", heal_amount), 2, y_popup_margin)
-		y_popup_margin -= 100
-		healthChange.emit("gray", false, gray)
-	if ("red" in heal_type):
-		red = min(maxRed, red + heal_amount)
-		spawn_text_popup("red", str("+ ", heal_amount), 2, y_popup_margin)
-		y_popup_margin -= 100
-		healthChange.emit("red", false, red)
-	if ("yellow" in heal_type):
-		yellow = min(maxYellow, yellow + heal_amount)
-		spawn_text_popup("yellow", str("+ ", heal_amount), 2, y_popup_margin)
-		y_popup_margin -= 100
-		healthChange.emit("yellow", false, yellow)
-	if ("blue" in heal_type):
-		blue = min(maxBlue, blue + heal_amount)
-		spawn_text_popup("blue", str("+ ", heal_amount), 2, y_popup_margin)
-		healthChange.emit("blue", false, blue)
+	for i in range(heal_type.size()):
+		if ("gray" == heal_type[i]):
+			gray = min(maxGray, gray + heal_amount[i])
+			spawn_text_popup("gray", str("+ ", heal_amount[i]), 2, y_popup_margin)
+			y_popup_margin -= 100
+			healthChange.emit("gray", false, gray)
+		if ("red" == heal_type[i]):
+			red = min(maxRed, red + heal_amount[i])
+			spawn_text_popup("red", str("+ ", heal_amount[i]), 2, y_popup_margin)
+			y_popup_margin -= 100
+			healthChange.emit("red", false, red)
+		if ("yellow" == heal_type[i]):
+			yellow = min(maxYellow, yellow + heal_amount[i])
+			spawn_text_popup("yellow", str("+ ", heal_amount[i]), 2, y_popup_margin)
+			y_popup_margin -= 100
+			healthChange.emit("yellow", false, yellow)
+		if ("blue" == heal_type[i]):
+			blue = min(maxBlue, blue + heal_amount[i])
+			spawn_text_popup("blue", str("+ ", heal_amount[i]), 2, y_popup_margin)
+			y_popup_margin -= 100
+			healthChange.emit("blue", false, blue)
 
 func replaceSpell(spell_num:int, new_spell:PackedScene, new_spell_level:int):
 	if (!firstSpell):
@@ -473,3 +475,17 @@ func _on_stab_kill():
 	if prevGray != gray:
 		spawn_text_popup("gray", str("+ ", stabLifeLeechAmount), 1, 500)
 		healthChange.emit("gray", false, gray)
+
+func get_color(color:String)->int:
+	if (color == "blue"): return blue
+	if (color == "red"): return red
+	if (color == "yellow"): return yellow
+	if (color == "gray"): return gray
+	return 0
+	
+func get_max_color(color:String)->int:
+	if (color == "blue"): return maxBlue
+	if (color == "red"): return maxRed
+	if (color == "yellow"): return maxYellow
+	if (color == "gray"): return maxGray
+	return 0

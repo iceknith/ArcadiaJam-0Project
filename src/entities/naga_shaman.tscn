@@ -56,14 +56,12 @@ size = Vector2(337, 120)
 scale = Vector2(1.25, 1.25)
 script = ExtResource("2_jadju")
 minHealth = 45.0
-maxHealth = 75.0
+damageToKill = 55
 meleDamageType = ["red"]
 minMeleDamageAmount = 5
-maxMeleDamageAmount = 10
 ranged = true
 shootRange = 2000.0
 minShootDamageAmount = 10
-maxShootDamageAmount = 25
 attacks = Array[PackedScene]([ExtResource("2_65kyr")])
 
 [node name="AnimatedSprite2D" parent="." index="0"]

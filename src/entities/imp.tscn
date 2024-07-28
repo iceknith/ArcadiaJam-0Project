@@ -63,12 +63,11 @@ minSpeed = 1500.0
 maxSpeed = 1750.0
 knockbackSpeed = 1250.0
 minHealth = 50.0
+damageToKill = 60
 meleDamageType = ["blue", "yellow", "red"]
 minMeleDamageAmount = 5
-maxMeleDamageAmount = 10
 ranged = true
 minShootDamageAmount = 15
-maxShootDamageAmount = 25
 attacks = Array[PackedScene]([ExtResource("2_ihwsx")])
 
 [node name="AnimatedSprite2D" parent="." index="0"]

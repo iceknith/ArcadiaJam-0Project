@@ -56,8 +56,8 @@ size = Vector2(62, 271)
 [node name="MIB" instance=ExtResource("1_fc1pa")]
 minSpeed = 1250.0
 maxSpeed = 1500.0
-minHealth = 25.0
-maxHealth = 45.0
+minHealth = 20.0
+damageToKill = 25
 meleDamageType = ["gray", "blue"]
 ranged = true
 attacks = Array[PackedScene]([ExtResource("2_iv5vg")])

@@ -5,6 +5,7 @@ signal player_in_same_room(player)
 @export var minEntities:int = 2
 @export var maxEntities:int = 10
 var level
+var roomHP:float
 var difficulty:float
 
 var entitiesList:Array[Array] = [
@@ -32,15 +33,28 @@ var positions:Array[Vector2] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(roomHP)
 	for child in get_children():
 		if (child.is_class("Marker2D")):
 			positions.append(child.position)
-	for i in int(minEntities + clampf(randf_range(difficulty*0.9, difficulty*1.1), 0, 1)*(maxEntities - minEntities)):
-		var entity:Entity = entitiesList[level].pick_random().instantiate()
-		entity.position = positions.pick_random()
-		entity.level = difficulty
-		player_in_same_room.connect(entity._on_player_in_same_room)
-		get_parent().add_child.call_deferred(entity)
+	
+	#add entities to room, so that it comes near to the roomHP
+	var haveFoundMob:bool = true
+	var activeRoommHP:int  = 0
+	while haveFoundMob:
+		haveFoundMob = false
+		entitiesList[level].shuffle()
+		for entity_scene:PackedScene in entitiesList[level]:
+			var entity:Entity = entity_scene.instantiate()
+			if (activeRoommHP + entity.damageToKill < roomHP):
+				activeRoommHP += entity.damageToKill
+				entity.level = 0
+				entity.position = positions.pick_random()
+				player_in_same_room.connect(entity._on_player_in_same_room)
+				get_parent().add_child.call_deferred(entity)
+				haveFoundMob = true
+				break
+			entity.queue_free()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
