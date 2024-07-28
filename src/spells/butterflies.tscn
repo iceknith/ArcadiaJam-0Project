@@ -48,14 +48,13 @@ butterflies_num = 12
 attackEntities = true
 costType = "yellow"
 maxLevels = 4
-maxColorAdd_per_level = Array[int]([20, 20, 25, 30])
-costs_per_level = Array[int]([10, 10, 5, 5])
-damageAmount_per_level = Array[int]([10, 10, 15, 18])
+maxColorAdd_per_level = Array[int]([20, 25, 30, 35])
+costs_per_level = Array[int]([15, 14, 13, 12])
+damageAmount_per_level = Array[int]([10, 10, 10, 10])
 acceleration_per_leve = Array[float]([50.0, 50.0, 60.0, 70.0])
 speed_per_level = Array[float]([2500.0, 2500.0, 2750.0, 3000.0])
 maxDuration_per_level = Array[float]([5.0, 5.0, 5.0, 5.0])
 damageType = []
-autoDisapear = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(2, -0.999998)

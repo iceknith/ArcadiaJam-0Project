@@ -8,14 +8,14 @@ var finishRooms:Array = []
 var grid:Array = [];
 
 @export var default_room_cnt:int = 5
-@export var max_room_to_corridor = 1
+@export var max_room_to_corridor:int = 1
 @export var minRoomToShop:int = 2
 @export var maxRoomToShop:int = 4
 
 @export var spellMinDamage:int = 10
 @export var spellMaxDamage:int = 60
 
-@export var roomHealTolerance:float = -0.1
+@export var roomHealPercent:float = 0.7
 
 var world = 1
 var visited_worlds = 1;
@@ -83,7 +83,7 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 	
 	var prevRoom:Room = null
 
-	var room_to_corridor = max_room_to_corridor
+	var room_to_corridor:int = max_room_to_corridor
 	var room_to_shop = 0
 	var i:int = 0
 	
@@ -120,7 +120,7 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 			if (room.hasMobs):
 				room.get_node("spawner").level = worldNum
 				room.get_node("spawner").roomHP = (pow((float)(i)/roomNum, 2) * (playerDamage/2) + (playerDamage/2)) * get_difficulty()
-				room.damageHealed = (pow((float)(i)/roomNum, 2) * (playerDamage/2) + (playerDamage/2)) * (get_difficulty() + roomHealTolerance)
+				room.damageHealed = (pow((float)(i)/roomNum, 2) * (playerDamage/2) + (playerDamage/2)) * (get_difficulty() *roomHealPercent)
 				#the player has roomHealTolerance % more damage "healed" than damage he theoretically has to cast
 			#if the room is a shop
 			elif (!room.isCorridor && i != roomNum):

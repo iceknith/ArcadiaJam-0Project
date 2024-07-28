@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyqm13b0mw25c"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_4ot3j"]
+[ext_resource type="Script" path="res://src/spells/laser_blade.gd" id="2_u5avf"]
+[ext_resource type="Texture2D" uid="uid://bri6m85ibnyu0" path="res://assets/spells/Lame laser/lame_laser.png" id="3_koayi"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="12_upumi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhn6c"]
+size = Vector2(795, 94)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ju8rl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_koayi")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_koayi")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_koayi")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 6.0
+}]
+
+[node name="Lame laser" instance=ExtResource("1_4ot3j")]
+script = ExtResource("2_u5avf")
+knock_back_force_multiplier = 15
+attackEntities = true
+costType = "yellow"
+maxLevels = 4
+maxColorAdd_per_level = Array[int]([30, 30, 35, 40])
+costs_per_level = Array[int]([8, 8, 8, 8])
+damageAmount_per_level = Array[int]([10, 12, 15, 18])
+acceleration_per_leve = Array[float]([0.0, 0.0, 0.0, 0.0])
+speed_per_level = Array[float]([0.0, 0.0, 0.0, 0.0])
+maxDuration_per_level = Array[float]([2.0, 2.0, 2.0, 2.0])
+deleted_by_map = false
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(72.5, -37)
+shape = SubResource("RectangleShape2D_jhn6c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(2, -0.999998)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_ju8rl")
+animation = &"fly"
+script = ExtResource("12_upumi")
+spawnAnimationTime = 0.0
+explosionAnimationTime = 0.0
+explodeToContact = false
+
+[node name="Timer" type="Timer" parent="." index="2"]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

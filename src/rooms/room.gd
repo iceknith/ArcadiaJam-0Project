@@ -136,7 +136,6 @@ func player_get_heal()->Array:
 	
 	var maxColor = "gray"
 	var maxHeal = 0
-	
 	print("heal dmg: ", damageToHeal)
 	#If the player really needs to be healed gray
 	if (player.gray < player.maxGray/2):

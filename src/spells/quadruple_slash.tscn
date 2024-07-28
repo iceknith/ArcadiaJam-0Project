@@ -66,14 +66,13 @@ script = ExtResource("2_jfs8b")
 attackEntities = true
 costType = "red"
 maxLevels = 4
-maxColorAdd_per_level = Array[int]([25, 30, 35, 40])
+maxColorAdd_per_level = Array[int]([35, 40, 45, 50])
 costs_per_level = Array[int]([20, 20, 20, 20])
-damageAmount_per_level = Array[int]([15, 18, 20, 23])
+damageAmount_per_level = Array[int]([12, 13, 14, 15])
 acceleration_per_leve = Array[float]([75.0, 75.0, 75.0, 75.0])
 speed_per_level = Array[float]([2500.0, 2500.0, 2500.0, 2500.0])
 maxDuration_per_level = Array[float]([5.0, 5.0, 5.0, 5.0])
 damageType = []
-autoDisapear = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(2, -0.999998)

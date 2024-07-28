@@ -14,7 +14,7 @@ class_name Spell
 @export var speed_per_level:Array[float] = [.0]
 @export var maxDuration_per_level:Array[float] = [.0]
 @export var damageType:Array = ["yellow","blue","red","gray"]
-@export var autoDisapear:bool = true
+@export var autoDisapear:bool = false
 @export var deleted_by_map:bool = true
 
 signal hit(bodyType:String, body:Node2D)
@@ -64,7 +64,8 @@ func _on_body_entered(body):
 	if ("TileMap" in body.name && deleted_by_map):
 		isAlive = false
 		hit.emit("TileMap", body)
-		if autoDisapear: queue_free()
+		if autoDisapear: 
+			queue_free()
 
 func _on_area_entered(area):
 	var body:Node2D = area.get_parent()
@@ -74,10 +75,13 @@ func _on_area_entered(area):
 		player.damage(damageAmount, direction, damageType)
 		if (player.gray <= 0): kill.emit()
 		hit.emit("player", player)
-		if autoDisapear: queue_free()
+		if autoDisapear: 
+			queue_free()
+			
 	elif ("hit_hitbox" in area.name && attackEntities):
 		var entity:Entity = body
 		entity.damage(damageAmount, direction)
 		if (entity.health <= 0): kill.emit()
 		hit.emit("entity", entity)
-		if autoDisapear: queue_free()
+		if autoDisapear: 
+			queue_free()

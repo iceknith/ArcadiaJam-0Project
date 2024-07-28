@@ -36,14 +36,13 @@ script = ExtResource("2_wsg6n")
 attackEntities = true
 costType = "blue"
 maxLevels = 4
-maxColorAdd_per_level = Array[int]([30, 30, 30, 30])
-costs_per_level = Array[int]([20, 17, 15, 12])
-damageAmount_per_level = Array[int]([1, 2, 3, 4])
+maxColorAdd_per_level = Array[int]([30, 35, 40, 45])
+costs_per_level = Array[int]([15, 13, 12, 10])
+damageAmount_per_level = Array[int]([30, 30, 30, 30])
 acceleration_per_leve = Array[float]([25.0, 25.0, 25.0, 25.0])
 speed_per_level = Array[float]([2000.0, 2000.0, 2000.0, 2000.0])
 maxDuration_per_level = Array[float]([2.0, 3.0, 4.0, 5.0])
 damageType = []
-autoDisapear = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(2, -0.999998)

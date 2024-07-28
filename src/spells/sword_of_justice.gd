@@ -7,7 +7,7 @@ var entities:Array[Entity]
 func _physics_process(delta):
 	super._physics_process(delta)
 	
-	if (hasHitEntity):
+	if (hasHitEntity and isAlive):
 		for entity in entities:
 			entity.velocity = Vector2.ZERO
 			entity.position += velocity * delta
@@ -20,4 +20,5 @@ func _on_hit(bodyType, body):
 		entities.append(body)
 		isAlive = true
 	elif (bodyType == "TileMap"):
+		isAlive = false
 		queue_free()
