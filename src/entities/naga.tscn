@@ -54,7 +54,7 @@ size = Vector2(360.48, 71.0033)
 [node name="naga" instance=ExtResource("1_sc23h")]
 scale = Vector2(1.5, 1.5)
 minHealth = 60.0
-damageToKill = 60
+damageToKill = 70
 meleDamageType = ["red"]
 minMeleDamageAmount = 10
 rotatedOffsetX = -230.0

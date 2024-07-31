@@ -121,10 +121,20 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 				room.get_node("spawner").level = worldNum
 				room.get_node("spawner").roomHP = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * get_difficulty()
 				room.damageHealed = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * (get_difficulty() * roomHealPercent)
-				room.healPercent = roomHealPercent
 			#if the room is a shop
 			elif (!room.isCorridor && i != roomNum):
 				room.get_node("Shop").newSpellExpectedDamage = randi_range(spellMinDamage, spellMaxDamage)
+				#remove the potential damage of the lowest spell
+				if not (null in player.spells):
+					var lowest_spell_damage:int = 2000
+					for index in range(4):
+						var spell:Spell = player.spells[index].instantiate()
+						var spell_lvl:int = player.spell_levels[index]
+						var spell_damage:int = spell.maxColorAdd_per_level[spell_lvl] * spell.damageAmount_per_level[spell_lvl]/spell.costs_per_level[spell_lvl]
+						if (spell_damage < lowest_spell_damage):
+							lowest_spell_damage = spell_damage
+					playerDamage -= lowest_spell_damage
+					
 				playerDamage += room.get_node("Shop").newSpellExpectedDamage
 			add_child(room)
 			
@@ -178,7 +188,6 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 						found_room = false;
 						break;
 					current_dir = possible_dirs.pop_front()
-			
 			
 			#If we did find a position, we update all the variables
 			current_pix += current_dir[0]

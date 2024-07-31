@@ -74,7 +74,6 @@ acceleration_per_leve = Array[float]([75.0, 75.0, 75.0, 75.0])
 speed_per_level = Array[float]([2750.0, 2750.0, 2750.0, 2750.0])
 maxDuration_per_level = Array[float]([5.0, 5.0, 5.0, 5.0])
 damageType = []
-autoDisapear = false
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_36dy8")

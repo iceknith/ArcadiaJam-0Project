@@ -19,13 +19,13 @@ func _process(delta):
 	if time > spawnAnimationTime && !hasExploded: animation = "fly"
 	elif time > explosionAnimationTime && hasExploded: get_parent().queue_free()
 	
-	if get_parent().direction.x < -0.5:
+	"if get_parent().direction.x < -0.5:
 		flip_h = true
 	elif get_parent().direction.x > 0.5:
-		flip_h = false
+		flip_h = false"
 		
 func _on_hit(bodyType:String, body:Node2D):
-	if (explodeToContact || bodyType == "TileMap"):
+	if ((explodeToContact || bodyType == "TileMap") && animation != "spawn"):
 		hasExploded = true
 		animation = "explode"
 		get_parent().isAlive = false

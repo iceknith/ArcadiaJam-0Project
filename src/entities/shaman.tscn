@@ -59,7 +59,7 @@ radius = 677.106
 script = ExtResource("2_f4ojc")
 push_back_force = 2.0
 minHealth = 5.0
-damageToKill = 20
+damageToKill = 25
 meleDamageType = ["blue"]
 minMeleDamageAmount = 10
 

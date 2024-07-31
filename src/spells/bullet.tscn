@@ -54,3 +54,5 @@ animation = &"spawn"
 script = ExtResource("3_gegu1")
 spawnAnimationTime = 0.0
 explosionAnimationTime = 0.0
+
+[connection signal="hit" from="." to="Sprite2D" method="_ont_hit"]

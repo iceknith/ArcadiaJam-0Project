@@ -62,6 +62,7 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if ("TileMap" in body.name && deleted_by_map):
+		print("hit tilemap")
 		isAlive = false
 		hit.emit("TileMap", body)
 		if autoDisapear: 
@@ -71,6 +72,7 @@ func _on_area_entered(area):
 	var body:Node2D = area.get_parent()
 	if (!isAlive): return
 	if ("player" in body.name && attackPlayer):
+		print("hit player")
 		var player:Player = body
 		player.damage(damageAmount, direction, damageType)
 		if (player.gray <= 0): kill.emit()
@@ -79,6 +81,7 @@ func _on_area_entered(area):
 			queue_free()
 			
 	elif ("hit_hitbox" in area.name && attackEntities):
+		print("hit entity: ", body.name)
 		var entity:Entity = body
 		entity.damage(damageAmount, direction)
 		if (entity.health <= 0): kill.emit()

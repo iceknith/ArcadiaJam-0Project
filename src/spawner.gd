@@ -37,6 +37,7 @@ func _ready():
 		if (child.is_class("Marker2D")):
 			positions.append(child.position)
 	
+	print("roomHP:",roomHP)
 	#add entities to room, so that it comes near to the roomHP
 	var haveFoundMob:bool = true
 	var activeRoommHP:int  = 0

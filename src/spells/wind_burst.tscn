@@ -85,3 +85,4 @@ spawnAnimationTime = 0.5
 explosionAnimationTime = 0.5
 
 [connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]
