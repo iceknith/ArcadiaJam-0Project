@@ -63,7 +63,7 @@ animations = [{
 
 [node name="Bourrasque" instance=ExtResource("1_kcpdx")]
 script = ExtResource("2_nynf2")
-knock_back_force_multiplier = 10
+knock_back_force_multiplier = 5
 attackEntities = true
 costType = "blue"
 maxLevels = 4

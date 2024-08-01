@@ -6,20 +6,12 @@
 size = Vector2(644, 171)
 
 [node name="stab" instance=ExtResource("1_vruxd")]
-utilitySpell = false
-attackPlayer = false
 attackEntities = true
-costType = "gray"
 maxLevels = 1
-maxColorAdd_per_level = Array[int]([0])
 costs_per_level = Array[int]([7])
 damageAmount_per_level = Array[int]([10])
-acceleration_per_leve = Array[float]([0.0])
-speed_per_level = Array[float]([0.0])
 maxDuration_per_level = Array[float]([0.2])
-damageType = ["yellow", "blue", "red", "gray"]
-autoDisapear = false
-deleted_by_map = true
+deleted_by_map = false
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(322, -1)

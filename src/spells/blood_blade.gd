@@ -7,4 +7,3 @@ func _ready():
 	super._ready()
 	
 	scale = size_per_levels[level] * Vector2.ONE
-

@@ -1,13 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://do2ofp0is0txa"]
+[gd_scene load_steps=8 format=3 uid="uid://do2ofp0is0txa"]
 
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_ym6su"]
 [ext_resource type="Script" path="res://src/spells/sword_of_justice.gd" id="2_wsg6n"]
 [ext_resource type="Texture2D" uid="uid://cfhy448nu52kp" path="res://assets/spells/Lame scintillante/lame_scintillante_0002.png" id="3_f557l"]
 [ext_resource type="Texture2D" uid="uid://cunoc16wdacnk" path="res://assets/spells/Lame scintillante/lame_scintillante_0000.png" id="4_tcl0a"]
 [ext_resource type="Texture2D" uid="uid://ijlulurvdmuf" path="res://assets/spells/Lame scintillante/lame_scintillante_0001.png" id="5_q1s24"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="6_csjjs"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5aisa"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_f557l")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_f557l")
@@ -32,6 +41,7 @@ animations = [{
 }]
 
 [node name="Lame scintillante" instance=ExtResource("1_ym6su")]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_wsg6n")
 attackEntities = true
 costType = "blue"
@@ -48,6 +58,9 @@ damageType = []
 position = Vector2(2, -0.999998)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_5aisa")
-animation = &"spawn"
+animation = &"explode"
+script = ExtResource("6_csjjs")
+explodeToContact = false
 
 [connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]

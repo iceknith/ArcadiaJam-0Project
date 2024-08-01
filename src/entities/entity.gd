@@ -115,7 +115,7 @@ func movement_handler(dir:Vector2, delta):
 		rotate.emit()
 
 func damage(damage_amount:int, damage_direction:Vector2):
-	if (state == "hit" || state == "invincible" || state == "dead"): return
+	if (state == "hit" || state == "invincible" || state == "dead" || target == null): return
 	
 	health -= damage_amount
 	state = "hit"

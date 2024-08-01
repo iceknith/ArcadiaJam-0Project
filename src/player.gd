@@ -59,6 +59,8 @@ var time_since_state_change:float = 0
 var spell_selected:int
 var spell_spawned:bool
 
+var room_mobs:Array[Entity] = []
+
 var stab = preload("res://src/spells/stab.tscn")
 var popup_text = preload("res://src/popup_text.tscn")
 
@@ -99,9 +101,10 @@ func _process(delta):
 		showTutorial.emit("intro")
 		
 	if (state == "stab"): stab_handler(delta)
-	elif (state == "spell"): spell_handler(buffer_direction, delta)
+	elif (state == "spell"): spell_handler(delta)
 	elif (state == "dash" || state == "dash_stop"): dash_handler(delta)
 	elif (state == "hit" || state == "invincible"): hit_handler(delta)
+	
 
 func _physics_process(delta):
 	if (state == "dead"): return
@@ -237,9 +240,10 @@ func dash_handler(delta):
 		time_since_state_change += delta
 		if time_since_state_change > 0.2:
 			state = "idle"
+			damage_emitted += 7 #have the dash be part of the damage emitted for the resolution of this room
 			time_since_state_change = 0
 
-func spell_handler(input:Vector2, delta):
+func spell_handler(delta):
 	if (!firstSpellCasted):
 		firstSpellCasted = true
 		showTutorial.emit("spell_use")
@@ -250,12 +254,16 @@ func spell_handler(input:Vector2, delta):
 		state = "idle"
 	elif (time_since_state_change > 0.125 && !spell_spawned):
 		var spell_instance:Spell = spells[spell_selected].instantiate()
+		#finding the position
+		var nearest_mob:Entity = get_closest_visible_mob()
+		var direction:Vector2
+		if (nearest_mob): direction = (nearest_mob.global_position - global_position).normalized()
+		elif ($AnimatedSprite2D.flip_h): direction = Vector2.LEFT
+		else: direction = Vector2.RIGHT
 		
-		if (input == Vector2.ZERO):
-			if $AnimatedSprite2D.flip_h: input.x = -1
-			else: input.x = 1
-		spell_instance.direction = input
+		spell_instance.direction = direction
 		spell_instance.position = position
+		spell_instance.deleted_by_map = nearest_mob == null
 		spell_instance.player = self
 		spell_instance.level = spell_levels[spell_selected]
 		damage_emitted += spell_instance.damageAmount_per_level[spell_levels[spell_selected]]
@@ -493,3 +501,28 @@ func get_max_color(color:String)->int:
 	if (color == "yellow"): return maxYellow
 	if (color == "gray"): return maxGray
 	return 0
+
+func get_closest_visible_mob()->Entity:
+	if (room_mobs.is_empty()): return null
+	
+	var min_mob:Entity = null
+	var min_dist:float = INF
+	for mob in room_mobs:
+		if (is_instance_valid(mob)):
+			var distance:float = global_position.distance_squared_to(mob.global_position)
+			if (distance < min_dist):
+				#check if the raycast doesn't hit a wall before it hits the mob
+				var space_state = get_world_2d().direct_space_state
+				var querry = PhysicsRayQueryParameters2D.create(global_position, mob.global_position)
+				querry.exclude = [self]
+				querry.hit_from_inside = false
+				querry.collide_with_areas = false
+				querry.collide_with_bodies = true
+				querry.collision_mask = 0b1
+				
+				var collider = space_state.intersect_ray(querry)
+				
+				if (collider == null || collider.is_empty()):
+					min_dist = distance
+					min_mob = mob
+	return min_mob

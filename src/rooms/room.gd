@@ -27,6 +27,8 @@ var door_to_close:Array = []
 var walls:Array = []
 var openDoorTimer = 0
 
+var room_mobs:Array[Entity] = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,6 +64,7 @@ func _on_body_entered(body):
 		player.damage_emitted = 0
 		player_entered_first_time.emit(player)
 		playerEntered = true
+		player.room_mobs = room_mobs
 		if (hasMobs):
 			doorClosed = true
 			close_doors()
@@ -93,7 +96,8 @@ func open_doors():
 		if "wall" in child.name: child.queue_free()
 	
 	if (hasMobs):
-		damageHealed =min(damageHealed, player.damage_emitted)
+		damageHealed = min(damageHealed, player.damage_emitted * healPercent) #have the player be rewarded for using less damage than anticipated
+		player.room_mobs = []
 		var lootStat = player_get_heal()
 		var lootItem:Item = loot[lootStat[0]].instantiate()
 		lootItem.healTypes = lootStat[1]

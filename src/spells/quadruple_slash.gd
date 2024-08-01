@@ -16,8 +16,6 @@ func _ready():
 	if (spawnNum == 3): theta += 3*PI/24
 	else: theta -= PI/12
 		
-	print(theta)
-		
 	rotation = theta
 	direction = Vector2(cos(theta),sin(theta))
 		

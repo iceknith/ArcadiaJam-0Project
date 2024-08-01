@@ -64,4 +64,5 @@ collision_mask = 3
 position = Vector2(8, -5.5)
 shape = SubResource("RectangleShape2D_5cfbo")
 
+[connection signal="player_entered_first_time" from="." to="spawner" method="_on_player_entered_first_time"]
 [connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_body_entered"]

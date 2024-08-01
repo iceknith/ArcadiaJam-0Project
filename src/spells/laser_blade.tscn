@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyqm13b0mw25c"]
+[gd_scene load_steps=7 format=3 uid="uid://r1n5mv3p0p0c"]
 
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_4ot3j"]
 [ext_resource type="Script" path="res://src/spells/laser_blade.gd" id="2_u5avf"]
@@ -37,7 +37,7 @@ animations = [{
 
 [node name="Lame laser" instance=ExtResource("1_4ot3j")]
 script = ExtResource("2_u5avf")
-knock_back_force_multiplier = 15
+knock_back_force_multiplier = 3
 attackEntities = true
 costType = "yellow"
 maxLevels = 4

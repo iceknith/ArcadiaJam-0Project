@@ -2,15 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_ad7vk"]
 [ext_resource type="Script" path="res://src/spells/fire_orb.gd" id="2_kcf2o"]
-[ext_resource type="Texture2D" uid="uid://ccth5nx2usi3k" path="res://assets/spells/Orbe enflammé/explosion_yellow0000.png" id="3_r416g"]
-[ext_resource type="Texture2D" uid="uid://blj3tvqxf1gmu" path="res://assets/spells/Orbe enflammé/explosion_yellow0001.png" id="4_eqclg"]
-[ext_resource type="Texture2D" uid="uid://06rn0kow3yhv" path="res://assets/spells/Orbe enflammé/explosion_yellow0002.png" id="5_tdud8"]
-[ext_resource type="Texture2D" uid="uid://cjylh7xc1aj2b" path="res://assets/spells/Orbe enflammé/explosion_yellow0003.png" id="6_18rlg"]
-[ext_resource type="Texture2D" uid="uid://c4ch3srjjnldi" path="res://assets/spells/Orbe enflammé/explosion_yellow0004.png" id="7_txycd"]
-[ext_resource type="Texture2D" uid="uid://nu6htqryqvvs" path="res://assets/spells/Orbe enflammé/explosion_yellow0005.png" id="8_l6tv2"]
-[ext_resource type="Texture2D" uid="uid://bkmalt355orfv" path="res://assets/spells/Orbe enflammé/orbe_enflamme_0002.png" id="9_nuql4"]
-[ext_resource type="Texture2D" uid="uid://c4ap3ba78urjf" path="res://assets/spells/Orbe enflammé/orbe_enflamme_0000.png" id="10_57bv5"]
-[ext_resource type="Texture2D" uid="uid://bvlw77yh54dxs" path="res://assets/spells/Orbe enflammé/orbe_enflamme_0001.png" id="11_g1pmi"]
+[ext_resource type="Texture2D" uid="uid://ccth5nx2usi3k" path="res://assets/spells/Orbe explosive/explosion_yellow0000.png" id="3_r416g"]
+[ext_resource type="Texture2D" uid="uid://blj3tvqxf1gmu" path="res://assets/spells/Orbe explosive/explosion_yellow0001.png" id="4_eqclg"]
+[ext_resource type="Texture2D" uid="uid://06rn0kow3yhv" path="res://assets/spells/Orbe explosive/explosion_yellow0002.png" id="5_tdud8"]
+[ext_resource type="Texture2D" uid="uid://cjylh7xc1aj2b" path="res://assets/spells/Orbe explosive/explosion_yellow0003.png" id="6_18rlg"]
+[ext_resource type="Texture2D" uid="uid://c4ch3srjjnldi" path="res://assets/spells/Orbe explosive/explosion_yellow0004.png" id="7_txycd"]
+[ext_resource type="Texture2D" uid="uid://nu6htqryqvvs" path="res://assets/spells/Orbe explosive/explosion_yellow0005.png" id="8_l6tv2"]
+[ext_resource type="Texture2D" uid="uid://bkmalt355orfv" path="res://assets/spells/Orbe explosive/orbe_enflamme_0002.png" id="9_nuql4"]
+[ext_resource type="Texture2D" uid="uid://c4ap3ba78urjf" path="res://assets/spells/Orbe explosive/orbe_enflamme_0000.png" id="10_57bv5"]
+[ext_resource type="Texture2D" uid="uid://bvlw77yh54dxs" path="res://assets/spells/Orbe explosive/orbe_enflamme_0001.png" id="11_g1pmi"]
 [ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="11_xp77b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36dy8"]
@@ -61,7 +61,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Orbe enflammé" instance=ExtResource("1_ad7vk")]
+[node name="Orbe explosive" instance=ExtResource("1_ad7vk")]
 script = ExtResource("2_kcf2o")
 explosion_radius = 750.0
 attackEntities = true
@@ -82,7 +82,7 @@ shape = SubResource("CircleShape2D_36dy8")
 position = Vector2(32, 22)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_gwd2r")
-animation = &"explode"
+animation = &"fly"
 script = ExtResource("11_xp77b")
 spawnAnimationTime = 0.25
 explosionAnimationTime = 0.5

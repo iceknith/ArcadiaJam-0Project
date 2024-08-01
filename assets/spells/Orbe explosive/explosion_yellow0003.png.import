@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd2y3d8x71l83"
-path="res://.godot/imported/spell_orb_0002.png-52f2d11bf41efe0deb5deb63560a8628.ctex"
+uid="uid://cjylh7xc1aj2b"
+path="res://.godot/imported/explosion_yellow0003.png-51bb8ef36518fc20876647c8b98fdfc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spells/Orbe explosif/spell_orb_0002.png"
-dest_files=["res://.godot/imported/spell_orb_0002.png-52f2d11bf41efe0deb5deb63560a8628.ctex"]
+source_file="res://assets/spells/Orbe explosive/explosion_yellow0003.png"
+dest_files=["res://.godot/imported/explosion_yellow0003.png-51bb8ef36518fc20876647c8b98fdfc3.ctex"]
 
 [params]
 

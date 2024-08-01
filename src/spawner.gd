@@ -37,7 +37,7 @@ func _ready():
 		if (child.is_class("Marker2D")):
 			positions.append(child.position)
 	
-	print("roomHP:",roomHP)
+	#print("roomHP:",roomHP)
 	#add entities to room, so that it comes near to the roomHP
 	var haveFoundMob:bool = true
 	var activeRoommHP:int  = 0
@@ -52,6 +52,7 @@ func _ready():
 				entity.position = positions.pick_random()
 				player_in_same_room.connect(entity._on_player_in_same_room)
 				get_parent().add_child.call_deferred(entity)
+				get_parent().room_mobs.append(entity)
 				haveFoundMob = true
 				break
 			entity.queue_free()

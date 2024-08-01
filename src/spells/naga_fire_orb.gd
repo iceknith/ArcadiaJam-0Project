@@ -14,8 +14,9 @@ func _ready():
 	var fire_orbs:PackedScene = load("res://src/spells/naga_fire_orb.tscn")
 	var tetha:float = 0
 	var new_direction:Vector2 = Vector2(1, 0)
-	var theta_step:float = 2*PI/orb_num
+	var theta_step:float = .0
 	if (orb_num != 0):
+		theta_step = 2*PI/orb_num
 		direction = new_direction
 		rotation = tetha
 	

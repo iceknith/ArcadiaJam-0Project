@@ -35,6 +35,7 @@ animations = [{
 }]
 
 [node name="bullet" instance=ExtResource("1_qc6lc")]
+z_index = 2
 scale = Vector2(2, 2)
 attackPlayer = true
 maxLevels = 1
@@ -43,6 +44,7 @@ acceleration_per_leve = Array[float]([100.0])
 speed_per_level = Array[float]([2000.0])
 maxDuration_per_level = Array[float]([5.0])
 damageType = ["blue", "gray"]
+autoDisapear = true
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("RectangleShape2D_fm67d")

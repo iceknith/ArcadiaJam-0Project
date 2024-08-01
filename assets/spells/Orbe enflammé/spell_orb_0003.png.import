@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4ap3ba78urjf"
-path="res://.godot/imported/orbe_enflamme_0000.png-801f69a68f5cde0859914005fcf54635.ctex"
+uid="uid://cap4tq3gyfn32"
+path="res://.godot/imported/spell_orb_0003.png-3178044a41a5db41ee25e24872b328a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spells/Orbe enflammé/orbe_enflamme_0000.png"
-dest_files=["res://.godot/imported/orbe_enflamme_0000.png-801f69a68f5cde0859914005fcf54635.ctex"]
+source_file="res://assets/spells/Orbe enflammé/spell_orb_0003.png"
+dest_files=["res://.godot/imported/spell_orb_0003.png-3178044a41a5db41ee25e24872b328a7.ctex"]
 
 [params]
 

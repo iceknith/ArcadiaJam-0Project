@@ -60,6 +60,7 @@ minHealth = 20.0
 damageToKill = 30
 meleDamageType = ["gray", "blue"]
 ranged = true
+shootRange = 50.0
 attacks = Array[PackedScene]([ExtResource("2_iv5vg")])
 rotatedOffsetX = 150.0
 
@@ -75,6 +76,9 @@ target_desired_distance = 2000.0
 
 [node name="deathAnimationTimer" parent="." index="5"]
 wait_time = 2.0
+
+[node name="hit_hitbox" parent="." index="7"]
+collision_layer = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="0"]
 position = Vector2(58, 356)

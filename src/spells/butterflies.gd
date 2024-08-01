@@ -23,5 +23,3 @@ func _ready():
 		butterflies_instance.direction = new_direction
 		butterflies_instance.position = position
 		get_parent().add_child(butterflies_instance)
-		
-		

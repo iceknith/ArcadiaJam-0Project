@@ -10,3 +10,5 @@
 [node name="inGameGui" parent="." instance=ExtResource("2_2bukq")]
 
 [connection signal="playerSignal" from="world" to="inGameGui" method="_on_world_player_signal"]
+[connection signal="GUISignal" from="inGameGui" to="world" method="_on_gui_gui_signal"]
+[connection signal="togglePauseGame" from="inGameGui" to="world" method="_on_gui_toggle_pause_game"]

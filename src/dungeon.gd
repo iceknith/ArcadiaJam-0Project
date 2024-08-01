@@ -15,8 +15,6 @@ var grid:Array = [];
 @export var spellMinDamage:int = 10
 @export var spellMaxDamage:int = 60
 
-@export var roomHealPercent:float = 0.7
-
 var world = 1
 var visited_worlds = 1;
 
@@ -116,11 +114,13 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 			room = possible_rooms.pop_front().instantiate()
 			room.position = current_pix
 			
-			#change the mob count of the room
+			#change the difficulty of the room
 			if (room.hasMobs):
 				room.get_node("spawner").level = worldNum
 				room.get_node("spawner").roomHP = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * get_difficulty()
-				room.damageHealed = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * (get_difficulty() * roomHealPercent)
+				room.damageHealed = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * (get_difficulty() * get_room_heal_percent())
+				room.healPercent = get_room_heal_percent()
+				
 			#if the room is a shop
 			elif (!room.isCorridor && i != roomNum):
 				room.get_node("Shop").newSpellExpectedDamage = randi_range(spellMinDamage, spellMaxDamage)
@@ -283,3 +283,6 @@ func deleteDungeon():
 
 func get_difficulty()->float:
 	return log(visited_worlds)/2 + 0.3
+	
+func get_room_heal_percent()->float:
+	return 0.85 + 0.1/get_difficulty()

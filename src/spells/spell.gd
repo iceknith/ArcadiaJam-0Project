@@ -36,7 +36,7 @@ var isAlive:bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rotation = atan(direction.y/direction.x)
+	rotation = -atan2(-direction.y,direction.x)
 	
 	cost = costs_per_level[level]
 	maxColorAdd = maxColorAdd_per_level[level]
@@ -54,17 +54,22 @@ func _process(delta):
 	if (duration > maxDuration):
 		queue_free()
 
+func _on_body_entered(body):
+	if ("TileMap" in body.name && deleted_by_map):
+		isAlive = false
+		hit.emit("TileMap", body)
+		if autoDisapear: queue_free()
+
 func _physics_process(delta):
 	if (isAlive):
 		velocity = lerp(velocity, direction * speed, delta * acceleration)
 		
 		position += velocity * delta
 
-func _on_body_entered(body):
-	if ("TileMap" in body.name && deleted_by_map):
-		print("hit tilemap")
+func _on_area_exited(area):
+	if ("room" in area.name || "Room" in area.name || "corridor" in area.name):
 		isAlive = false
-		hit.emit("TileMap", body)
+		hit.emit("TileMap", area)
 		if autoDisapear: 
 			queue_free()
 
@@ -72,7 +77,6 @@ func _on_area_entered(area):
 	var body:Node2D = area.get_parent()
 	if (!isAlive): return
 	if ("player" in body.name && attackPlayer):
-		print("hit player")
 		var player:Player = body
 		player.damage(damageAmount, direction, damageType)
 		if (player.gray <= 0): kill.emit()
@@ -81,7 +85,6 @@ func _on_area_entered(area):
 			queue_free()
 			
 	elif ("hit_hitbox" in area.name && attackEntities):
-		print("hit entity: ", body.name)
 		var entity:Entity = body
 		entity.damage(damageAmount, direction)
 		if (entity.health <= 0): kill.emit()
