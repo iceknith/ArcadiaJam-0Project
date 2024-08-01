@@ -57,6 +57,7 @@ func _process(delta):
 		state = "dead"
 		$AnimatedSprite2D.animation = "dead"
 		$deathAnimationTimer.start()
+		if ($hit_hitbox.get_node_or_null("Shadow")): $hit_hitbox.get_node("Shadow").visible = false
 		velocity = Vector2.ZERO
 		death.emit()
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://7jmvt7d100l"]
+[gd_scene load_steps=11 format=3 uid="uid://7jmvt7d100l"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_1xsno"]
 [ext_resource type="Texture2D" uid="uid://m122n5ikryrd" path="res://assets/mobs/zombie/zombie_default.png" id="2_8yfof"]
 [ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="2_18rhn"]
 [ext_resource type="Texture2D" uid="uid://d316f8fxuyejv" path="res://assets/mobs/zombie/zombie_walk_0000.png" id="4_sk82q"]
 [ext_resource type="Texture2D" uid="uid://dywtx2yawlimr" path="res://assets/mobs/zombie/zombie_walk_0001.png" id="5_jo0hw"]
+[ext_resource type="Texture2D" uid="uid://dlrq2rxlxk02a" path="res://assets/shadow.png" id="6_c0f21"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8w2j6"]
 animations = [{
@@ -82,11 +83,16 @@ shape = SubResource("CapsuleShape2D_bis06")
 wait_time = 2.0
 one_shot = false
 
-[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+[node name="Shadow" type="Sprite2D" parent="hit_hitbox" index="0"]
+position = Vector2(-39.75, 372)
+scale = Vector2(0.86125, 0.31375)
+texture = ExtResource("6_c0f21")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="1"]
 position = Vector2(0, 59)
 shape = SubResource("CapsuleShape2D_hqhk4")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="1"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="2"]
 position = Vector2(-36.9291, -134.109)
 rotation = -0.210635
 shape = SubResource("RectangleShape2D_isiyk")

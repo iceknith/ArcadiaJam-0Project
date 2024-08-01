@@ -65,16 +65,16 @@ sprite_frames = SubResource("SpriteFrames_3st65")
 animation = &"walk"
 frame_progress = 0.555846
 
-[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
-position = Vector2(12.5, 53)
-shape = SubResource("RectangleShape2D_yhavg")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="1"]
-position = Vector2(206.768, 189.702)
-rotation = -0.477318
-shape = SubResource("RectangleShape2D_gin1e")
-
-[node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="3"]
+[node name="Shadow" type="Sprite2D" parent="hit_hitbox" index="0"]
 position = Vector2(133.333, 264.667)
 scale = Vector2(1.475, 0.4225)
 texture = ExtResource("6_qnmdo")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="1"]
+position = Vector2(12.5, 53)
+shape = SubResource("RectangleShape2D_yhavg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="2"]
+position = Vector2(206.768, 189.702)
+rotation = -0.477318
+shape = SubResource("RectangleShape2D_gin1e")

@@ -41,7 +41,6 @@ animations = [{
 }]
 
 [node name="Lame scintillante" instance=ExtResource("1_ym6su")]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("2_wsg6n")
 attackEntities = true
 costType = "blue"

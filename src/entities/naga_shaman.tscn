@@ -71,11 +71,16 @@ animation = &"walk"
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CapsuleShape2D_di10o")
 
-[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+[node name="Shadow" type="Sprite2D" parent="hit_hitbox" index="0"]
+position = Vector2(3.2, 328)
+scale = Vector2(1.216, 0.4225)
+texture = ExtResource("6_r785s")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="1"]
 position = Vector2(-23.5, 79)
 shape = SubResource("RectangleShape2D_g30p8")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="1"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="2"]
 position = Vector2(39.5, 271)
 shape = SubResource("RectangleShape2D_xea3g")
 
@@ -84,10 +89,5 @@ target_position = Vector2(3000, 0)
 
 [node name="shootCooldown" parent="hit_hitbox/fire_point" index="1"]
 wait_time = 3.0
-
-[node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="3"]
-position = Vector2(3.2, 328)
-scale = Vector2(1.216, 0.4225)
-texture = ExtResource("6_r785s")
 
 [connection signal="timeout" from="hit_hitbox/fire_point/shootCooldown" to="." method="_on_shoot_cooldown_timeout"]

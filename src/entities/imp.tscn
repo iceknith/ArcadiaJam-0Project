@@ -80,11 +80,16 @@ frame_progress = 0.735441
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CapsuleShape2D_cmatb")
 
-[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+[node name="Shadow" type="Sprite2D" parent="hit_hitbox" index="0"]
+position = Vector2(-7.62939e-06, 340.875)
+scale = Vector2(0.6625, 0.210625)
+texture = ExtResource("6_4twid")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="1"]
 position = Vector2(-40.3734, -50)
 shape = SubResource("RectangleShape2D_ph7yf")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="1"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="2"]
 position = Vector2(-31.5, -127)
 shape = SubResource("RectangleShape2D_cq2ei")
 
@@ -93,10 +98,5 @@ target_position = Vector2(4000, 0)
 
 [node name="shootCooldown" parent="hit_hitbox/fire_point" index="1"]
 wait_time = 0.75
-
-[node name="Sprite2D" type="Sprite2D" parent="." index="8"]
-position = Vector2(-7.62939e-06, 340.875)
-scale = Vector2(0.6625, 0.210625)
-texture = ExtResource("6_4twid")
 
 [connection signal="timeout" from="hit_hitbox/fire_point/shootCooldown" to="." method="_on_shoot_cooldown_timeout"]

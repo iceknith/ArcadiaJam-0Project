@@ -64,11 +64,11 @@ sprite_frames = SubResource("SpriteFrames_vlu8q")
 animation = &"walk"
 frame_progress = 0.596018
 
-[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
-position = Vector2(-59, 29)
-shape = SubResource("RectangleShape2D_hgy4o")
-
-[node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="2"]
+[node name="Shadow" type="Sprite2D" parent="hit_hitbox" index="0"]
 position = Vector2(-67.5, 367)
 scale = Vector2(0.9125, 0.31375)
 texture = ExtResource("6_tay10")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="1"]
+position = Vector2(-59, 29)
+shape = SubResource("RectangleShape2D_hgy4o")

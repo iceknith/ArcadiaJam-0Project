@@ -27,5 +27,6 @@ func _on_timer_timeout():
 
 	quadruple_slash_instance.direction = direction
 	quadruple_slash_instance.position = startPos
+	quadruple_slash_instance.level = level
 	quadruple_slash_instance.spawnNum = spawnNum - 1
 	get_parent().add_child(quadruple_slash_instance)

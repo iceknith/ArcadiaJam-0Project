@@ -84,7 +84,7 @@ func _on_area_entered(area):
 		if autoDisapear: 
 			queue_free()
 			
-	elif ("hit_hitbox" in area.name && attackEntities):
+	elif ("hit_hitbox" in area.name && attackEntities && body.state != "dead"):
 		var entity:Entity = body
 		entity.damage(damageAmount, direction)
 		if (entity.health <= 0): kill.emit()

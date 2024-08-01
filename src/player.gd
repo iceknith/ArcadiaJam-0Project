@@ -220,8 +220,6 @@ func stab_handler(delta):
 		stab_instance.position = position
 		stab_instance.direction = dir
 		stab_instance.kill.connect(_on_stab_kill)
-		if ($AnimatedSprite2D.flip_h):
-			stab_instance.position.x -= stab_instance.get_node("CollisionShape2D").get_shape().get_rect().size.x
 		get_parent().add_child(stab_instance)
 		stab_instance.damageAmount += additionalStabDamage
 		damage_emitted += stab_instance.damageAmount

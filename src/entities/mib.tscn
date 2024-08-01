@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bovjfu1ap5g6x"]
+[gd_scene load_steps=12 format=3 uid="uid://bovjfu1ap5g6x"]
 
 [ext_resource type="PackedScene" uid="uid://fogg8jxfmkbt" path="res://src/entities/entity.tscn" id="1_fc1pa"]
+[ext_resource type="Script" path="res://src/entities/mib.gd" id="2_gvyw0"]
 [ext_resource type="PackedScene" uid="uid://cahhc0oyqsiev" path="res://src/spells/bullet.tscn" id="2_iv5vg"]
 [ext_resource type="Texture2D" uid="uid://cbxnfo6utlhwu" path="res://assets/mobs/MIB/mib.png" id="2_qk7i2"]
 [ext_resource type="Texture2D" uid="uid://c1x7kjxxcngml" path="res://assets/mobs/mobDeath.png" id="3_uc0cj"]
@@ -54,6 +55,7 @@ height = 644.0
 size = Vector2(62, 271)
 
 [node name="MIB" instance=ExtResource("1_fc1pa")]
+script = ExtResource("2_gvyw0")
 minSpeed = 1250.0
 maxSpeed = 1500.0
 minHealth = 20.0
@@ -70,6 +72,7 @@ animation = &"walk"
 frame = 1
 frame_progress = 0.0837033
 offset = Vector2(-75, 0)
+metadata/_edit_lock_ = true
 
 [node name="NavigationAgent2D" parent="." index="1"]
 target_desired_distance = 2000.0
@@ -80,20 +83,23 @@ wait_time = 2.0
 [node name="hit_hitbox" parent="." index="7"]
 collision_layer = 5
 
-[node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="0"]
+[node name="reloadAnimationPos" type="Marker2D" parent="hit_hitbox" index="0"]
+position = Vector2(-343, -158)
+
+[node name="Shadow" type="Sprite2D" parent="hit_hitbox" index="1"]
 position = Vector2(58, 356)
 scale = Vector2(1, 0.4225)
 texture = ExtResource("7_6jvw7")
 
-[node name="CollisionShape2D" parent="hit_hitbox" index="1"]
+[node name="CollisionShape2D" parent="hit_hitbox" index="2"]
 position = Vector2(31, 17)
 shape = SubResource("CapsuleShape2D_0bb23")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="2"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_hitbox" index="3"]
 position = Vector2(-36, -47)
 shape = SubResource("RectangleShape2D_dgvtj")
 
-[node name="fire_point" parent="hit_hitbox" index="3"]
+[node name="fire_point" parent="hit_hitbox" index="4"]
 position = Vector2(-334, -160)
 
 [node name="RayCast2D" parent="hit_hitbox/fire_point" index="0"]

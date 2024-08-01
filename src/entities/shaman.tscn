@@ -53,7 +53,7 @@ height = 72.0
 size = Vector2(319, 438)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bpwvs"]
-radius = 677.106
+radius = 700.0
 
 [node name="shaman" instance=ExtResource("1_dw82e")]
 script = ExtResource("2_f4ojc")
@@ -70,7 +70,12 @@ animation = &"walk"
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CapsuleShape2D_4vb2d")
 
-[node name="CollisionShape2D" parent="hit_hitbox" index="0"]
+[node name="Shadow" type="Sprite2D" parent="hit_hitbox" index="0"]
+position = Vector2(-2, 423)
+scale = Vector2(0.615, 0.24375)
+texture = ExtResource("6_r5co1")
+
+[node name="CollisionShape2D" parent="hit_hitbox" index="1"]
 position = Vector2(-36.5, -100)
 shape = SubResource("RectangleShape2D_1v1o5")
 
@@ -79,10 +84,5 @@ shape = SubResource("RectangleShape2D_1v1o5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitbox" index="0"]
 position = Vector2(0, -75)
 shape = SubResource("CircleShape2D_bpwvs")
-
-[node name="Sprite2D" type="Sprite2D" parent="." index="9"]
-position = Vector2(-2, 423)
-scale = Vector2(0.615, 0.24375)
-texture = ExtResource("6_r5co1")
 
 [connection signal="area_entered" from="attack_hitbox" to="." method="_on_attack_hitbox_area_entered"]

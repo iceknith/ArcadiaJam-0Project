@@ -74,7 +74,7 @@ position = Vector2(-0.399726, -11.5512)
 rotation = 0.541052
 shape = SubResource("RectangleShape2D_4thmf")
 
-[node name="Sprite2D" type="Sprite2D" parent="hit_hitbox" index="2"]
+[node name="Shadow" type="Sprite2D" parent="hit_hitbox" index="2"]
 position = Vector2(14, 127)
 scale = Vector2(1.1975, 0.4225)
 texture = ExtResource("5_j0rye")
