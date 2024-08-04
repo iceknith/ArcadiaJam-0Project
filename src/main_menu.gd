@@ -15,3 +15,12 @@ func _process(delta):
 
 func _on_button_pressed():
 	start_game.emit()
+
+
+func _on_high_scores_button_pressed():
+	get_parent().add_child(load("res://src/high_score_menu.tscn").instantiate())
+	queue_free()
+
+
+func _on_quit_pressed():
+	get_tree().quit()

@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ho3j4cwv61le"]
+[gd_scene load_steps=9 format=3 uid="uid://ho3j4cwv61le"]
 
 [ext_resource type="Script" path="res://src/main_menu.gd" id="1_t5fe8"]
 [ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="2_odj4d"]
 [ext_resource type="Texture2D" uid="uid://clnkejwhgbwcr" path="res://assets/title.png" id="2_pkyal"]
-[ext_resource type="PackedScene" uid="uid://bf64853tpct3y" path="res://high_score_display.tscn" id="4_ci78c"]
+[ext_resource type="StyleBox" uid="uid://dub8ow3mesr3q" path="res://assets/GUI/button_style_boxes/button_style_box_unpressed.tres" id="5_02p86"]
+[ext_resource type="StyleBox" uid="uid://bqjmg2lsusjr2" path="res://assets/GUI/button_style_boxes/button_style_box_hovered.tres" id="6_hce4l"]
+[ext_resource type="StyleBox" uid="uid://8d5pwbxbywoc" path="res://assets/GUI/button_style_boxes/button_style_box_pressed.tres" id="7_7igtd"]
+[ext_resource type="Script" path="res://src/Button.gd" id="7_yceyr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7k6o3"]
 font = ExtResource("2_odj4d")
@@ -33,38 +36,15 @@ texture = ExtResource("2_pkyal")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 10.0
-offset_top = -18.0
-offset_right = -1572.0
-offset_bottom = 198.0
+offset_left = 3.0
+offset_top = -10.0
+offset_right = -1579.0
+offset_bottom = 206.0
 grow_horizontal = 2
 text = "Iceknith
 Creatchure
 Deysox"
 label_settings = SubResource("LabelSettings_7k6o3")
-vertical_alignment = 1
-
-[node name="HighScore Display" parent="." instance=ExtResource("4_ci78c")]
-layout_mode = 1
-offset_left = 44.0
-offset_top = 527.0
-offset_right = -919.0
-offset_bottom = 321.0
-scale = Vector2(0.6, 0.6)
-
-[node name="Label" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 2.0
-offset_top = 72.0
-offset_right = 2.0
-offset_bottom = 95.0
-grow_horizontal = 2
-text = "Title"
-label_settings = SubResource("LabelSettings_7k6o3")
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="."]
@@ -82,6 +62,52 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_odj4d")
 theme_override_font_sizes/font_size = 200
+theme_override_styles/normal = ExtResource("5_02p86")
+theme_override_styles/hover = ExtResource("6_hce4l")
+theme_override_styles/pressed = ExtResource("7_7igtd")
+theme_override_styles/focus = ExtResource("6_hce4l")
 text = "Jouer"
+script = ExtResource("7_yceyr")
+
+[node name="highScoresButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 872.0
+offset_right = 521.0
+offset_bottom = 993.0
+theme_override_fonts/font = ExtResource("2_odj4d")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("5_02p86")
+theme_override_styles/hover = ExtResource("6_hce4l")
+theme_override_styles/pressed = ExtResource("7_7igtd")
+theme_override_styles/focus = ExtResource("6_hce4l")
+text = "Highscores"
+
+[node name="quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 554.0
+offset_top = 332.0
+offset_right = 874.0
+offset_bottom = 453.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.196078)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 0.588235)
+theme_override_fonts/font = ExtResource("2_odj4d")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("5_02p86")
+theme_override_styles/hover = ExtResource("6_hce4l")
+theme_override_styles/pressed = ExtResource("7_7igtd")
+theme_override_styles/focus = ExtResource("6_hce4l")
+text = "Quitter"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="highScoresButton" to="." method="_on_high_scores_button_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

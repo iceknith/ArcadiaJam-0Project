@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1p62rhud5731"]
+[gd_scene load_steps=15 format=3 uid="uid://d1p62rhud5731"]
 
 [ext_resource type="Script" path="res://src/world.gd" id="1_h7s14"]
 [ext_resource type="PackedScene" uid="uid://ceujuajux8q35" path="res://src/dungeon.tscn" id="1_ox068"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dgpbwk01d1qeh" path="res://assets/cressidadeathscreen.png" id="4_34gtw"]
 [ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="5_hprrq"]
 [ext_resource type="Script" path="res://src/TextEdit.gd" id="6_67m82"]
+[ext_resource type="Script" path="res://src/HighScoreKeyboard.gd" id="7_ydqmq"]
+[ext_resource type="StyleBox" uid="uid://dub8ow3mesr3q" path="res://assets/GUI/button_style_boxes/button_style_box_unpressed.tres" id="8_o72uk"]
+[ext_resource type="StyleBox" uid="uid://bqjmg2lsusjr2" path="res://assets/GUI/button_style_boxes/button_style_box_hovered.tres" id="9_mkde0"]
+[ext_resource type="StyleBox" uid="uid://8d5pwbxbywoc" path="res://assets/GUI/button_style_boxes/button_style_box_pressed.tres" id="10_osnac"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cjuco"]
 font = ExtResource("5_hprrq")
@@ -22,6 +26,13 @@ font_color = Color(1, 1, 0.231373, 1)
 shadow_size = 50
 shadow_color = Color(0, 0, 0, 0.341176)
 shadow_offset = Vector2(10, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkt2g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_226ft"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
 
 [node name="world" type="Node2D"]
 script = ExtResource("1_h7s14")
@@ -101,15 +112,49 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -422.0
-offset_top = 189.0
+offset_top = 109.0
 offset_right = 418.0
-offset_bottom = 284.0
+offset_bottom = 204.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_hprrq")
 theme_override_font_sizes/font_size = 100
 placeholder_text = "Entrez votre nom !"
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+caret_blink = true
+caret_draw_when_editable_disabled = true
+caret_multiple = false
 script = ExtResource("6_67m82")
+
+[node name="OnscreenKeyboard" type="PanelContainer" parent="highScoreRegister"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 343.0
+offset_top = -292.0
+offset_right = -354.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rkt2g")
+script = ExtResource("7_ydqmq")
+custom_layout_file = "res://addons/onscreenkeyboard/customize/keyboardLayouts/keyboard_layout_fr.json"
+background = SubResource("StyleBoxFlat_226ft")
+normal = ExtResource("8_o72uk")
+hover = ExtResource("9_mkde0")
+pressed = ExtResource("10_osnac")
+special_keys = ExtResource("8_o72uk")
+font = ExtResource("5_hprrq")
+font_size = 75
+font_color_normal = Color(1, 1, 1, 0.588235)
+font_color_hover = Color(1, 1, 1, 0.784314)
 
 [connection signal="player_entered_room" from="dungeon" to="." method="_on_dungeon_player_entered_room"]
 [connection signal="death" from="player" to="." method="_on_player_death"]
@@ -118,3 +163,5 @@ script = ExtResource("6_67m82")
 [connection signal="showTutorial" from="player" to="." method="_on_player_show_tutorial"]
 [connection signal="spellChange" from="player" to="." method="_on_player_spell_change"]
 [connection signal="name_found" from="highScoreRegister/TextEdit" to="." method="_on_text_edit_name_found"]
+[connection signal="text_changed" from="highScoreRegister/TextEdit" to="highScoreRegister/TextEdit" method="_on_text_changed"]
+[connection signal="key_pressed" from="highScoreRegister/OnscreenKeyboard" to="highScoreRegister/TextEdit" method="_on_onscreen_keyboard_key_pressed"]

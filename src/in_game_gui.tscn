@@ -15,6 +15,7 @@ script = ExtResource("1_coytm")
 [node name="Shop" parent="." instance=ExtResource("3_kcr6l")]
 
 [node name="generate dungeon" type="Button" parent="."]
+visible = false
 offset_left = 70.0
 offset_top = 68.0
 offset_right = 220.0

@@ -148,6 +148,7 @@ func player_get_heal()->Array:
 		result[2].append((int) (min(player.maxGray - player.gray, damageToHeal/damage_per_color["gray"])))
 		damageToHeal -= result[2][-1] * damage_per_color["gray"]
 		maxHeal = result[2][-1]
+		colors.remove_at(0)
 	
 	for c in colors:
 		#Check if we have to exit

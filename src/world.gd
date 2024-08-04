@@ -2,7 +2,7 @@ extends Node2D
 
 signal playerSignal(signalType:String, signalValues:Array)
 
-@export var max_high_score_saved = 10
+@export var max_high_score_saved = 15
 var showTutorial:bool = false
 var high_scores:Array[Array] = []
 

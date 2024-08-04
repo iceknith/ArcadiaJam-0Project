@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://bl74ahbhad686"]
+
+[ext_resource type="Texture2D" uid="uid://dgpbwk01d1qeh" path="res://assets/cressidadeathscreen.png" id="1_5c1gt"]
+[ext_resource type="Script" path="res://src/high_score_menu.gd" id="1_vi7ra"]
+[ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="2_4ks5o"]
+[ext_resource type="StyleBox" uid="uid://dub8ow3mesr3q" path="res://assets/GUI/button_style_boxes/button_style_box_unpressed.tres" id="3_d4dm5"]
+[ext_resource type="StyleBox" uid="uid://bqjmg2lsusjr2" path="res://assets/GUI/button_style_boxes/button_style_box_hovered.tres" id="4_jhqfb"]
+[ext_resource type="StyleBox" uid="uid://8d5pwbxbywoc" path="res://assets/GUI/button_style_boxes/button_style_box_pressed.tres" id="5_04ix7"]
+[ext_resource type="PackedScene" uid="uid://bf64853tpct3y" path="res://src/high_score_display.tscn" id="6_n16qi"]
+[ext_resource type="Script" path="res://src/Button.gd" id="7_nrf75"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7o06e"]
+font = ExtResource("2_4ks5o")
+font_size = 250
+font_color = Color(0.945098, 0.745098, 0, 1)
+shadow_color = Color(0, 0, 0, 0.341176)
+
+[node name="HighScores" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vi7ra")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5c1gt")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 10.0
+offset_right = 2.00012
+offset_bottom = 217.0
+grow_horizontal = 2
+text = "HighScores :"
+label_settings = SubResource("LabelSettings_7o06e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -425.0
+offset_top = -246.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_4ks5o")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("3_d4dm5")
+theme_override_styles/hover = ExtResource("4_jhqfb")
+theme_override_styles/pressed = ExtResource("5_04ix7")
+theme_override_styles/focus = ExtResource("4_jhqfb")
+text = "Retour 
+au menu"
+script = ExtResource("7_nrf75")
+
+[node name="HighScore Display" parent="." instance=ExtResource("6_n16qi")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -475.5
+offset_top = -265.0
+offset_right = 475.5
+offset_bottom = 505.0
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

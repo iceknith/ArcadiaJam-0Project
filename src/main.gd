@@ -17,8 +17,7 @@ func _process(delta):
 	pass
 
 func launchGame():
-	if firstLaunch: get_node("main_menu").queue_free()
-	else: get_node("death_menu").queue_free()
+	for child in get_children(): child.queue_free()
 	add_child(game.instantiate())
 	
 	if firstLaunch: get_node("game").get_node("world").showTutorial = true

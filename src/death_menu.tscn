@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://pa3hm0ca2mau"]
+[gd_scene load_steps=9 format=3 uid="uid://pa3hm0ca2mau"]
 
 [ext_resource type="Script" path="res://src/death_menu.gd" id="1_r2v0p"]
 [ext_resource type="Texture2D" uid="uid://dgpbwk01d1qeh" path="res://assets/cressidadeathscreen.png" id="2_xppbb"]
 [ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="3_nuhsu"]
-[ext_resource type="PackedScene" uid="uid://bf64853tpct3y" path="res://high_score_display.tscn" id="4_j6rbb"]
+[ext_resource type="StyleBox" uid="uid://dub8ow3mesr3q" path="res://assets/GUI/button_style_boxes/button_style_box_unpressed.tres" id="4_mic5p"]
+[ext_resource type="StyleBox" uid="uid://bqjmg2lsusjr2" path="res://assets/GUI/button_style_boxes/button_style_box_hovered.tres" id="5_vbafm"]
+[ext_resource type="StyleBox" uid="uid://8d5pwbxbywoc" path="res://assets/GUI/button_style_boxes/button_style_box_pressed.tres" id="6_kwrqu"]
+[ext_resource type="Script" path="res://src/Button.gd" id="7_qgicj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hn8rm"]
 font = ExtResource("3_nuhsu")
@@ -12,16 +15,6 @@ font_color = Color(0.415686, 0, 0.027451, 1)
 shadow_size = 50
 shadow_color = Color(0, 0, 0, 0.341176)
 shadow_offset = Vector2(25, 25)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yeyo7"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hu5x1"]
-bg_color = Color(0.121569, 0.121569, 0.121569, 0.894118)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o1ix3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4b1k5"]
-bg_color = Color(0.121569, 0.121569, 0.121569, 0.894118)
 
 [node name="death_menu" type="Control"]
 layout_mode = 3
@@ -71,9 +64,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_nuhsu")
 theme_override_font_sizes/font_size = 150
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yeyo7")
-theme_override_styles/hover = SubResource("StyleBoxFlat_hu5x1")
+theme_override_styles/normal = ExtResource("4_mic5p")
+theme_override_styles/hover = ExtResource("5_vbafm")
+theme_override_styles/pressed = ExtResource("6_kwrqu")
+theme_override_styles/focus = ExtResource("5_vbafm")
 text = "Nouvelle partie"
+script = ExtResource("7_qgicj")
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 1
@@ -88,19 +84,67 @@ offset_right = 160.0
 offset_bottom = 508.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.392157)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 0.588235)
 theme_override_fonts/font = ExtResource("3_nuhsu")
 theme_override_font_sizes/font_size = 100
-theme_override_styles/normal = SubResource("StyleBoxEmpty_o1ix3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4b1k5")
+theme_override_styles/normal = ExtResource("4_mic5p")
+theme_override_styles/hover = ExtResource("5_vbafm")
+theme_override_styles/pressed = ExtResource("6_kwrqu")
+theme_override_styles/focus = ExtResource("5_vbafm")
 text = "Quitter"
 
-[node name="HighScore Display" parent="." instance=ExtResource("4_j6rbb")]
+[node name="BackToMenu" type="Button" parent="."]
 layout_mode = 1
-offset_left = 33.0
-offset_top = 576.0
-offset_right = -936.0
-offset_bottom = 370.0
-scale = Vector2(0.5, 0.5)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -395.0
+offset_top = -210.0
+offset_right = -51.9999
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.490196)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 0.784314)
+theme_override_fonts/font = ExtResource("3_nuhsu")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("4_mic5p")
+theme_override_styles/hover = ExtResource("5_vbafm")
+theme_override_styles/pressed = ExtResource("6_kwrqu")
+theme_override_styles/focus = ExtResource("5_vbafm")
+text = "Retour
+au menu"
+
+[node name="Highscores" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -190.0
+offset_right = 479.0
+offset_bottom = -17.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 0.784314)
+theme_override_fonts/font = ExtResource("3_nuhsu")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = ExtResource("4_mic5p")
+theme_override_styles/hover = ExtResource("5_vbafm")
+theme_override_styles/pressed = ExtResource("6_kwrqu")
+theme_override_styles/focus = ExtResource("5_vbafm")
+text = "Highscores"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="BackToMenu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="Highscores" to="." method="_on_highscores_pressed"]

@@ -47,7 +47,7 @@ costType = "blue"
 maxLevels = 4
 maxColorAdd_per_level = Array[int]([30, 35, 40, 45])
 costs_per_level = Array[int]([15, 13, 12, 10])
-damageAmount_per_level = Array[int]([30, 30, 30, 30])
+damageAmount_per_level = Array[int]([30, 31, 33, 35])
 acceleration_per_leve = Array[float]([25.0, 25.0, 25.0, 25.0])
 speed_per_level = Array[float]([2000.0, 2000.0, 2000.0, 2000.0])
 maxDuration_per_level = Array[float]([2.0, 3.0, 4.0, 5.0])
@@ -59,7 +59,6 @@ scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_5aisa")
 animation = &"explode"
 script = ExtResource("6_csjjs")
-explodeToContact = false
 
 [connection signal="hit" from="." to="." method="_on_hit"]
 [connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]

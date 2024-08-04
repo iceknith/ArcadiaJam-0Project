@@ -329,10 +329,13 @@ func damage(damage_amount:int, damage_direction:Vector2, damageType:Array):
 func heal(heal_amount:Array, heal_type:Array):
 	var y_popup_margin = 500
 	for i in range(heal_type.size()):
+		if (heal_amount[i] == 0): continue
+		
 		if ("gray" == heal_type[i]):
 			gray = min(maxGray, gray + heal_amount[i])
 			spawn_text_popup("gray", str("+ ", heal_amount[i]), 2, y_popup_margin)
 			y_popup_margin -= 100
+	
 			healthChange.emit("gray", false, gray)
 		if ("red" == heal_type[i]):
 			red = min(maxRed, red + heal_amount[i])

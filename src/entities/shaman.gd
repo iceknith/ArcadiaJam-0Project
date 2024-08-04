@@ -13,3 +13,19 @@ func _on_attack_hitbox_area_entered(area):
 		var player:Player = body
 		var damage_direction:Vector2 = (player.global_position - global_position).normalized() * push_back_force
 		player.damage(meleDamageAmount, damage_direction, meleDamageType)
+
+func _process(delta):
+	if (state == "dead"): return
+	
+	#collect actions
+	action_handler()
+	
+	#consequences
+	if (health <= 0 and state != "dead"):
+		state = "dead"
+		$AnimatedSprite2D.animation = "dead"
+		$deathAnimationTimer.start()
+		if ($hit_hitbox.get_node_or_null("Shadow")): $hit_hitbox.get_node("Shadow").visible = false
+		velocity = Vector2.ZERO
+		death.emit()
+		queue_redraw()

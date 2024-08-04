@@ -12,3 +12,13 @@ func _on_button_pressed():
 
 func _on_button_2_pressed():
 	get_tree().quit()
+
+
+func _on_highscores_pressed():
+	get_parent().add_child(load("res://src/high_score_menu.tscn").instantiate())
+	queue_free()
+
+
+func _on_back_to_menu_pressed():
+	get_parent().add_child(load("res://src/main_menu.tscn").instantiate())
+	queue_free()
