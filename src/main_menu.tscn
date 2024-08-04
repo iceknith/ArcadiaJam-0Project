@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ho3j4cwv61le"]
+[gd_scene load_steps=6 format=3 uid="uid://ho3j4cwv61le"]
 
 [ext_resource type="Script" path="res://src/main_menu.gd" id="1_t5fe8"]
 [ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="2_odj4d"]
 [ext_resource type="Texture2D" uid="uid://clnkejwhgbwcr" path="res://assets/title.png" id="2_pkyal"]
+[ext_resource type="PackedScene" uid="uid://bf64853tpct3y" path="res://high_score_display.tscn" id="4_ci78c"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7k6o3"]
 font = ExtResource("2_odj4d")
 font_size = 70
-font_color = Color(0.188235, 0.188235, 0.188235, 1)
+font_color = Color(0.188235, 0.188235, 0.188235, 0.431373)
 shadow_size = 50
 shadow_color = Color(0, 0, 0, 0.341176)
 shadow_offset = Vector2(25, 25)
@@ -27,6 +28,29 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_pkyal")
+
+[node name="Signature" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = -18.0
+offset_right = -1572.0
+offset_bottom = 198.0
+grow_horizontal = 2
+text = "Iceknith
+Creatchure
+Deysox"
+label_settings = SubResource("LabelSettings_7k6o3")
+vertical_alignment = 1
+
+[node name="HighScore Display" parent="." instance=ExtResource("4_ci78c")]
+layout_mode = 1
+offset_left = 44.0
+offset_top = 527.0
+offset_right = -919.0
+offset_bottom = 321.0
+scale = Vector2(0.6, 0.6)
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -59,20 +83,5 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_odj4d")
 theme_override_font_sizes/font_size = 200
 text = "Jouer"
-
-[node name="Signature" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 25.0
-offset_top = 854.0
-offset_right = -1557.0
-offset_bottom = 1070.0
-grow_horizontal = 2
-text = "Iceknith
-Creatchure
-Deysox"
-label_settings = SubResource("LabelSettings_7k6o3")
-vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

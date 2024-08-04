@@ -15,8 +15,8 @@ func _process(delta):
 	pass
 
 func _on_world_player_signal(signalType, signalValues):
-	if (signalType == "death"):
-		pass
+	if (signalType == "hide gui"):
+		hide() 
 	elif (signalType == "health_change"):
 		$playerGUI.health_change(signalValues[0], signalValues[1], signalValues[2])
 	elif (signalType == "spell_change"):

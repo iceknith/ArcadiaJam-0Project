@@ -1,0 +1,10 @@
+Name2;15;3;5
+PlayerTest;1;2;8
+PlayerTest;1;1;1
+Name;1;1;1
+Dimitri le plus beau;1;1;1
+Je ;1;1;1
+Dimitri le plus bô;1;1;1
+Dimitri;1;1;1
+Dimitri;1;1;1
+Iceknith;1;1;1

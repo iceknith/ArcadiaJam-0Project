@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://pa3hm0ca2mau"]
+[gd_scene load_steps=10 format=3 uid="uid://pa3hm0ca2mau"]
 
 [ext_resource type="Script" path="res://src/death_menu.gd" id="1_r2v0p"]
 [ext_resource type="Texture2D" uid="uid://dgpbwk01d1qeh" path="res://assets/cressidadeathscreen.png" id="2_xppbb"]
 [ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="3_nuhsu"]
+[ext_resource type="PackedScene" uid="uid://bf64853tpct3y" path="res://high_score_display.tscn" id="4_j6rbb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hn8rm"]
 font = ExtResource("3_nuhsu")
@@ -62,9 +63,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -247.0
+offset_left = -422.0
 offset_top = -40.0
-offset_right = 253.0
+offset_right = 428.0
 offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -92,6 +93,14 @@ theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxEmpty_o1ix3")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4b1k5")
 text = "Quitter"
+
+[node name="HighScore Display" parent="." instance=ExtResource("4_j6rbb")]
+layout_mode = 1
+offset_left = 33.0
+offset_top = 576.0
+offset_right = -936.0
+offset_bottom = 370.0
+scale = Vector2(0.5, 0.5)
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

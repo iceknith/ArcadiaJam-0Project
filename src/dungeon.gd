@@ -1,5 +1,7 @@
 extends Node2D
 
+signal player_entered_room()
+
 var rooms:Array = [];
 var corridors:Array = [];
 var walls:Array = []
@@ -16,7 +18,7 @@ var grid:Array = [];
 @export var spellMaxDamage:int = 60
 
 var world = 1
-var visited_worlds = 1;
+var visited_worlds = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -211,6 +213,7 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 		previous_dir = current_dir
 		prevRoom = room
 		reverse_index = grid.size()
+		room.player_entered_first_time.connect(_player_entered_room)
 		if (i == 1):
 			get_parent().get_node("player").position = position + room.position + room.get_node("LootPosition").position
 			room.remove_entities.call_deferred()
@@ -286,3 +289,6 @@ func get_difficulty()->float:
 	
 func get_room_heal_percent()->float:
 	return 0.85 + 0.1/get_difficulty()
+	
+func _player_entered_room(player)->void:
+	player_entered_room.emit()

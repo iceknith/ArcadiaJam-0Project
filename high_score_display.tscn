@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://bf64853tpct3y"]
+
+[ext_resource type="Script" path="res://high_score_display.gd" id="1_u3u3o"]
+[ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="1_xxrxm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pbac"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(1, 1, 1, 0.454902)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_nin3k"]
+font = ExtResource("1_xxrxm")
+font_size = 75
+font_color = Color(1, 1, 0, 0.490196)
+
+[sub_resource type="LabelSettings" id="LabelSettings_15pgs"]
+line_spacing = 10.0
+font = ExtResource("1_xxrxm")
+font_size = 50
+font_color = Color(0, 0, 0, 0.486275)
+outline_color = Color(0.40378, 0.40378, 9.62615e-08, 1)
+shadow_size = 3
+shadow_color = Color(1, 1, 1, 0.196078)
+
+[node name="HighScore Display" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = -963.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7pbac")
+script = ExtResource("1_u3u3o")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Highscores :"
+label_settings = SubResource("LabelSettings_nin3k")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "
+
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 
+1234567890123456789 - Loop 99 World 3 Room 55 "
+label_settings = SubResource("LabelSettings_15pgs")
+horizontal_alignment = 1
