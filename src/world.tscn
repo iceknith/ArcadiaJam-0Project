@@ -47,6 +47,7 @@ defaultDashDuration = 0.6
 defaultStabCost = 7
 
 [node name="highScoreRegister" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
