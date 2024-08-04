@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr1cc4gg313og"]
+[gd_scene load_steps=6 format=3 uid="uid://cr1cc4gg313og"]
 
 [ext_resource type="Script" path="res://src/shop.gd" id="1_4tm1s"]
 [ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="1_40c4v"]
 [ext_resource type="Theme" uid="uid://cwfjtfcadn8x4" path="res://assets/select_item_theme.tres" id="2_e1gf3"]
+[ext_resource type="Script" path="res://src/Button.gd" id="3_av8jf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oe5dv"]
 font = ExtResource("1_40c4v")
@@ -39,6 +40,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_e1gf3")
+script = ExtResource("3_av8jf")
 
 [node name="icon" type="Sprite2D" parent="item_1"]
 scale = Vector2(0.3, 0.3)
@@ -136,6 +138,7 @@ offset_top = 837.0
 offset_right = 279.0
 offset_bottom = 938.0
 theme = ExtResource("2_e1gf3")
+script = ExtResource("3_av8jf")
 
 [node name="spell_2_button" type="Button" parent="."]
 layout_mode = 0

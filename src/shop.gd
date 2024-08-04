@@ -26,6 +26,8 @@ func init_item_selection(itemIconPath:Array, itemPointer:Array, itemType:Array, 
 	itemPointers = itemPointer
 	itemLevels = itemLevel
 	itemTypes = itemType
+	$item_1/select_button.was_active = false
+	$spell_1_button.was_active = true
 	
 	for i in 3:
 		var marker:Marker2D = get_node(str("item_", i+1))
@@ -68,6 +70,7 @@ func init_item_selection(itemIconPath:Array, itemPointer:Array, itemType:Array, 
 
 func init_spell_selection(index:int):
 	$text_label.text = "Choisissez où ce sort ira !"
+	$spell_1_button.was_active = false
 	for i in 3:
 		if (i != index):
 			get_node(str("item_", i+1)).visible = false
