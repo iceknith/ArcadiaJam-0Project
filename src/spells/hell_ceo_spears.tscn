@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcwmvmt3yna1v"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_1wl5r"]
+[ext_resource type="Texture2D" uid="uid://bfbfaes1hq52i" path="res://assets/spells/Flèches givrées/fleche_givree_0003.png" id="2_obwxn"]
+[ext_resource type="Script" path="res://src/spells/hell_ceo_spears.gd" id="2_sckny"]
+[ext_resource type="Texture2D" uid="uid://fope2nw4b58p" path="res://assets/spells/Flèches givrées/fleche_givree_0000.png" id="3_qm6f2"]
+[ext_resource type="Texture2D" uid="uid://kriohrayvw6f" path="res://assets/spells/Flèches givrées/fleche_givree_0001.png" id="4_alcx3"]
+[ext_resource type="Texture2D" uid="uid://du2gmmqomwjof" path="res://assets/spells/Flèches givrées/fleche_givree_0002.png" id="5_bdhyh"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="6_hqojm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uv86j"]
+size = Vector2(661, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4yc03"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_obwxn")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_obwxn")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qm6f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_alcx3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bdhyh")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 6.0
+}]
+
+[node name="HellCEOSpears" instance=ExtResource("1_1wl5r")]
+script = ExtResource("2_sckny")
+distance_between_spells = 500.0
+attackPlayer = true
+damageAmount_per_level = Array[int]([20])
+acceleration_per_leve = Array[float]([75.0])
+speed_per_level = Array[float]([1500.0])
+maxDuration_per_level = Array[float]([5.0])
+damageType = ["blue"]
+deleted_by_map = false
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_uv86j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(2, -0.999998)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_4yc03")
+animation = &"spawn"
+script = ExtResource("6_hqojm")
+spawnAnimationTime = 0.5
+explosionAnimationTime = 0.25
+
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]

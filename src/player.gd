@@ -81,6 +81,20 @@ func _ready():
 	dashDuration = defaultDashDuration
 	stabCost = defaultStabCost
 	maxGray = defaultMaxGray
+	
+	#debug :
+	call_deferred("temp_debug")
+	#spellNum:int, newSpell:String, newSpellType:String, newSpellCost:int
+	#healthType:String, maxHealthChange:bool, newValue:int
+
+func temp_debug():
+	var spells2 = [load("res://src/spells/blood_blade.tscn"), 
+			load("res://src/spells/sword_of_justice.tscn"), 
+			load("res://src/spells/quadruple_slash.tscn"), 
+			load("res://src/spells/laser_blade.tscn")]
+	var spell_levels2 = [3, 2, 1, 3]
+	for i in range(spells.size()):
+		replaceSpell(i+1, spells2[i], spell_levels2[i])
 
 func _process(delta):
 	if (state == "dead"): 

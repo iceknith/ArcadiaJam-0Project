@@ -3,13 +3,7 @@ extends Spell
 var orb_num:int = 12
 
 func _ready():
-	rotation = atan(direction.y/direction.x)
-	
-	cost = costs_per_level[level]
-	maxColorAdd = maxColorAdd_per_level[level]
-	acceleration = acceleration_per_leve[level]
-	speed = speed_per_level[level]
-	maxDuration = maxDuration_per_level[level]
+	super._ready()
 	
 	var fire_orbs:PackedScene = load("res://src/spells/naga_fire_orb.tscn")
 	var tetha:float = 0

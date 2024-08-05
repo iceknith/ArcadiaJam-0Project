@@ -5,7 +5,6 @@ signal death
 signal rotate
 
 @export var minSpeed = 750.0
-@export var maxSpeed = 1000.0
 @export var acceleration = 50.0
 @export var knockbackSpeed = 750.0
 @export var minHealth = 100.0
@@ -19,7 +18,7 @@ signal rotate
 @export var rotatedOffsetX:float = 0
 
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
-@onready var ray_cast := $hit_hitbox/fire_point/RayCast2D as RayCast2D
+var ray_cast
 
 var speed:float
 var health:int
@@ -31,20 +30,21 @@ var direction:Vector2 = Vector2.ZERO
 var canShoot:bool = true
 var wantToMove:bool = true
 
-var level:float = 0
-
 var popup_text = preload("res://src/popup_text.tscn")
 
 func _ready():
 	$AnimatedSprite2D.animation = "idle"
 	$AnimatedSprite2D.play()
 	health = minHealth
-	speed = minSpeed + clampf(randf_range(level*0.8, level*1.2), 0, 1)*(maxSpeed - minSpeed)
+	speed = minSpeed
 	meleDamageAmount = minMeleDamageAmount
 	shootDamageAmount = minShootDamageAmount
 	
-	if (!ranged):
-		$hit_hitbox/fire_point.queue_free()
+	if ($hit_hitbox.get_node_or_null("fire_point")):
+		ray_cast = $hit_hitbox/fire_point/RayCast2D as RayCast2D
+	
+		if (!ranged):
+			$hit_hitbox/fire_point.queue_free()
 
 func _process(delta):
 	if (state == "dead"): return
@@ -62,7 +62,7 @@ func _process(delta):
 		death.emit()
 
 func _physics_process(delta):
-	if ((state != "hit" && !wantToMove) || state == "dead" || state == "freeze"): return
+	if ((state != "hit" && !wantToMove) || state == "dead" || state == "freeze" || state == "cast"): return
 	
 	if (state != "hit"):
 		direction = to_local(nav_agent.get_next_path_position()).normalized()

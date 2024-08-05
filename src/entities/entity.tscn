@@ -31,7 +31,7 @@ radius = 36.0
 height = 72.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xlw4"]
-size = Vector2(76.5066, 109.622)
+size = Vector2(76.5066, 132.811)
 
 [node name="entity" type="CharacterBody2D"]
 z_index = 9

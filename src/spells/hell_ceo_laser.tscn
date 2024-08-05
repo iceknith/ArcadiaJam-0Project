@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://xqr58tbj3kah"]
+
+[ext_resource type="PackedScene" uid="uid://rixp6jv4crp0" path="res://src/spells/spell.tscn" id="1_17j4n"]
+[ext_resource type="Script" path="res://src/spells/hell_ceo_laser.gd" id="2_736m6"]
+[ext_resource type="Texture2D" uid="uid://bri6m85ibnyu0" path="res://assets/spells/Lame laser/lame_laser.png" id="3_g38dh"]
+[ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="4_fcfjh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmsx1"]
+size = Vector2(900, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ju8rl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_g38dh")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_g38dh")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_g38dh")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 6.0
+}]
+
+[node name="HellCEOLaser" instance=ExtResource("1_17j4n")]
+scale = Vector2(5, 5)
+script = ExtResource("2_736m6")
+rotation_slowness = 10.0
+distance_from_point = 3600.0
+attackPlayer = true
+damageAmount_per_level = Array[int]([20])
+maxDuration_per_level = Array[float]([200.0])
+damageType = ["yellow"]
+deleted_by_map = false
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-17.7, -39.75)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_vmsx1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(2, -0.999998)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_ju8rl")
+animation = &"fly"
+script = ExtResource("4_fcfjh")
+spawnAnimationTime = 0.0
+explosionAnimationTime = 0.0
+explodeToContact = false
+metadata/_edit_lock_ = true
+
+[connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="hit" from="." to="AnimatedSprite2D" method="_on_hit"]

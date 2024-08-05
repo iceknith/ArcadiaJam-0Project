@@ -36,6 +36,7 @@ draw_center = false
 
 [node name="world" type="Node2D"]
 script = ExtResource("1_h7s14")
+max_high_score_saved = 99
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.25098, 0.25098, 0.25098, 1)

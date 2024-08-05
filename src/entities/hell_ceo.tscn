@@ -1,0 +1,217 @@
+[gd_scene load_steps=24 format=3 uid="uid://dku5kc02mu3ml"]
+
+[ext_resource type="PackedScene" uid="uid://jvxdcsmrlwss" path="res://src/entities/hell_ceo_shield_hit_hitbox.tscn" id="2_ky60h"]
+[ext_resource type="Script" path="res://src/entities/hell_ceo.gd" id="2_oiddg"]
+[ext_resource type="PackedScene" uid="uid://bhrr7rbly6w4e" path="res://src/spells/hell_ceo_flame_spiral.tscn" id="2_qwvbo"]
+[ext_resource type="PackedScene" uid="uid://xqr58tbj3kah" path="res://src/spells/hell_ceo_laser.tscn" id="3_5xrhu"]
+[ext_resource type="Texture2D" uid="uid://ckdf7xeu6kqg5" path="res://assets/mobs/hell_ceo/cast_p1/temp.png" id="3_3386g"]
+[ext_resource type="PackedScene" uid="uid://bcwmvmt3yna1v" path="res://src/spells/hell_ceo_spears.tscn" id="3_m6gp8"]
+[ext_resource type="Texture2D" uid="uid://xwkjrtl0qul0" path="res://assets/mobs/hell_ceo/cast_p1/temp_q.png" id="4_ed2cb"]
+[ext_resource type="Texture2D" uid="uid://dvjfqjhh4x4gm" path="res://assets/mobs/hell_ceo/cast_p2/temp.png" id="5_pgvn5"]
+[ext_resource type="Texture2D" uid="uid://bxhcbxfs5qyoc" path="res://assets/mobs/hell_ceo/cast_p2/temp_q.png" id="6_mwn2v"]
+[ext_resource type="Texture2D" uid="uid://dn6kxavsdlelo" path="res://assets/mobs/hell_ceo/dead_p1/temp.png" id="7_dkyp7"]
+[ext_resource type="Texture2D" uid="uid://enhp8b6kxpgo" path="res://assets/mobs/hell_ceo/dead_p2/temp.png" id="8_tjf43"]
+[ext_resource type="Texture2D" uid="uid://dovoy4c2t810v" path="res://assets/mobs/hell_ceo/hit_p1/temp.png" id="9_swpnt"]
+[ext_resource type="Texture2D" uid="uid://scuhtovkhfoj" path="res://assets/mobs/hell_ceo/hit_p2/temp.png" id="10_dyf16"]
+[ext_resource type="Texture2D" uid="uid://cqevfuq3u6pm8" path="res://assets/mobs/hell_ceo/idle_p1/temp.png" id="11_mtmto"]
+[ext_resource type="Texture2D" uid="uid://ccqxdb8iswlfc" path="res://assets/mobs/hell_ceo/idle_p2/temp.png" id="12_5hota"]
+[ext_resource type="Texture2D" uid="uid://crwhaftd8p7ri" path="res://assets/mobs/hell_ceo/teleport_p2/temp.png" id="13_dqcy3"]
+[ext_resource type="Texture2D" uid="uid://dvit7bvsk10w7" path="res://assets/mobs/hell_ceo/teleport_p2/temp_q.png" id="14_jcpvu"]
+[ext_resource type="Texture2D" uid="uid://casfewh7r1add" path="res://assets/mobs/hell_ceo/walk_p1/temp.png" id="15_7hnjm"]
+[ext_resource type="Script" path="res://src/entities/hitboxes.gd" id="16_gmn1b"]
+[ext_resource type="Texture2D" uid="uid://d363ae68ffcil" path="res://assets/mobs/hell_ceo/walk_p2/temp.png" id="16_j5o6l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e030d"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"cast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3386g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ed2cb")
+}],
+"loop": true,
+"name": &"cast_p1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_pgvn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mwn2v")
+}],
+"loop": true,
+"name": &"cast_p2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_dkyp7")
+}],
+"loop": true,
+"name": &"dead_p1",
+"speed": 0.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_tjf43")
+}],
+"loop": true,
+"name": &"dead_p2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_swpnt")
+}],
+"loop": true,
+"name": &"hit_p1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_dyf16")
+}],
+"loop": true,
+"name": &"hit_p2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_mtmto")
+}],
+"loop": true,
+"name": &"idle_p1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_5hota")
+}],
+"loop": true,
+"name": &"idle_p2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_dqcy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jcpvu")
+}],
+"loop": true,
+"name": &"teleport_p2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_7hnjm")
+}],
+"loop": true,
+"name": &"walk_p1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_j5o6l")
+}],
+"loop": true,
+"name": &"walk_p2",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4ye0"]
+radius = 36.0
+height = 72.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xlw4"]
+size = Vector2(244, 577)
+
+[node name="hell CEO" type="CharacterBody2D"]
+z_index = 9
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("2_oiddg")
+shield = ExtResource("2_ky60h")
+phase_1_attacks = Array[PackedScene]([ExtResource("3_5xrhu"), ExtResource("3_m6gp8"), ExtResource("2_qwvbo")])
+phase_1_shield_count = 3
+minSpeed = 0.0
+acceleration = 0.0
+minHealth = 0.0
+damageToKill = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 9
+sprite_frames = SubResource("SpriteFrames_e030d")
+animation = &"dead_p1"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_q4ye0")
+
+[node name="pathRefreshTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="invincibilityTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="deathAnimationTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="freezeTimer" type="Timer" parent="."]
+
+[node name="spellCastTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="castTimeoutTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="hit_hitbox" type="Area2D" parent="."]
+script = ExtResource("16_gmn1b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_hitbox"]
+position = Vector2(-43, 59.5)
+shape = SubResource("RectangleShape2D_2xlw4")
+
+[connection signal="rotate" from="." to="hit_hitbox" method="_on_rotate"]
+[connection signal="timeout" from="pathRefreshTimer" to="." method="_on_path_refresh_timer_timeout"]
+[connection signal="timeout" from="invincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="deathAnimationTimer" to="." method="_on_death_animation_timer_timeout"]
+[connection signal="timeout" from="freezeTimer" to="." method="_on_freeze_timer_timeout"]
+[connection signal="timeout" from="spellCastTimer" to="." method="cast_spell"]
+[connection signal="timeout" from="castTimeoutTimer" to="." method="_on_cast_timeout_timer_timeout"]
+[connection signal="area_entered" from="hit_hitbox" to="." method="_on_hitbox_area_collision"]

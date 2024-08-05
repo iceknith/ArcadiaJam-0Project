@@ -1,19 +1,50 @@
-[gd_scene load_steps=10 format=3 uid="uid://bl74ahbhad686"]
+[gd_scene load_steps=18 format=3 uid="uid://bl74ahbhad686"]
 
-[ext_resource type="Texture2D" uid="uid://dgpbwk01d1qeh" path="res://assets/cressidadeathscreen.png" id="1_5c1gt"]
 [ext_resource type="Script" path="res://src/high_score_menu.gd" id="1_vi7ra"]
 [ext_resource type="FontFile" uid="uid://va8mynseap87" path="res://assets/GUI/Cressidafont-Regular.ttf" id="2_4ks5o"]
+[ext_resource type="Texture2D" uid="uid://5btpk802774h" path="res://assets/GUI/cressidahs.png" id="2_ojdqw"]
 [ext_resource type="StyleBox" uid="uid://dub8ow3mesr3q" path="res://assets/GUI/button_style_boxes/button_style_box_unpressed.tres" id="3_d4dm5"]
 [ext_resource type="StyleBox" uid="uid://bqjmg2lsusjr2" path="res://assets/GUI/button_style_boxes/button_style_box_hovered.tres" id="4_jhqfb"]
 [ext_resource type="StyleBox" uid="uid://8d5pwbxbywoc" path="res://assets/GUI/button_style_boxes/button_style_box_pressed.tres" id="5_04ix7"]
-[ext_resource type="PackedScene" uid="uid://bf64853tpct3y" path="res://src/high_score_display.tscn" id="6_n16qi"]
-[ext_resource type="Script" path="res://src/Button.gd" id="7_nrf75"]
+[ext_resource type="Texture2D" uid="uid://c0wn7hr0f7qg2" path="res://assets/GUI/buttons/button_left_unfocused.png" id="8_u1fn3"]
+[ext_resource type="Texture2D" uid="uid://c2sn3nkev3lvw" path="res://assets/GUI/buttons/button_left_focused.png" id="9_l4nah"]
+[ext_resource type="Texture2D" uid="uid://dlb2o1e8hbl81" path="res://assets/GUI/buttons/button_left_disabled.png" id="10_0dwtr"]
+[ext_resource type="Texture2D" uid="uid://dnkb05adpaemq" path="res://assets/GUI/buttons/button_right_unfocused.png" id="11_yu4fq"]
+[ext_resource type="Texture2D" uid="uid://4rp4hm73yy4c" path="res://assets/GUI/buttons/button_right_focused.png" id="12_1jbev"]
+[ext_resource type="Script" path="res://src/TextureButton.gd" id="13_6r6dm"]
+[ext_resource type="Texture2D" uid="uid://brerfqufdh2v" path="res://assets/GUI/buttons/button_right_disabled.png" id="13_8vh8v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7o06e"]
 font = ExtResource("2_4ks5o")
-font_size = 250
+font_size = 200
 font_color = Color(0.945098, 0.745098, 0, 1)
 shadow_color = Color(0, 0, 0, 0.341176)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nxal6"]
+font = ExtResource("2_4ks5o")
+font_size = 150
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0.0470588, 0.0470588, 0.0470588, 0.458824)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wmmn"]
+font = ExtResource("2_4ks5o")
+font_size = 89
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0.145098, 0.145098, 0.145098, 0.215686)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jlrtg"]
+font = ExtResource("2_4ks5o")
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0.145098, 0.145098, 0.145098, 0.215686)
+shadow_offset = Vector2(5, 5)
 
 [node name="HighScores" type="Control"]
 layout_mode = 3
@@ -31,18 +62,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_5c1gt")
+texture = ExtResource("2_ojdqw")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 2.0
-offset_top = 10.0
-offset_right = 2.00012
-offset_bottom = 217.0
+offset_left = 514.0
+offset_top = -6.0
+offset_right = -467.0
+offset_bottom = 201.0
 grow_horizontal = 2
-text = "HighScores :"
+text = "HighScores"
 label_settings = SubResource("LabelSettings_7o06e")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -54,32 +85,163 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -425.0
-offset_top = -246.0
-offset_right = -50.0
-offset_bottom = -50.0
+offset_left = -319.0
+offset_top = -230.0
+offset_right = -55.0
+offset_bottom = -72.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_4ks5o")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = ExtResource("3_d4dm5")
 theme_override_styles/hover = ExtResource("4_jhqfb")
 theme_override_styles/pressed = ExtResource("5_04ix7")
 theme_override_styles/focus = ExtResource("4_jhqfb")
 text = "Retour 
 au menu"
-script = ExtResource("7_nrf75")
 
-[node name="HighScore Display" parent="." instance=ExtResource("6_n16qi")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -475.5
-offset_top = -265.0
-offset_right = 475.5
-offset_bottom = 505.0
+[node name="button_left" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 767.0
+offset_top = 923.0
+offset_right = 858.0
+offset_bottom = 1027.0
+disabled = true
+texture_normal = ExtResource("8_u1fn3")
+texture_pressed = ExtResource("9_l4nah")
+texture_hover = ExtResource("9_l4nah")
+texture_disabled = ExtResource("10_0dwtr")
+texture_focused = ExtResource("9_l4nah")
+
+[node name="button_right" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1045.0
+offset_top = 918.0
+offset_right = 1138.0
+offset_bottom = 1022.0
+texture_normal = ExtResource("11_yu4fq")
+texture_pressed = ExtResource("12_1jbev")
+texture_hover = ExtResource("12_1jbev")
+texture_disabled = ExtResource("13_8vh8v")
+texture_focused = ExtResource("12_1jbev")
+script = ExtResource("13_6r6dm")
+
+[node name="Score1" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="Position" type="Label" parent="Score1"]
+layout_mode = 0
+offset_left = 307.0
+offset_top = 205.0
+offset_right = 437.0
+offset_bottom = 329.0
+text = "99"
+label_settings = SubResource("LabelSettings_nxal6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Score1"]
+layout_mode = 0
+offset_left = 506.0
+offset_top = 222.0
+offset_right = 1284.0
+offset_bottom = 297.0
+text = "01234567890123457689"
+label_settings = SubResource("LabelSettings_3wmmn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Score1"]
+layout_mode = 0
+offset_left = 1332.0
+offset_top = 234.0
+offset_right = 1504.0
+offset_bottom = 285.0
+text = "99-9-99"
+label_settings = SubResource("LabelSettings_jlrtg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score2" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 3.21
+offset_top = 265.0
+offset_right = 3.21
+offset_bottom = 265.0
+
+[node name="Position" type="Label" parent="Score2"]
+layout_mode = 0
+offset_left = 307.0
+offset_top = 205.0
+offset_right = 437.0
+offset_bottom = 329.0
+text = "99"
+label_settings = SubResource("LabelSettings_nxal6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Score2"]
+layout_mode = 0
+offset_left = 506.0
+offset_top = 222.0
+offset_right = 1284.0
+offset_bottom = 297.0
+text = "01234567890123457689"
+label_settings = SubResource("LabelSettings_3wmmn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Score2"]
+layout_mode = 0
+offset_left = 1332.0
+offset_top = 234.0
+offset_right = 1504.0
+offset_bottom = 285.0
+text = "99-9-99"
+label_settings = SubResource("LabelSettings_jlrtg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score3" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 5.21
+offset_top = 529.85
+offset_right = 5.21
+offset_bottom = 529.85
+
+[node name="Position" type="Label" parent="Score3"]
+layout_mode = 0
+offset_left = 307.0
+offset_top = 205.0
+offset_right = 437.0
+offset_bottom = 329.0
+text = "99"
+label_settings = SubResource("LabelSettings_nxal6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Score3"]
+layout_mode = 0
+offset_left = 506.0
+offset_top = 222.0
+offset_right = 1284.0
+offset_bottom = 297.0
+text = "01234567890123457689"
+label_settings = SubResource("LabelSettings_3wmmn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Score3"]
+layout_mode = 0
+offset_left = 1332.0
+offset_top = 234.0
+offset_right = 1504.0
+offset_bottom = 285.0
+text = "99-9-99"
+label_settings = SubResource("LabelSettings_jlrtg")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="button_left" to="." method="_on_button_left_pressed"]
+[connection signal="pressed" from="button_right" to="." method="_on_button_right_pressed"]

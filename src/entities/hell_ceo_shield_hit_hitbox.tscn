@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://jvxdcsmrlwss"]
+
+[ext_resource type="Texture2D" uid="uid://iavloqqxmfvh" path="res://assets/gameIcon.png" id="1_2fi0c"]
+[ext_resource type="Script" path="res://src/entities/hell_ceo_shield_hit_hitbox.gd" id="1_oj3yq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qm12b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2fi0c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f0ers"]
+radius = 150.0
+
+[node name="Hell CEO Shield shield_hitbox" type="Area2D"]
+script = ExtResource("1_oj3yq")
+slowness = 10.0
+distance_to_boss = 600.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -24)
+scale = Vector2(2.395, 2.395)
+sprite_frames = SubResource("SpriteFrames_qm12b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f0ers")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

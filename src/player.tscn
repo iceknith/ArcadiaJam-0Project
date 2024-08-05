@@ -225,4 +225,5 @@ metadata/_edit_lock_ = true
 scale = Vector2(6, 6)
 texture = ExtResource("30_o26sk")
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="RegenerationTimer" to="." method="_on_regeneration_timer_timeout"]

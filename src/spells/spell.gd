@@ -76,6 +76,7 @@ func _on_area_exited(area):
 func _on_area_entered(area):
 	var body:Node2D = area.get_parent()
 	if (!isAlive): return
+	
 	if ("player" in body.name && attackPlayer):
 		var player:Player = body
 		player.damage(damageAmount, direction, damageType)
@@ -83,7 +84,11 @@ func _on_area_entered(area):
 		hit.emit("player", player)
 		if autoDisapear: 
 			queue_free()
-			
+	elif ("shield_hitbox" in area.name && attackEntities):
+		hit.emit("shield", area)
+		if autoDisapear:
+			queue_free()
+	
 	elif ("hit_hitbox" in area.name && attackEntities && body.state != "dead"):
 		var entity:Entity = body
 		entity.damage(damageAmount, direction)

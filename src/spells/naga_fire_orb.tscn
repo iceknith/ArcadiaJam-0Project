@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="11_almp5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36dy8"]
-radius = 200.0
+radius = 154.635
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fcuen"]
 animations = [{
