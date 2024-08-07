@@ -6,6 +6,7 @@ extends Spell
 var flame_count:int = max_flame_number
 var init_pos:Vector2
 var parent:CharacterBody2D
+var child:Spell = null
 
 func _on_spawn_new_flame_timeout():
 	if (flame_count <= 0 || !is_instance_valid(parent)): return
@@ -17,4 +18,9 @@ func _on_spawn_new_flame_timeout():
 	new_flame.parent = parent
 	new_flame.direction = Vector2(cos(new_rotation), sin(new_rotation))
 	get_parent().add_child(new_flame)
+	child = new_flame
 
+
+func custom_queue_free():
+	if child: child.custom_queue_free()
+	super.queue_free()

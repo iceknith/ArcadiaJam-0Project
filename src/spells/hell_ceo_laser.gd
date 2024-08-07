@@ -43,3 +43,7 @@ func _process(delta):
 		queue_free()
 	elif rotation_sense ==  1 && rotation_around_point >= initial_pos + max_rotation:
 		queue_free()
+
+
+func custom_queue_free():
+	queue_free()

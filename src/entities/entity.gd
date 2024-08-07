@@ -62,7 +62,7 @@ func _process(delta):
 		death.emit()
 
 func _physics_process(delta):
-	if ((state != "hit" && !wantToMove) || state == "dead" || state == "freeze" || state == "cast"): return
+	if ((state != "hit" && !wantToMove) || state == "dead" || state == "freeze" || state == "cast" || state == "tp"): return
 	
 	if (state != "hit"):
 		direction = to_local(nav_agent.get_next_path_position()).normalized()

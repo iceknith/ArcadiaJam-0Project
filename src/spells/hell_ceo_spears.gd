@@ -4,6 +4,7 @@ extends Spell
 var is_on_upper_ceiling:bool
 var spawn_spells:bool = true
 var parent:Entity
+var children:Array[Spell] = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,4 +32,10 @@ func _ready():
 		new_spell.position = position + Vector2(x, 0)
 		new_spell.direction = direction
 		get_parent().add_child(new_spell)
+		children.append(new_spell)
 		
+
+func custom_queue_free():
+	for child in children: child.queue_free()
+	queue_free()
+	

@@ -5,6 +5,10 @@ func _ready():
 	super._ready()
 	room_mobs.append($"hell CEO")
 
+func _process(delta):
+	pass
+	
+
 func _on_hell_ceo_death():
 	dungeon_finished(player)
 

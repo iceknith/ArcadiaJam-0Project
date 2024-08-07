@@ -48,7 +48,6 @@ deleted_by_map = false
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-17.7, -39.75)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_vmsx1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]

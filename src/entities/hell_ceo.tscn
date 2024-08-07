@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dku5kc02mu3ml"]
+[gd_scene load_steps=25 format=3 uid="uid://dku5kc02mu3ml"]
 
 [ext_resource type="PackedScene" uid="uid://jvxdcsmrlwss" path="res://src/entities/hell_ceo_shield_hit_hitbox.tscn" id="2_ky60h"]
 [ext_resource type="Script" path="res://src/entities/hell_ceo.gd" id="2_oiddg"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bcwmvmt3yna1v" path="res://src/spells/hell_ceo_spears.tscn" id="3_m6gp8"]
 [ext_resource type="Texture2D" uid="uid://xwkjrtl0qul0" path="res://assets/mobs/hell_ceo/cast_p1/temp_q.png" id="4_ed2cb"]
 [ext_resource type="Texture2D" uid="uid://dvjfqjhh4x4gm" path="res://assets/mobs/hell_ceo/cast_p2/temp.png" id="5_pgvn5"]
+[ext_resource type="PackedScene" uid="uid://boy5b550eaf01" path="res://src/spells/hell_ceo_spawner.tscn" id="6_38nxq"]
 [ext_resource type="Texture2D" uid="uid://bxhcbxfs5qyoc" path="res://assets/mobs/hell_ceo/cast_p2/temp_q.png" id="6_mwn2v"]
 [ext_resource type="Texture2D" uid="uid://dn6kxavsdlelo" path="res://assets/mobs/hell_ceo/dead_p1/temp.png" id="7_dkyp7"]
 [ext_resource type="Texture2D" uid="uid://enhp8b6kxpgo" path="res://assets/mobs/hell_ceo/dead_p2/temp.png" id="8_tjf43"]
@@ -56,12 +57,12 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 4.0,
 "texture": ExtResource("7_dkyp7")
 }],
 "loop": true,
 "name": &"dead_p1",
-"speed": 0.1
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -161,8 +162,12 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("2_oiddg")
 shield = ExtResource("2_ky60h")
+phase_1_health = 0
 phase_1_attacks = Array[PackedScene]([ExtResource("3_5xrhu"), ExtResource("3_m6gp8"), ExtResource("2_qwvbo")])
 phase_1_shield_count = 3
+phase_2_acceleration = 50.0
+phase_2_attacks = Array[PackedScene]([ExtResource("3_5xrhu"), ExtResource("3_m6gp8"), ExtResource("2_qwvbo"), ExtResource("6_38nxq")])
+phase_2_shield_count = 4
 minSpeed = 0.0
 acceleration = 0.0
 minHealth = 0.0
@@ -171,10 +176,9 @@ damageToKill = 0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 9
 sprite_frames = SubResource("SpriteFrames_e030d")
-animation = &"dead_p1"
+animation = &"walk_p2"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_q4ye0")
@@ -196,8 +200,18 @@ one_shot = true
 [node name="spellCastTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="castTimeoutTimer" type="Timer" parent="."]
+[node name="castTimeoutTimerP1" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
+
+[node name="castTimeoutTimerP2" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="tpTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="tpTimeoutTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="hit_hitbox" type="Area2D" parent="."]
@@ -213,5 +227,8 @@ shape = SubResource("RectangleShape2D_2xlw4")
 [connection signal="timeout" from="deathAnimationTimer" to="." method="_on_death_animation_timer_timeout"]
 [connection signal="timeout" from="freezeTimer" to="." method="_on_freeze_timer_timeout"]
 [connection signal="timeout" from="spellCastTimer" to="." method="cast_spell"]
-[connection signal="timeout" from="castTimeoutTimer" to="." method="_on_cast_timeout_timer_timeout"]
+[connection signal="timeout" from="castTimeoutTimerP1" to="." method="_on_cast_timeout_timer_timeout"]
+[connection signal="timeout" from="castTimeoutTimerP2" to="." method="_on_cast_timeout_timer_timeout"]
+[connection signal="timeout" from="tpTimer" to="." method="_on_tp_timer_timeout"]
+[connection signal="timeout" from="tpTimeoutTimer" to="." method="_on_tp_timeout_timer_timeout"]
 [connection signal="area_entered" from="hit_hitbox" to="." method="_on_hitbox_area_collision"]
