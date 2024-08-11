@@ -138,6 +138,12 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 					playerDamage -= lowest_spell_damage
 					
 				playerDamage += room.get_node("Shop").newSpellExpectedDamage
+			
+			#if this is the final room
+			elif (room.is_boss_room):
+				var damage:int = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * get_difficulty()
+				room.get_node("hell CEO").phase_1_health = damage/2
+				room.get_node("hell CEO").phase_2_health = damage/2
 			add_child(room)
 			
 			possible_dirs = room.entries_dir.duplicate()
@@ -274,8 +280,7 @@ func potentialDamage(player:Player)->int:
 
 func generateNewDungeon(player:Player):
 	deleteDungeon()
-	#generateDungeon(world, default_room_cnt, player)
-	generateDungeon(3, 3, player)
+	generateDungeon(world, default_room_cnt, player)
 	world = world%rooms.size() + 1
 	visited_worlds += 1
 	

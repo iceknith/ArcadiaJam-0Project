@@ -48,7 +48,6 @@ func _ready():
 			var entity:Entity = entity_scene.instantiate()
 			if (activeRoommHP + entity.damageToKill < roomHP * 1.2):
 				activeRoommHP += entity.damageToKill
-				entity.level = 0
 				entity.position = positions.pick_random()
 				player_in_same_room.connect(entity._on_player_in_same_room)
 				get_parent().add_child.call_deferred(entity)

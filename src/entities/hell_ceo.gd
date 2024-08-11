@@ -174,7 +174,7 @@ func clear_shields():
 	
 func clear_attacks():
 	for attack in casted_spells:
-		if is_instance_valid(casted_spells): attack.custom_queue_free()
+		if is_instance_valid(attack): attack.custom_queue_free()
 	casted_spells = []
 
 func _on_cast_timeout_timer_timeout():
@@ -185,8 +185,11 @@ func _on_cast_timeout_timer_timeout():
 func _on_invincibility_timer_timeout():
 	if !is_instance_valid(self): return
 	
+	
 	if (state == HIT_STATE || state == INVINCIBLE_STATE):
-		if (isCasting): state = CASTING_STATE
+		if (isCasting): 
+			state = CASTING_STATE
+			if ($spellCastTimer.is_stopped()): $spellCastTimer.start()
 		else: state = IDLE_STATE
 		if (ranged):
 			$hit_hitbox/fire_point/shootCooldown.start()

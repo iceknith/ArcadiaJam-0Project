@@ -83,9 +83,7 @@ func _ready():
 	maxGray = defaultMaxGray
 	
 	#debug :
-	call_deferred("temp_debug")
-	#spellNum:int, newSpell:String, newSpellType:String, newSpellCost:int
-	#healthType:String, maxHealthChange:bool, newValue:int
+	#call_deferred("temp_debug")
 
 func temp_debug():
 	var spells2 = [load("res://src/spells/blood_blade.tscn"), 
@@ -343,7 +341,7 @@ func damage(damage_amount:int, damage_direction:Vector2, damageType:Array):
 func heal(heal_amount:Array, heal_type:Array):
 	var y_popup_margin = 500
 	for i in range(heal_type.size()):
-		if (heal_amount[i] == 0): continue
+		if (heal_amount[i] <= 0): continue
 		
 		if ("gray" == heal_type[i]):
 			gray = min(maxGray, gray + heal_amount[i])

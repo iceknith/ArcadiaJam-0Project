@@ -22,5 +22,5 @@ func _on_spawn_new_flame_timeout():
 
 
 func custom_queue_free():
-	if child: child.custom_queue_free()
-	super.queue_free()
+	if child && is_instance_valid(child): child.custom_queue_free()
+	queue_free()

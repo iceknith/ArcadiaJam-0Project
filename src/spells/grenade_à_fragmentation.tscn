@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://src/spells/animatedExplosionSpell.gd" id="7_umw3y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36dy8"]
-radius = 200.0
+radius = 144.099
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gwd2r"]
 animations = [{
@@ -42,6 +42,7 @@ animations = [{
 }]
 
 [node name="Grenade à fragmentation" instance=ExtResource("1_yf8d5")]
+scale = Vector2(0.75, 0.75)
 script = ExtResource("2_v4top")
 explosion_radius = 750.0
 attackEntities = true
@@ -63,6 +64,8 @@ position = Vector2(32, 22)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_gwd2r")
 animation = &"spawn"
+frame = 1
+frame_progress = 0.102205
 script = ExtResource("7_umw3y")
 explodeToContact = false
 

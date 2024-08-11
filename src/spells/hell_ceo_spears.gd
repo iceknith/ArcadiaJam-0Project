@@ -36,6 +36,6 @@ func _ready():
 		
 
 func custom_queue_free():
-	for child in children: child.queue_free()
+	for child in children: if is_instance_valid(child): child.queue_free()
 	queue_free()
 	

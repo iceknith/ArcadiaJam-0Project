@@ -1,5 +1,7 @@
 extends Room
 
+func _init():
+	is_boss_room = true
 
 func _ready():
 	super._ready()

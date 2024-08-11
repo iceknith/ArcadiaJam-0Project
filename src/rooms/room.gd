@@ -17,6 +17,7 @@ signal player_entered_first_time(player:Player)
 @export var maxHeal:float = 0.8
 var damageHealed:int = 0 #describes the amount of damage the player should be able to inflict thanks to the heal provided by the room
 var healPercent = 0
+var is_boss_room = false
 
 var player:Player
 var playerEntered:bool = false

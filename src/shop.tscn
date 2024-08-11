@@ -7,7 +7,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_oe5dv"]
 font = ExtResource("1_40c4v")
-font_size = 50
+font_size = 44
+outline_size = 20
+outline_color = Color(0, 0, 0, 0.784314)
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -52,9 +54,11 @@ offset_right = 200.0
 offset_bottom = 192.0
 theme = ExtResource("2_e1gf3")
 theme_override_font_sizes/font_size = 100
-text = "Placeholder"
+text = "Sort I
+Ce sort fera apparaître des flèches givrées dans les quattres directions. Celles-ci imobiliseront vos ennemis, et leur feront |atk| dégats. Il vous coûtera |cost| |color| et vous rajoutera |max| |color|."
 label_settings = SubResource("LabelSettings_oe5dv")
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="item_2" type="Marker2D" parent="."]
 position = Vector2(480, 400)
@@ -84,9 +88,10 @@ offset_right = 200.0
 offset_bottom = 192.0
 theme = ExtResource("2_e1gf3")
 theme_override_font_sizes/font_size = 100
-text = "Placeholder"
+text = "Passive IV"
 label_settings = SubResource("LabelSettings_oe5dv")
 horizontal_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="item_3" type="Marker2D" parent="."]
@@ -116,9 +121,11 @@ offset_right = 200.0
 offset_bottom = 192.0
 theme = ExtResource("2_e1gf3")
 theme_override_font_sizes/font_size = 100
-text = "Placeholder"
+text = "Sort_nom_long IV
+Ce sort fera apparaître des flèches givrées dans les quattres directions. Celles-ci imobiliseront vos ennemis, et leur feront |atk| dégats. Il vous coûtera |cost| |color| et vous rajoutera |max| |color|."
 label_settings = SubResource("LabelSettings_oe5dv")
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="back_button" type="Button" parent="."]
 visible = false

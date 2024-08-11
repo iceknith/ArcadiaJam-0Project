@@ -65,6 +65,7 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("2_xqduw")
 attackPlayer = true
 costType = ""
+damageAmount_per_level = Array[int]([5])
 acceleration_per_leve = Array[float]([25.0])
 speed_per_level = Array[float]([1500.0])
 maxDuration_per_level = Array[float]([20.0])

@@ -13,6 +13,31 @@ var selectedItemLevel:int
 var itemTypes:Array
 
 var levelLabel:Array = ["I","II","III","IV"]
+var colorLabel:Dictionary = {"red":"rouge", "yellow":"jaune", "blue":"bleu", "gray":"gris"}
+var spell_info_text:Dictionary = {
+	"Orbe enflammé" : "|name|\nUne orbe qui traversera vos ennemis, leur infligeant |atk| dégats. Il vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Lame sanguinaire" : "|name|\nUne flame qui traversera vos ennemis, devenant de plus en plus grande à chaque ameilloration. Elle leur fera |atk| dégats, vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Quadruple taillade" : "|name|\nCe sort lance quatres lames en direction de vos ennemis, qui leur infligeront chacune |atk| dégats. Ce sort vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Lame laser" : "|name|\nUn rayon laser qui touchera tout les enemis proches de vous. Il leur infligera |atk| dégats. Ce sort vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Bourrasque" : "|name|\nCe sort économe vous permettera de projeter vos ennemis à l'autre bout de la pièce, en leur infligeant |atk| dégats. Il vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Lame scintillante" : "|name|\nUne lame de petite taille infligeant |atk| dégats à vos ennemis. Ce sort vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Flèches givrées" : "|name|\nCe sort fera apparaître des flèches givrées dans les quattres directions. Celles-ci imobiliseront vos ennemis, et leur feront |atk| dégats. Il vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Orbe explosive" : "|name|\nUne orbe qui explosera au contact de vos ennemis, et qui causera |atk| dégats à tout les ennemis aux alentours. Ce sort vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Grenade à fragmentation" : "|name|\nUne orbe qui explosera après un certain temps, et qui causera |atk| dégats à tout les ennemis aux alentours. Ce sort vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Papillons" : "|name|\nCe sort fera apparaître des orbes dans toutes les directions. Chaque orbe fera |atk| dégat. Ce sort vous coûtera |cost| |color| et vous rajoutera |max| |color|.",
+	"Default" : "|name|\nCe sort infligera |atk| dégats. Il vous coûtera |cost| |color| et vous rajoutera |max| |color|."
+}
+var passive_info_text:Dictionary = {
+	
+	"Esprit renforcé" : "|name|\nRajoute du gris à votre barre de gris",
+	"Couteau économe" : "|name|\nAttaquer au couteau sera moins coûteux",
+	"Dash économe" : "|name|\nLe bond sera moins coûteux", 
+	"Grand bond" : "|name|\nLe bond vous propulsera plus vite plus loin",
+	"Marathon" : "|name|\nVous courerez plus vite",
+	"Vol d'esprit" : "|name|\nVous gagnerez du gris à chaque meurtre au couteau",
+	"Lame pointue" : "|name|\nVotre couteau infligera plus de dégats",
+	"Default" : ""
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,17 +61,28 @@ func init_item_selection(itemIconPath:Array, itemPointer:Array, itemType:Array, 
 			marker.get_node("select_button").visible = true
 			marker.get_node("icon").visible = true
 			marker.get_node("icon").texture = load(itemIconPath[i])
-			if(itemType[i] == "item"):
+			if (itemType[i] == "item"):
 				var item:Item = itemPointers[i].instantiate()
 				marker.get_node("description").text = str("Heal de\n+ ", item.healAmount, " ", item.healType[0])
+		
 			elif ("spell" in itemType[i]):
 				var spell:Spell = itemPointers[i].instantiate()
 				spell.level = itemLevels[i]
-				marker.get_node("description").text = str(spell.name, " ", levelLabel[spell.level],
-				"\n Essence consommée : ", spell.costs_per_level[spell.level], " ", spell.costType, "\n Essence max : +",
-				 spell.maxColorAdd_per_level[spell.level], " ", spell.costType)
+				var name:String = str(spell.name, " ", levelLabel[spell.level])
+				var atk:String = str(spell.damageAmount_per_level[spell.level])
+				var cost:String = str(spell.costs_per_level[spell.level])
+				var max:String = str(spell.maxColorAdd_per_level[spell.level])
+				var color:String = colorLabel[spell.costType]
+				var text = spell_info_text.get(spell.name)
+				if (text == null):
+					text = spell_info_text["Default"]
+				marker.get_node("description").text = text.replace("|name|", name).replace("|atk|", atk).replace("|cost|", cost).replace("|max|", max).replace("|color|", color)
+				
 			elif ("passive_" in itemType[i]):
-				marker.get_node("description").text = str(itemType[i].split("_")[1], " ", levelLabel[itemLevels[i]])
+				var name:String = str(itemType[i].split("_")[1], " ", levelLabel[itemLevels[i]])
+				var text = passive_info_text.get(itemType[i].split("_")[1])
+				if (text == null): text = passive_info_text["Default"]
+				marker.get_node("description").text = text.replace("|name|", name)
 		else:
 			marker.visible = false
 	
