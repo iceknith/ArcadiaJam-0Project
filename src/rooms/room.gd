@@ -18,6 +18,7 @@ signal player_entered_first_time(player:Player)
 var damageHealed:int = 0 #describes the amount of damage the player should be able to inflict thanks to the heal provided by the room
 var healPercent = 0
 var is_boss_room = false
+var canClose:bool = false
 
 var player:Player
 var playerEntered:bool = false
@@ -47,7 +48,9 @@ func _ready():
 				entries_dir[i].append(Vector2(entries_dir[i][0].x/collisionRect.size.x, 0))
 			else:
 				entries_dir[i].append(Vector2(0, entries_dir[i][0].y/collisionRect.size.y))
-				
+	
+	await get_tree().create_timer(3).timeout
+	canClose = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -60,7 +63,7 @@ func _process(delta):
 				open_doors()
 
 func _on_body_entered(body):
-	if ("player" in body.name && !playerEntered):
+	if (canClose && "player" in body.name && !playerEntered):
 		player = body
 		player.damage_emitted = 0
 		player_entered_first_time.emit(player)

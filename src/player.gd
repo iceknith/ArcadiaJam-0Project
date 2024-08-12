@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 class_name  Player
 
 signal healthChange(healthType:String, maxHealthChange:bool, newValue:int)
