@@ -36,8 +36,8 @@ func _ready():
 		var world_file = DirAccess.open(str("res://src/rooms/world",i))
 		
 		for room in world_file.get_files():
-			if ".remap" in room:
-				room = room.replace(".remap","")
+			if ".gd" in room:
+				continue
 			if "corridor" in room:
 				corridors[i-1].append(load(str("res://src/rooms/world",i,"/",room)) as PackedScene)
 			elif "wallLeft" in room: 

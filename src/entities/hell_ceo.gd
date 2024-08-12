@@ -35,15 +35,16 @@ var animation_durations:Dictionary = {"idle":0, "walk":0, "hit":0, "cast":0, "te
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	super._ready()
-	state = IDLE_STATE
-	health = phase_1_health
-	speed = phase_1_speed
-	acceleration = phase_1_acceleration
-	
 	change_default_animations(phase)
 	spawn_shields(phase_1_shield_count)
 	set_phase_independant_animation_durations()
+	super._ready()
+	
+	state = IDLE_STATE
+	health = phase_1_health
+	print(health)
+	speed = phase_1_speed
+	acceleration = phase_1_acceleration
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

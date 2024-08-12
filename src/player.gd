@@ -116,7 +116,6 @@ func _process(delta):
 	elif (state == "spell"): spell_handler(delta)
 	elif (state == "dash" || state == "dash_stop"): dash_handler(delta)
 	elif (state == "hit" || state == "invincible"): hit_handler(delta)
-	
 
 func _physics_process(delta):
 	if (state == "dead"): return
@@ -521,7 +520,7 @@ func get_closest_visible_mob()->Entity:
 	var min_mob:Entity = null
 	var min_dist:float = INF
 	for mob in room_mobs:
-		if (is_instance_valid(mob)):
+		if (is_instance_valid(mob) && mob.state != "dead"):
 			var distance:float = global_position.distance_squared_to(mob.global_position)
 			if (distance < min_dist):
 				#check if the raycast doesn't hit a wall before it hits the mob
