@@ -119,8 +119,8 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 			#change the difficulty of the room
 			if (room.hasMobs):
 				room.get_node("spawner").level = worldNum
-				room.get_node("spawner").roomHP = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * get_difficulty()
-				room.damageHealed = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * (get_difficulty() * get_room_heal_percent())
+				room.get_node("spawner").roomHP = get_room_hit_points(i, roomNum, playerDamage)
+				room.damageHealed = get_room_hit_points(i, roomNum, playerDamage) * get_room_heal_percent()
 				room.healPercent = get_room_heal_percent()
 				
 			#if the room is a shop
@@ -141,7 +141,7 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 			
 			#if this is the final room
 			elif (room.is_boss_room):
-				var damage:int = (pow((float)(i)/roomNum, 2) * (playerDamage/4) + (playerDamage*3/4)) * get_difficulty()
+				var damage:int = get_room_hit_points(i, roomNum, playerDamage)
 				room.get_node("hell CEO").phase_1_health = damage/2
 				room.get_node("hell CEO").phase_2_health = damage/2
 			add_child(room)
@@ -292,7 +292,10 @@ func deleteDungeon():
 
 func get_difficulty()->float:
 	return log(visited_worlds)/2 + 0.3
-	
+
+func get_room_hit_points(roomNum:float, maxRooms:int, playerDamage:float)->float:
+	return (pow(roomNum/maxRooms, 2) * (playerDamage/4) + (playerDamage*3/4)) * get_difficulty()
+
 func get_room_heal_percent()->float:
 	return 0.85 + 0.1/get_difficulty()
 	

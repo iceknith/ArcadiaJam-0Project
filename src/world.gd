@@ -82,8 +82,8 @@ func _on_player_death():
 func _on_player_health_change(healthType, maxHealthChange, newValue):
 	playerSignal.emit("health_change", [healthType, maxHealthChange, newValue])
 
-func _on_player_spell_change(spellNum, newSpell, newSpellType, newSpellCost):
-	playerSignal.emit("spell_change", [spellNum, newSpell, newSpellType, newSpellCost])
+func _on_player_spell_change(spellNum, newSpell, newSpellType, newSpellCost, newSpellLevel):
+	playerSignal.emit("spell_change", [spellNum, newSpell, newSpellType, newSpellCost, newSpellLevel])
 
 func _on_player_passive_change(passive, passive_level):
 	playerSignal.emit("passive_change", [passive, passive_level])

@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name  Player
 
 signal healthChange(healthType:String, maxHealthChange:bool, newValue:int)
-signal spellChange(spellNum:int, newSpell:String, newSpellType:String, newSpellCost:int)
+signal spellChange(spellNum:int, newSpell:String, newSpellType:String, newSpellCost:int, newSpellLevel:int)
 signal passiveChange(passive:String, passive_level:int)
 signal death
 signal showTutorial(tutorialType:String)
@@ -397,7 +397,7 @@ func replaceSpell(spell_num:int, new_spell:PackedScene, new_spell_level:int):
 	spells[spell_num - 1] = new_spell
 	spell_levels[spell_num - 1] = new_spell_level
 	var spell:Spell = new_spell.instantiate()
-	spellChange.emit(spell_num, spell.name, spell.costType, spell.costs_per_level[new_spell_level])
+	spellChange.emit(spell_num, spell.name, spell.costType, spell.costs_per_level[new_spell_level], new_spell_level)
 	if (spell.costType == "gray"):
 		maxGray += spell.maxColorAdd_per_level[new_spell_level]
 		healthChange.emit("gray", true, maxGray)

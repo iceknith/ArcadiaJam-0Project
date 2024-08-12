@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbgi5hfe1qdm0"]
+[gd_scene load_steps=19 format=3 uid="uid://bbgi5hfe1qdm0"]
 
 [ext_resource type="Script" path="res://src/player_gui.gd" id="1_kg7fi"]
 [ext_resource type="Texture2D" uid="uid://dykr1opknrv2s" path="res://assets/GUI/hp_bar/overlay.png" id="1_kury1"]
@@ -11,10 +11,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_1gxb6"]
 font = ExtResource("7_o0dof")
-font_size = 50
-font_color = Color(0, 0, 0, 1)
+font_size = 40
 shadow_size = 4
-shadow_color = Color(0.552941, 0.552941, 0.552941, 1)
+shadow_color = Color(0.0605303, 0.0605304, 0.0605303, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1hfxy"]
 font = ExtResource("7_o0dof")
@@ -37,19 +36,33 @@ font_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.0627451, 0.32549, 0.552941, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_5odn5"]
+[sub_resource type="LabelSettings" id="LabelSettings_jimn6"]
+font = ExtResource("7_o0dof")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0.481789, 0.481789, 0.481789, 1)
+shadow_size = 4
+shadow_color = Color(0.482353, 0.482353, 0.482353, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k0pjk"]
 font = ExtResource("7_o0dof")
 font_size = 50
 font_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.0627451, 0.32549, 0.552941, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_4jli6"]
+[sub_resource type="LabelSettings" id="LabelSettings_uxi6d"]
 font = ExtResource("7_o0dof")
 font_size = 50
 font_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.8, 0.701961, 0.0313726, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vrpbn"]
+font = ExtResource("7_o0dof")
+font_size = 40
+shadow_size = 4
+shadow_color = Color(0.0605303, 0.0605304, 0.0605303, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6h7me"]
 font = ExtResource("7_o0dof")
@@ -157,6 +170,15 @@ offset_left = -66.0
 offset_top = 36.0
 offset_right = 74.0
 offset_bottom = 78.0
+label_settings = SubResource("LabelSettings_jimn6")
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="spell_1_pos"]
+z_index = 1
+offset_left = -23.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 26.0
 label_settings = SubResource("LabelSettings_1gxb6")
 horizontal_alignment = 1
 
@@ -171,7 +193,16 @@ offset_right = 46.0
 offset_bottom = 74.0
 text = "
 "
-label_settings = SubResource("LabelSettings_5odn5")
+label_settings = SubResource("LabelSettings_k0pjk")
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="spell_2_pos"]
+z_index = 1
+offset_left = -27.0
+offset_top = -15.0
+offset_right = 28.0
+offset_bottom = 27.0
+label_settings = SubResource("LabelSettings_1gxb6")
 horizontal_alignment = 1
 
 [node name="spell_3_pos" type="Marker2D" parent="."]
@@ -183,7 +214,16 @@ offset_left = -61.0
 offset_top = 34.0
 offset_right = 62.0
 offset_bottom = 76.0
-label_settings = SubResource("LabelSettings_4jli6")
+label_settings = SubResource("LabelSettings_uxi6d")
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="spell_3_pos"]
+z_index = 1
+offset_left = -27.0
+offset_top = -16.0
+offset_right = 28.0
+offset_bottom = 26.0
+label_settings = SubResource("LabelSettings_vrpbn")
 horizontal_alignment = 1
 
 [node name="spell_4_pos" type="Marker2D" parent="."]
@@ -196,6 +236,15 @@ offset_top = 36.0
 offset_right = 57.0
 offset_bottom = 78.0
 label_settings = SubResource("LabelSettings_6h7me")
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="spell_4_pos"]
+z_index = 1
+offset_left = -27.0
+offset_top = -19.0
+offset_right = 28.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_1gxb6")
 horizontal_alignment = 1
 
 [node name="passive_label" type="Label" parent="."]

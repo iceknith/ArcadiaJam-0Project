@@ -35,6 +35,8 @@ var blueColor:Color = Color("#10538d")
 var passives:Array[String] = []
 var passive_levels:Array[int] = []
 
+var levelDisplay:Array[String] = ["I", "II", "III", "VI"]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	display_health()
@@ -91,10 +93,11 @@ func display_health():
 		$health_bar_blue.texture = blueImages[min(3, int(4*blue/maxBlue))]
 	$health_counter_blue.text = str(max(0, blue), "/", max(0, maxBlue))
 	
-func spell_change(spellNum:int, newSpell:String, newSpellType:String, newSpellCost:int):
+func spell_change(spellNum:int, newSpell:String, newSpellType:String, newSpellCost:int, newSpellLevel:int):
 	var pos:Marker2D = get_node(str("spell_", spellNum, "_pos"))
 	var label:Label = pos.get_node("cost")
-	for child in pos.get_children(): if(child != label): child.queue_free()
+	var level_label:Label = pos.get_node("level")
+	for child in pos.get_children(): if(child as Label == null): child.queue_free()
 	
 	var spell_icon = load(str("res://assets/spells/",newSpell,"/icon.png"))
 	var spell_sprite:Sprite2D = Sprite2D.new()
@@ -103,6 +106,7 @@ func spell_change(spellNum:int, newSpell:String, newSpellType:String, newSpellCo
 	pos.add_child(spell_sprite)
 	
 	label.text = str(newSpellCost)
+	level_label.text = levelDisplay[newSpellLevel]
 	if (newSpellType == "gray"):
 		label.label_settings.shadow_color = grayColor
 	elif (newSpellType == "red"):

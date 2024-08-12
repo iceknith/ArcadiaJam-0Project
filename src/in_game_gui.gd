@@ -20,7 +20,7 @@ func _on_world_player_signal(signalType, signalValues):
 	elif (signalType == "health_change"):
 		$playerGUI.health_change(signalValues[0], signalValues[1], signalValues[2])
 	elif (signalType == "spell_change"):
-		$playerGUI.spell_change(signalValues[0], signalValues[1], signalValues[2], signalValues[3])
+		$playerGUI.spell_change(signalValues[0], signalValues[1], signalValues[2], signalValues[3], signalValues[4])
 	elif (signalType == "passive_change"):
 		$playerGUI.passive_change(signalValues[0], signalValues[1])
 	elif (signalType == "choosing_spell"):
