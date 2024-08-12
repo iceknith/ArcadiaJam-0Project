@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccth5nx2usi3k"
-path="res://.godot/imported/explosion_yellow0000.png-27bcfa58be73b7c1fccd58ff27c24bde.ctex"
+path="res://.godot/imported/explosion_yellow0000.png-b0f25de5585a0f1768982b1a46e9988f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spells/Orbe explosive/explosion_yellow0000.png"
-dest_files=["res://.godot/imported/explosion_yellow0000.png-27bcfa58be73b7c1fccd58ff27c24bde.ctex"]
+source_file="res://assets/spells/Orbe explosif/explosion_yellow0000.png"
+dest_files=["res://.godot/imported/explosion_yellow0000.png-b0f25de5585a0f1768982b1a46e9988f.ctex"]
 
 [params]
 

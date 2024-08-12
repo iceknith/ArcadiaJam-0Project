@@ -24,10 +24,10 @@ script = ExtResource("1_4tm1s")
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1078.0
-color = Color(0, 0, 0, 0.25098)
+color = Color(0, 0, 0, 0.568627)
 
 [node name="item_1" type="Marker2D" parent="."]
-position = Vector2(960, 400)
+position = Vector2(960, 330)
 
 [node name="select_button" type="Button" parent="item_1"]
 anchors_preset = 8
@@ -61,7 +61,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="item_2" type="Marker2D" parent="."]
-position = Vector2(480, 400)
+position = Vector2(480, 300)
 
 [node name="select_button" type="Button" parent="item_2"]
 anchors_preset = 8
@@ -95,7 +95,7 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="item_3" type="Marker2D" parent="."]
-position = Vector2(1440, 400)
+position = Vector2(1440, 300)
 
 [node name="select_button" type="Button" parent="item_3"]
 anchors_preset = 8

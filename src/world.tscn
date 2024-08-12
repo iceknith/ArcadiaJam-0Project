@@ -52,11 +52,6 @@ metadata/_edit_lock_ = true
 
 [node name="player" parent="." instance=ExtResource("2_xiut1")]
 z_index = 10
-defaultDashCost = 15
-defaultDashSpeed = 6000.0
-defaultDashAcceleration = 100.0
-defaultDashDuration = 0.6
-defaultStabCost = 7
 
 [node name="highScoreRegister" type="Control" parent="."]
 visible = false

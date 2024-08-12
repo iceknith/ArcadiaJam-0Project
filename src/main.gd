@@ -20,7 +20,7 @@ func launchGame():
 	for child in get_children(): child.queue_free()
 	add_child(game.instantiate())
 	
-	if firstLaunch: get_node("game").get_node("world").showTutorial = true
+	get_node("game").get_node("world").showTutorial = true
 	
 func endGame():
 	firstLaunch = false

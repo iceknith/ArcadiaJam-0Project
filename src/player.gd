@@ -11,7 +11,7 @@ signal showTutorial(tutorialType:String)
 @export var defaultAcceleration = 50.0
 @export var defaultKnockbackForce = 1500.0
 @export var defaultInvincibilityTimer = 2.0
-@export var defaultDashCost = 12
+@export var defaultDashCost = 7
 @export var defaultDashSpeed = 4000.0
 @export var defaultDashAcceleration = 200.0
 @export var defaultDashDuration = 1.0
