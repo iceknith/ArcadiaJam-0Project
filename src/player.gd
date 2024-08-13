@@ -441,14 +441,14 @@ func addPassive(passiveName:String, passiveLevel:int):
 		healthChange.emit("gray", true, maxGray)
 		
 	elif (passiveName == "Couteau économe"):
-		if passiveLevel == 0: stabCost = defaultStabCost - 1
-		elif passiveLevel == 1: stabCost = defaultStabCost - 2
+		if passiveLevel == 0: stabCost = defaultStabCost - 2
+		elif passiveLevel == 1: stabCost = defaultStabCost - 3
 		elif passiveLevel == 2: stabCost = defaultStabCost - 4
 		elif passiveLevel == 3: stabCost = defaultStabCost - 5
 		
 	elif (passiveName == "Bond économe"):
-		if passiveLevel == 0: dashCost = defaultDashCost - 1
-		elif passiveLevel == 1: dashCost = defaultDashCost - 2
+		if passiveLevel == 0: dashCost = defaultDashCost - 2
+		elif passiveLevel == 1: dashCost = defaultDashCost - 3
 		elif passiveLevel == 2: dashCost = defaultDashCost - 4
 		elif passiveLevel == 3: dashCost = defaultDashCost - 5
 		
@@ -477,7 +477,7 @@ func addPassive(passiveName:String, passiveLevel:int):
 		elif passiveLevel == 3: additionalStabDamage = 10
 		
 	passiveChange.emit(passiveName, passiveLevel)
-	if (passiveName in passives):
+	if (passiveName in passives) and passive_levels[passives.find(passiveName)] < passiveLevel:
 		passive_levels[passives.find(passiveName)] = passiveLevel
 	else:
 		passives.append(passiveName)
