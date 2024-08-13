@@ -38,15 +38,6 @@ func _ready():
 		choose_new_spell.connect(get_parent().get_parent().get_parent()._on_player_choosing_spell)
 	elif isShop:
 		open_shop.connect(get_parent().get_parent().get_parent()._on_player_open_shop)
-		
-	#test to see the avg damage per cost
-	"""
-	for spell_scene:PackedScene in spells:
-		var spell:Spell = spell_scene.instantiate()
-		for i in range(0, spell.maxLevels):
-			print(spell.name, " has ", spell.damageAmount_per_level[i] * spell.maxColorAdd_per_level[i]/spell.costs_per_level[i])
-		spell.queue_free()
-	"""
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -101,7 +92,7 @@ func shop_handler(player:Player):
 	itemType.append("spell")
 	
 	#second item
-	if player_can_upgrade_passive || bool(randi()%2):
+	if player_can_upgrade_passive && bool(randi()%2):
 		var indexes:Array = range(player.passives.size())
 		indexes.shuffle()
 		for i in indexes:
