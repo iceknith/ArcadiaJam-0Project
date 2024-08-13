@@ -25,7 +25,7 @@ var spells:Array[PackedScene] = [load("res://src/spells/fire_ball.tscn"),
 								#load("res://src/spells/attack_burst.tscn"),
 								#load("res://src/spells/the_world.tscn")
 								]
-var passives:Array[String] = ["Esprit renforcé", "Couteau économe", "Dash économe", 
+var passives:Array[String] = ["Esprit renforcé", "Couteau économe", "Bond économe", 
 							"Grand bond", "Marathon", "Vol d'esprit", "Lame pointue"]
 var newSpellExpectedDamage:int = 0
 
@@ -104,7 +104,12 @@ func shop_handler(player:Player):
 	else:
 		items.append(null)
 		itemLevels.append(0)
-		itemType.append(str("passive_", passives.pick_random()))
+		var passives_not_owned:Array = [] 
+		for elem in passives:	
+			if elem not in player.passives:
+				passives_not_owned.append(elem)
+		if passives_not_owned.size() == 0: passives_not_owned = passives	
+		itemType.append(str("passive_", passives_not_owned.pick_random()))
 			
 	#third item
 	if (player_can_upgrade_spells):

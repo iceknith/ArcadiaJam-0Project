@@ -30,8 +30,8 @@ var spell_info_text:Dictionary = {
 var passive_info_text:Dictionary = {
 	
 	"Esprit renforcé" : ["Augmente la taille de votre jauge d'essence.","Essence max","+30","+50","+70","+100"],
-	"Couteau économe" : ["Attaquer au couteau consomme moins d'essence.","Consommation","-1","-2","-4","-5"],
-	"Dash économe" : ["Bondir consomme moins d'énergie.","Consommation","-1","-2","-4","-5"], 
+	"Couteau économe" : ["Attaquer au couteau consomme moins d'essence.","Consommation","-2","-3","-4","-5"],
+	"Bond économe" : ["Bondir consomme moins d'énergie.","Consommation","-2","-3","-4","-5"], 
 	"Grand bond" : ["Le bond gagne en portée et en vitesse.","Statistiques","+10%","+25%","+45%","+60%"],
 	"Marathon" : ["Augmente votre vitesse de course.","Vitesse","+20%","+30%","+40%","+50%"],
 	"Vol d'esprit" : ["Régénère de l'essence après chaque meutre au couteau.","Régénération","8","12","15","18"],
