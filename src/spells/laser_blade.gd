@@ -19,9 +19,6 @@ func _ready():
 	initial_pos = direction.angle() + PI/4
 	rotation_around_point = initial_pos
 	
-	if 7*PI/6 > direction.angle() and direction.angle() > 5*PI/6:
-		blade_rotation_add = 0
-	
 	global_position = rotation_point + Vector2(cos(rotation_around_point), sin(rotation_around_point)) * distance_from_point
 	rotation = rotation_around_point+blade_rotation_add
 
