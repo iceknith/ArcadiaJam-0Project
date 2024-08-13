@@ -20,7 +20,7 @@ const DEAD_STATE:String = "dead"
 @export var phase_2_attacks:Array[PackedScene] = []
 @export var phase_2_shield_count:int = 5
 @export var phase_2_min_dist_to_tp:int = 2000
-@export var phase_2_tp_distance:float = 1000.0
+@export var phase_2_tp_distance:float = 1250.0
 
 var phase = 1
 var can_cast:bool = true
