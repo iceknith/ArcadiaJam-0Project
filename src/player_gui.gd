@@ -35,7 +35,7 @@ var blueColor:Color = Color("#10538d")
 var passives:Array[String] = []
 var passive_levels:Array[int] = []
 
-var levelDisplay:Array[String] = ["I", "II", "III", "VI"]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -106,7 +106,7 @@ func spell_change(spellNum:int, newSpell:String, newSpellType:String, newSpellCo
 	pos.add_child(spell_sprite)
 	
 	label.text = str(newSpellCost)
-	level_label.text = levelDisplay[newSpellLevel]
+	level_label.text = levelLabel[newSpellLevel]
 	if (newSpellType == "gray"):
 		label.label_settings.shadow_color = grayColor
 	elif (newSpellType == "red"):

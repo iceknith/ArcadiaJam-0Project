@@ -101,7 +101,7 @@ func shop_handler(player:Player):
 	itemType.append("spell")
 	
 	#second item
-	if player_can_upgrade_passive:
+	if player_can_upgrade_passive || bool(randi()%2):
 		var indexes:Array = range(player.passives.size())
 		indexes.shuffle()
 		for i in indexes:
