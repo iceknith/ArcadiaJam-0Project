@@ -38,6 +38,8 @@ func _ready():
 		for room in world_file.get_files():
 			if ".gd" in room:
 				continue
+			if ".remap" in room:
+				room = room.replace(".remap","")
 			if "corridor" in room:
 				corridors[i-1].append(load(str("res://src/rooms/world",i,"/",room)) as PackedScene)
 			elif "wallLeft" in room: 
@@ -280,7 +282,7 @@ func potentialDamage(player:Player)->int:
 
 func generateNewDungeon(player:Player):
 	deleteDungeon()
-	generateDungeon(3, 3, player)
+	generateDungeon(world, default_room_cnt, player)
 	world = world%rooms.size() + 1
 	visited_worlds += 1
 	

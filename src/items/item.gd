@@ -96,7 +96,7 @@ func shop_handler(player:Player):
 			chosenSpell = spell_scene
 			spellDistanecToExpectations = distance
 	
-	items.append(load("res://src/spells/laser_blade.tscn"))
+	items.append(chosenSpell)
 	itemLevels.append(0)
 	itemType.append("spell")
 	
