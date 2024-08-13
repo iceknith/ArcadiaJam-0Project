@@ -16,4 +16,5 @@ func _on_hell_ceo_death():
 
 func _on_player_entered_first_time(player):
 	doorClosed = true
+	player.full_heal()
 	close_doors()

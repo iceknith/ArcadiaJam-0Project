@@ -344,24 +344,28 @@ func heal(heal_amount:Array, heal_type:Array):
 		if (heal_amount[i] <= 0): continue
 		
 		if ("gray" == heal_type[i]):
+			var prevGray = gray
 			gray = min(maxGray, gray + heal_amount[i])
-			spawn_text_popup("gray", str("+ ", heal_amount[i]), 2, y_popup_margin)
+			spawn_text_popup("gray", str("+ ", gray - prevGray), 2, y_popup_margin)
 			y_popup_margin -= 100
 	
 			healthChange.emit("gray", false, gray)
 		if ("red" == heal_type[i]):
+			var prevRed = red
 			red = min(maxRed, red + heal_amount[i])
-			spawn_text_popup("red", str("+ ", heal_amount[i]), 2, y_popup_margin)
+			spawn_text_popup("red", str("+ ", red - prevRed), 2, y_popup_margin)
 			y_popup_margin -= 100
 			healthChange.emit("red", false, red)
 		if ("yellow" == heal_type[i]):
+			var prevYellow = yellow
 			yellow = min(maxYellow, yellow + heal_amount[i])
-			spawn_text_popup("yellow", str("+ ", heal_amount[i]), 2, y_popup_margin)
+			spawn_text_popup("yellow", str("+ ", yellow - prevYellow), 2, y_popup_margin)
 			y_popup_margin -= 100
 			healthChange.emit("yellow", false, yellow)
 		if ("blue" == heal_type[i]):
+			var prevBlue = blue
 			blue = min(maxBlue, blue + heal_amount[i])
-			spawn_text_popup("blue", str("+ ", heal_amount[i]), 2, y_popup_margin)
+			spawn_text_popup("blue", str("+ ", blue - prevBlue), 2, y_popup_margin)
 			y_popup_margin -= 100
 			healthChange.emit("blue", false, blue)
 
@@ -486,6 +490,9 @@ func spawn_text_popup(textColor:String, textContent:String, textDuration:float, 
 	popup_text_instance.duration = textDuration	
 	popup_text_instance.position = position + Vector2.UP*y_margin
 	get_parent().add_child(popup_text_instance)
+
+func full_heal():
+	heal([INF, INF, INF, INF], ["gray", "blue", "yellow", "red"])
 
 func _on_regeneration_timer_timeout():
 	var prevGray = gray
