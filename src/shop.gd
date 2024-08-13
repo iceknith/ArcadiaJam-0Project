@@ -20,7 +20,7 @@ var spell_info_text:Dictionary = {
 	"Quadruple taillade" : ["Projette quatre lames en cône qui disparaissent au contact.","x4"],
 	"Lame laser" : ["Une lame magique qui attaque les ennemis proches en quart de cercle.",""],
 	"Bourrasque" : ["Ce sort économe vous permettera de projeter vos ennemis à l'autre bout de la pièce.",""],
-	"Lame scintillante" : ["Une entaille de petite taille qui repousse les ennemis.",""],
+	"Lame scintillante" : ["Une entaille de petite taille qui inflige de lourds dégâts.",""],
 	"Flèches givrées" : ["Lance quatre flèches en croix paralysant les ennemis au contact.","x4"],
 	"Orbe explosif" : ["Une boule d'énergie infligeant des dégâts de zone à distance.",""],
 	"Grenade à fragmentation" : ["Un projectile lent qui explose après un certain temps.",""],
@@ -29,14 +29,14 @@ var spell_info_text:Dictionary = {
 }
 var passive_info_text:Dictionary = {
 	
-	"Esprit renforcé" : "|name|\n\nAugmente la taille de votre jauge d'essence",
-	"Couteau économe" : "|name|\n\nAttaquer au couteau consomme moins d'essence",
-	"Dash économe" : "|name|\n\nBondir consomme moins d'énergie", 
-	"Grand bond" : "|name|\n\nLe bond gagne en portée et en vitesse",
-	"Marathon" : "|name|\n\nAugmente votre vitesse de course",
-	"Vol d'esprit" : "|name|\n\nRégénère de l'essence après chaque meutre au couteau",
-	"Lame pointue" : "|name|\n\nVotre couteau inflige plus de dégats",
-	"Default" : ""
+	"Esprit renforcé" : ["Augmente la taille de votre jauge d'essence.","Essence max","+30","+50","+70","+100"],
+	"Couteau économe" : ["Attaquer au couteau consomme moins d'essence.","Consommation","-1","-2","-4","-5"],
+	"Dash économe" : ["Bondir consomme moins d'énergie.","Consommation","-1","-2","-4","-5"], 
+	"Grand bond" : ["Le bond gagne en portée et en vitesse.","Statistiques","+10%","+25%","+45%","+60%"],
+	"Marathon" : ["Augmente votre vitesse de course.","Vitesse","+20%","+30%","+40%","+50%"],
+	"Vol d'esprit" : ["Régénère de l'essence après chaque meutre au couteau.","Régénération","8","12","15","18"],
+	"Lame pointue" : ["Votre couteau inflige plus de dégats.","Dégâts","+3","+5","+8","+10"],
+	"Default" : ["Confère un boost de motivation pendant la semaine d'exams","Caféine","+100%"]
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -80,9 +80,14 @@ func init_item_selection(itemIconPath:Array, itemPointer:Array, itemType:Array, 
 				
 			elif ("passive_" in itemType[i]):
 				var name:String = str(itemType[i].split("_")[1], " ", levelLabel[itemLevels[i]])
-				var text = passive_info_text.get(itemType[i].split("_")[1])
-				if (text == null): text = passive_info_text["Default"]
-				marker.get_node("description").text = text.replace("|name|", name)
+				var text = passive_info_text.get(itemType[i].split("_")[1])[0]
+				var stat = passive_info_text.get(itemType[i].split("_")[1])[1]
+				var statmodifier = passive_info_text.get(itemType[i].split("_")[1])[itemLevels[i]+2]
+				if (text == null): 
+					text = passive_info_text["Default"][0]
+					stat = passive_info_text["Default"][1]
+					statmodifier = passive_info_text["Default"][2]
+				marker.get_node("description").text = "{name}\n\n{text}\n\n{stat} : {statmodifier}".format({"name":name,"text":text,"stat":stat,"statmodifier":statmodifier})
 		else:
 			marker.visible = false
 	

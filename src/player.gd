@@ -431,9 +431,9 @@ func addPassive(passiveName:String, passiveLevel:int):
 		
 	elif (passiveName == "Esprit renforcé"):
 		if passiveLevel == 0: maxGray = defaultMaxGray + 30
-		elif passiveLevel == 1: maxGray = defaultMaxGray + 70
-		elif passiveLevel == 2: maxGray = defaultMaxGray + 100
-		elif passiveLevel == 3: maxGray = defaultMaxGray + 130
+		elif passiveLevel == 1: maxGray = defaultMaxGray + 50
+		elif passiveLevel == 2: maxGray = defaultMaxGray + 70
+		elif passiveLevel == 3: maxGray = defaultMaxGray + 100
 		healthChange.emit("gray", true, maxGray)
 		
 	elif (passiveName == "Couteau économe"):
@@ -462,9 +462,9 @@ func addPassive(passiveName:String, passiveLevel:int):
 		
 	elif (passiveName == "Vol d'esprit"):
 		if passiveLevel == 0: stabLifeLeechAmount = 8
-		elif passiveLevel == 1: stabLifeLeechAmount = 15 
-		elif passiveLevel == 2: stabLifeLeechAmount = 20
-		elif passiveLevel == 3: stabLifeLeechAmount = 25
+		elif passiveLevel == 1: stabLifeLeechAmount = 12 
+		elif passiveLevel == 2: stabLifeLeechAmount = 15
+		elif passiveLevel == 3: stabLifeLeechAmount = 18
 		
 	elif (passiveName == "Lame pointue"):
 		if passiveLevel == 0: additionalStabDamage = 3
