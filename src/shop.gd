@@ -21,7 +21,7 @@ var spell_info_text:Dictionary = {
 	"Lame laser" : ["Une lame magique qui attaque les ennemis proches en quart de cercle.",""],
 	"Bourrasque" : ["Ce sort économe vous permettera de projeter vos ennemis à l'autre bout de la pièce.",""],
 	"Lame scintillante" : ["Une entaille de petite taille qui inflige de lourds dégâts.",""],
-	"Flèches givrées" : ["Lance quatre flèches en croix paralysant les ennemis au contact.","x4"],
+	"Flèches givrées" : ["Lance quatre flèches en croix paralysant les ennemis au contact.","x5"],
 	"Orbe explosif" : ["Une boule d'énergie infligeant des dégâts de zone à distance.",""],
 	"Grenade à fragmentation" : ["Un projectile lent qui explose après un certain temps.",""],
 	"Papillons" : ["Disperse une myriade de petits projectiles en cercles.","x12"],

@@ -46,15 +46,13 @@ size = Vector2(661, 29)
 
 [node name="Flèches givrées" instance=ExtResource("1_xhun5")]
 script = ExtResource("2_bjena")
-arrow_num = 4
-directions = Array[Vector2]([Vector2(0, -1), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 1)])
 freezeTime_per_level = Array[float]([5.0, 7.5, 10.0, 12.0])
 attackEntities = true
 costType = "blue"
 maxLevels = 4
 maxColorAdd_per_level = Array[int]([25, 25, 30, 35])
-costs_per_level = Array[int]([8, 7, 6, 5])
-damageAmount_per_level = Array[int]([7, 8, 9, 10])
+costs_per_level = Array[int]([12, 12, 10, 10])
+damageAmount_per_level = Array[int]([10, 12, 14, 15])
 acceleration_per_leve = Array[float]([10.0, 10.0, 10.0, 10.0])
 speed_per_level = Array[float]([3000.0, 3000.0, 3000.0, 3000.0])
 maxDuration_per_level = Array[float]([20.0, 20.0, 20.0, 20.0])

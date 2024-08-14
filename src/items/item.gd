@@ -21,7 +21,7 @@ var spells:Array[PackedScene] = [load("res://src/spells/fire_ball.tscn"),
 								load("res://src/spells/frozen_arrow.tscn"),
 								load("res://src/spells/fire_orb.tscn"),
 								load("res://src/spells/butterflies.tscn"),
-								load("res://src/spells/grenade_à_fragmentation.tscn"),
+								#load("res://src/spells/grenade_à_fragmentation.tscn"),
 								#load("res://src/spells/attack_burst.tscn"),
 								#load("res://src/spells/the_world.tscn")
 								]

@@ -1,22 +1,37 @@
 extends Spell
 
-@export var arrow_num:int = 4
-@export var directions:Array[Vector2] = [Vector2.UP, Vector2.LEFT, Vector2.RIGHT, Vector2.DOWN]
 @export var freezeTime_per_level:Array[float]
+
+var startPos:Vector2
+var spawnNum:int = 4
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("go")
 	super._ready()
-	var frozenArrows:PackedScene = load("res://src/spells/frozen_arrow.tscn")
-	for i in arrow_num-1:
-		var frozen_arrow_instance:Spell = frozenArrows.instantiate()
-		frozen_arrow_instance.arrow_num = 0
-		frozen_arrow_instance.direction = directions[i]
-		frozen_arrow_instance.position = position
-		get_parent().add_child(frozen_arrow_instance)
-	if (arrow_num != 0):
-		direction = directions[arrow_num - 1]
-		rotation = atan(direction.y/direction.x)
+	
+	startPos = position
+	
+	var theta:float = direction.angle()
+	
+	if (spawnNum == 4): theta += PI/6
+	else: theta -= PI/12
+		
+	print(theta)
+	rotation = theta
+	direction = Vector2(cos(theta),sin(theta))
+	
+	if (spawnNum > 0):
+		print("instanciate")
+		var frozenArrows:PackedScene = load("res://src/spells/frozen_arrow.tscn")
+		var frozen_arrows_instance:Spell = frozenArrows.instantiate()
+		
+		frozen_arrows_instance.spawnNum = spawnNum-1
+		frozen_arrows_instance.direction = direction
+		frozen_arrows_instance.position = startPos
+		frozen_arrows_instance.level = level
+		
+		get_parent().add_child(frozen_arrows_instance)
 
 
 func _on_hit(bodyType:String, body:Node2D):
