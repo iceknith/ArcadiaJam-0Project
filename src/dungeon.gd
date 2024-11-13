@@ -143,7 +143,7 @@ func generateDungeon(worldNum:int, roomNum:int, player:Player):
 			
 			#if this is the final room
 			elif (room.is_boss_room):
-				var damage:int = get_room_hit_points(i, roomNum, playerDamage) / 2
+				var damage:int = get_room_hit_points(i, roomNum, playerDamage) / 2.5
 				room.get_node("hell CEO").phase_2_health = damage * 3/7
 				room.get_node("hell CEO").phase_1_health = damage - room.get_node("hell CEO").phase_2_health
 			add_child(room)
